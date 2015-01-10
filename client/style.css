@@ -1,0 +1,21 @@
+/* CSS declarations go here */
+body,  {
+	font-family: monospace;
+	font-size: 10pt;
+}
+
+h1 {
+	font-family: sans-serif;
+}
+
+.myFileInput {
+	border: 2px black;
+	padding: 6px;
+	margin-bottom: 12px;
+	background-color: lightgreen;
+}
+
+.remove {
+	background-color: orange;
+	padding: 0 12px 0 12px;
+}

@@ -1,0 +1,24 @@
+<template name="imagesShow">
+	{{#each showImages}}
+		<figure>
+			<img src="{{this.url}}">
+			<figcaption>
+				<a href="{{this.url}}">Link</a><br />
+				_id: {{this._id}}<br />
+				name: {{this.name}}<br />
+				{{this.original.size}} bytes<br />
+				{{this.uploadedAt}}<br />
+				<a href="{{this.url download=true}}">Download</a> – 
+				<span class='remove'>Remove</span>
+			</figcaption>
+		</figure>
+	{{/each}}
+</template>
+
+<template name="imageUpload">
+	<input type="file" name="randomword" class="myFileInput">
+</template>
+
+<template name="imagesCount">
+	<h1>{{posts}} Images in Database</h1>
+</template>
