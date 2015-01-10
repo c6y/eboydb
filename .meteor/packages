@@ -8,3 +8,4 @@ meteor-platform
 insecure
 cfs:standard-packages
 cfs:filesystem
+cfs:graphicsmagick
