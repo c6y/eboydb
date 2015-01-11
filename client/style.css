@@ -1,5 +1,5 @@
 /* CSS declarations go here */
-body,  {
+body {
 	font-family: monospace;
 	font-size: 10pt;
 }
@@ -17,5 +17,11 @@ h1 {
 
 .remove {
 	background-color: orange;
-	padding: 0 12px 0 12px;
+	padding: 4px 8px;
+	position: absolute;
+	margin: -4px;
+}
+
+figcaption {
+	margin-bottom: 24px;
 }

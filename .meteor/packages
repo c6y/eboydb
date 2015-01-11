@@ -9,3 +9,4 @@ insecure
 cfs:standard-packages
 cfs:filesystem
 cfs:graphicsmagick
+mrt:imagemagick
