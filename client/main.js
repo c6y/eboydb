@@ -12,6 +12,8 @@ Template.imagesShow.events({
 	}
 })
 
+
+
 Template.imagesCount.helpers({
 	'posts': function() {
 		return Images.find().count();
@@ -28,3 +30,31 @@ Template.imageUpload.events({
 		})
 	}
 });
+
+Template.pixUpload.events({
+	'change .myPixInput': function(event, template) {
+		event.preventDefault();
+		var file = event.target.files[0];
+		var reader = new FileReader();
+
+		// reader.onload = function(event){
+		// 	var result = reader.result;
+		// 	var buffer = new Uint8Array(result);
+		// 	MyPix.insert({binary: buffer});
+		// }
+		// reader.readAsArrayBuffer(file);
+
+		reader.onload = function(event){
+			MyPix.insert({binary: reader.result});
+		}
+
+		reader.readAsDataURL(file);
+	}
+});
+
+Template.pixList.helpers({
+	'showPix': function(){
+		return MyPix.find();
+	}
+})
+

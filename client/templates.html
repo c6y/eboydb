@@ -9,8 +9,7 @@
 				name: {{this.name}}<br />
 				{{this.original.size}} bytes<br />
 				{{this.uploadedAt}}<br />
-				<a href="{{this.url download=true}}">Download</a> – 
-				
+				<a href="{{this.url download=true}}">Download</a>				
 			</figcaption>
 		</figure>
 	{{/each}}
@@ -22,4 +21,14 @@
 
 <template name="imagesCount">
 	<h1>{{posts}} Images in Database</h1>
+</template>
+
+<template name="pixUpload">
+	<input type="file" name="myFile" class="myPixInput">
+</template>
+
+<template name="pixList">
+	{{#each showPix}}
+		<img src="{{this.binary}}"><br />
+	{{/each}}
 </template>
