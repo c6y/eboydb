@@ -1,26 +1,5 @@
-<template name="imagesShow">
-	{{#each showImages}}
-		<figure>
-			<span class='remove'>Remove</span>
-			<img src="{{this.url}}">
-			<figcaption>
-				<a href="{{this.url}}">Link</a><br />
-				_id: {{this._id}}<br />
-				name: {{this.name}}<br />
-				{{this.original.size}} bytes<br />
-				{{this.uploadedAt}}<br />
-				<a href="{{this.url download=true}}">Download</a>				
-			</figcaption>
-		</figure>
-	{{/each}}
-</template>
-
-<template name="imageUpload">
-	<input type="file" name="randomword" class="myFileInput">
-</template>
-
-<template name="imagesCount">
-	<h1>{{posts}} Images in Database</h1>
+<template name="pixCount">
+	<h1>{{posts}} Images in eboydb</h1>
 </template>
 
 <template name="pixUpload">
@@ -29,6 +8,13 @@
 
 <template name="pixList">
 	{{#each showPix}}
-		<img src="{{this.binary}}"><br />
+		<div class="pixDoc">
+			<span class='remove'>Remove</span>
+			<img src="{{this.binary}}"><br />
+			<figcaption>
+				<div>_id: {{this._id}}</div>
+				<div>{{thedate}}</div>
+			</figcaption>
+		</div>
 	{{/each}}
 </template>

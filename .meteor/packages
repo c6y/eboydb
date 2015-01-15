@@ -10,3 +10,4 @@ cfs:standard-packages
 cfs:filesystem
 cfs:graphicsmagick
 mrt:imagemagick
+mrt:moment

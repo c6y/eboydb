@@ -2,26 +2,45 @@
 body {
 	font-family: monospace;
 	font-size: 10pt;
+	text-align: center;
+}
+
+#container {
+	display: block;
+	width: 480px;
+	display: inline-block;
+	background-color: #eee;
+	text-align: left;
+}
+
+.pixDoc {
+	background-color: #ddd;
+	margin: 12px;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	padding: 6px;
 }
 
 h1 {
 	font-family: sans-serif;
+	padding-left: 18px;
 }
 
-.myFileInput {
-	border: 2px black;
+.myPixInput {
+	width: 468px;
 	padding: 6px;
 	margin-bottom: 12px;
-	background-color: lightgreen;
+	background-color: white;
+	display: block;
 }
 
 .remove {
 	background-color: orange;
 	padding: 4px 8px;
 	position: absolute;
-	margin: -4px;
+	margin: -7px;
 }
 
 figcaption {
-	margin-bottom: 24px;
+	margin-bottom: 0px;
 }
