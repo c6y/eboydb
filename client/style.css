@@ -19,6 +19,8 @@ body {
 	border-bottom: 1px solid #ccc;
 	border-right: 1px solid #ccc;
 	padding: 6px;
+	overflow-x: hidden;
+
 }
 
 h1 {

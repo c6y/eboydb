@@ -1,7 +1,9 @@
 Template.pixUpload.events({
 	'change .myPixInput': function(event, template) {
 		event.preventDefault();
-		var file = event.target.files[0];
+		var file = event.target.files[0]; //assuming 1 file only
+		if (!file) return;
+		
 		var reader = new FileReader();
 
 		reader.onload = function(event){
@@ -32,8 +34,19 @@ Template.pixList.helpers({
 })
 
 Template.pixList.events({
-	'click .remove': function() {
+	'click .remove': function(event, template) {
 		console.log("Removing \"" + this._id + "\"");
 		MyPix.remove(this._id);
+	},
+	'click .nextPage': function(event, template) {
+		console.log('next');
+
+		if(Number(Session.get('docCursor') < 100)) {
+			Session.set('docCursor', Number(Session.get('docCursor')) + 2);
+			console.log(Session.get('docCursor'));
+		}
+
+
+		
 	}
 })

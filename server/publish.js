@@ -1,6 +1,6 @@
-//Publish methods
+//Publish method
 
-Meteor.publish('MyPix', function() {
-	return MyPix.find();
+Meteor.publish('MyPix', function(cursor) {
+	return MyPix.find({}, {limit:2, skip:cursor});
 })
 
