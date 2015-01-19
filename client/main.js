@@ -26,7 +26,7 @@ Template.pixList.helpers({
 	'showPix': function(){
 		return MyPix.find({}, {sort: {createdAt: -1}});
 	},
-	'thedate': function(){
+	'thedate': function() {
 		var date = this.createdAt;
 		var formattedDate = moment(date).format('hh:mm:ss/dddd/DD/MMMM/YYYY');
 		return "date: " + formattedDate;
@@ -38,15 +38,26 @@ Template.pixList.events({
 		console.log("Removing \"" + this._id + "\"");
 		MyPix.remove(this._id);
 	},
-	'click .nextPage': function(event, template) {
-		console.log('next');
 
-		if(Number(Session.get('docCursor') < 100)) {
-			Session.set('docCursor', Number(Session.get('docCursor')) + 2);
+	'click .previous': function(event, template) {
+		if(Number(Session.get('docCursor') > 3)) {
+			Session.set('docCursor', Number(Session.get('docCursor')) - 4);
 			console.log(Session.get('docCursor'));
-		}
+		}		
+	},
 
+	'click .next': function(event, template) {
+		console.log('MyPix.find().count(): ' + MyPix.find().count());
+		
+		if(MyPix.find().count() > 3) {
+
+			Session.set('docCursor', Number(Session.get('docCursor')) + 4);
+
+		};
 
 		
+		
+
+		console.log(Session.get('docCursor'));
 	}
 })

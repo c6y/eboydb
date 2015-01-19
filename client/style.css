@@ -43,6 +43,20 @@ h1 {
 	margin: -7px;
 }
 
+.paging {
+	text-align: center;
+}
+
+.previous:hover, .next:hover {
+	background-color: cyan;
+}
+
+.previous:active, .next:active {
+	color: white;
+	background-color: black;
+}
 figcaption {
 	margin-bottom: 0px;
 }
+
+

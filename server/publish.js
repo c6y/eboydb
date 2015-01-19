@@ -1,6 +1,11 @@
 //Publish method
 
 Meteor.publish('MyPix', function(cursor) {
-	return MyPix.find({}, {limit:2, skip:cursor});
+	
+	var length = MyPix.find().count();
+	return MyPix.find({}, {limit:4, skip:cursor});
 })
 
+// Meteor.publish('PixQty', function() {
+// 	return MyPix.find().count();
+// })
