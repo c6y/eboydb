@@ -18,8 +18,12 @@ Template.pixUpload.events({
 
 Template.pixCount.helpers({
 	'posts': function() {
-		return MyPix.find().count();
-	}
+		return Counts.get('numberOfPosts')
+	},
+	'currentPage': function() {
+		var page = Math.floor(Session.get('docCursor') / 4) + 1;
+		return page;
+	} 
 })
 
 Template.pixList.helpers({
@@ -42,22 +46,14 @@ Template.pixList.events({
 	'click .previous': function(event, template) {
 		if(Number(Session.get('docCursor') > 3)) {
 			Session.set('docCursor', Number(Session.get('docCursor')) - 4);
-			console.log(Session.get('docCursor'));
+			console.log("Cursor: " + Session.get('docCursor'));
 		}		
 	},
 
 	'click .next': function(event, template) {
-		console.log('MyPix.find().count(): ' + MyPix.find().count());
-		
-		if(MyPix.find().count() > 3) {
-
+		if(Number(Session.get('docCursor')) + 4 < Counts.get('numberOfPosts')) {
 			Session.set('docCursor', Number(Session.get('docCursor')) + 4);
-
+			console.log("Cursor: " + Session.get('docCursor'));
 		};
-
-		
-		
-
-		console.log(Session.get('docCursor'));
 	}
 })

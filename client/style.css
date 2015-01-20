@@ -20,7 +20,8 @@ body {
 	border-right: 1px solid #ccc;
 	padding: 6px;
 	overflow-x: hidden;
-
+	max-height: 144px;
+	overflow-y: hidden;
 }
 
 h1 {
