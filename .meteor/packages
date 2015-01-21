@@ -10,3 +10,4 @@ cfs:standard-packages
 cfs:filesystem
 mrt:moment
 tmeasday:publish-counts
+mrt:imagemagick

@@ -1,18 +1,12 @@
 Template.pixUpload.events({
 	'change .myPixInput': function(event, template) {
 		event.preventDefault();
-		var file = event.target.files[0]; //assuming 1 file only
+		var file = event.target.files[0];
 		if (!file) return;
-		
-		var reader = new FileReader();
-
-		reader.onload = function(event){
-			MyPix.insert({
-				binary: reader.result,
-				createdAt: new Date
-			});
-		}
-		reader.readAsDataURL(file);
+		MyPix.insert(file, function (err, fileObj) {
+			//Inserted new doc with ID fileObj._id,
+			//and kicked off the data upload using HTTP
+		});
 	}
 })
 
@@ -27,13 +21,22 @@ Template.pixCount.helpers({
 })
 
 Template.pixList.helpers({
-	'showPix': function(){
-		return MyPix.find({}, {sort: {createdAt: -1}});
+	'showPix': function() {
+		return MyPix.find({}, {sort: {uploadedAt: -1}});
 	},
 	'thedate': function() {
-		var date = this.createdAt;
-		var formattedDate = moment(date).format('hh:mm:ss/dddd/DD/MMMM/YYYY');
-		return "date: " + formattedDate;
+		var date = this.uploadedAt;
+		return "date: " + date;
+	},
+	'img': function() {
+		var bin = this.binary;
+		return bin;
+	},
+	'thumbnail': function() {
+		var bin = this.binary;
+		var thumb = new FileReader();
+		Imagemagick.convert(['bin', '-filter', 'point', '64x64', 'thumb']);
+		return thumb;
 	}
 })
 
