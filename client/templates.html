@@ -13,12 +13,12 @@
 	</div>
 	{{#each showPix}}
 		<div class="pixDoc">
-			<span class='remove'>Remove</span>
-			<img src="{{this.binary}}"><br />
 			<figcaption>
 				<div>_id: {{this._id}}</div>
 				<div>{{thedate}}</div>
 			</figcaption>
+			<span class='remove'>Remove</span>
+			<img src="{{this.binary}}"><br />
 		</div>
 	{{/each}}
 </template>

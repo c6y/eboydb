@@ -7,7 +7,7 @@ body {
 
 #container {
 	display: block;
-	width: 480px;
+	width: auto;
 	display: inline-block;
 	background-color: #eee;
 	text-align: left;
@@ -16,11 +16,12 @@ body {
 .pixDoc {
 	background-color: #ddd;
 	margin: 12px;
-	border-bottom: 1px solid #ccc;
-	border-right: 1px solid #ccc;
+/*	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;*/
 	padding: 6px;
+	width: 432px;
 	overflow-x: hidden;
-	max-height: 144px;
+	max-height: 216px;
 	overflow-y: hidden;
 }
 
@@ -30,7 +31,7 @@ h1 {
 }
 
 .myPixInput {
-	width: 468px;
+	width: 100%;
 	padding: 6px;
 	margin-bottom: 12px;
 	background-color: white;
@@ -41,7 +42,8 @@ h1 {
 	background-color: orange;
 	padding: 4px 8px;
 	position: absolute;
-	margin: -7px;
+	/*float: right;*/
+	margin-left: -48px;
 }
 
 .paging {
@@ -57,7 +59,9 @@ h1 {
 	background-color: black;
 }
 figcaption {
-	margin-bottom: 0px;
+	padding-bottom: 3px;
+	margin-bottom: 9px;
+	border-bottom: #555 1px dashed;
 }
 
 
