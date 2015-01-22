@@ -16,13 +16,16 @@ body {
 .pixDoc {
 	background-color: #ddd;
 	margin: 12px;
-/*	border-bottom: 1px solid #ccc;
-	border-right: 1px solid #ccc;*/
 	padding: 6px;
 	width: 432px;
-	overflow-x: hidden;
 	max-height: 216px;
 	overflow-y: hidden;
+}
+
+img {
+	width: 100%;
+  height: auto;
+	background-color: #352545;
 }
 
 h1 {
@@ -43,7 +46,7 @@ h1 {
 	padding: 4px 8px;
 	position: absolute;
 	/*float: right;*/
-	margin-left: -48px;
+	margin-left: 392px;
 }
 
 .paging {
