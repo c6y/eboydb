@@ -11,3 +11,4 @@ cfs:filesystem
 mrt:moment
 tmeasday:publish-counts
 cfs:graphicsmagick
+classcraft:imagemagick
