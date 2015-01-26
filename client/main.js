@@ -1,4 +1,25 @@
-Template.pixUpload.events({
+Template.home.helpers({
+	'posts': function() {
+		return Counts.get('numberOfPosts')
+	},
+	'currentPage': function() {
+		var page = Math.floor(Session.get('docCursor') / 4) + 1;
+		return page;
+	}, 
+	'showPix': function() {
+		return MyPix.find({}, {sort: {uploadedAt: -1}});
+	},
+	'thedate': function() {
+		var date = this.uploadedAt;
+		return "date: " + date;
+	},
+	'img': function() {
+		var bin = this.binary;
+		return bin;
+	}
+})
+
+Template.home.events({
 	'change .myPixInput': function(event, template) {
 		FS.Utility.eachFile(event, function(file) {
 	
@@ -10,40 +31,7 @@ Template.pixUpload.events({
 				//kicked off the data upload using HTTP
 			});
 		});
-	}
-});
-
-Template.pixCount.helpers({
-	'posts': function() {
-		return Counts.get('numberOfPosts')
 	},
-	'currentPage': function() {
-		var page = Math.floor(Session.get('docCursor') / 4) + 1;
-		return page;
-	} 
-})
-
-Template.pixList.helpers({
-	'showPix': function() {
-		return MyPix.find({}, {sort: {uploadedAt: -1}});
-	},
-	'thedate': function() {
-		var date = this.uploadedAt;
-		return "date: " + date;
-	},
-	'img': function() {
-		var bin = this.binary;
-		return bin;
-	},
-	'thumbnail': function() {
-		var bin = this.binary;
-		var thumb = new FileReader();
-		Imagemagick.convert(['bin', '-filter', 'point', '64x64', 'thumb']);
-		return thumb;
-	}
-})
-
-Template.pixList.events({
 	'click .remove': function(event, template) {
 		console.log("Removing \"" + this._id + "\"");
 		MyPix.remove(this._id);
