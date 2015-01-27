@@ -40,14 +40,14 @@ Template.home.events({
 	'click .previous': function(event, template) {
 		if(Number(Session.get('docCursor') > 3)) {
 			Session.set('docCursor', Number(Session.get('docCursor')) - 4);
-			console.log("Cursor: " + Session.get('docCursor'));
+			console.log("docCursor: " + Session.get('docCursor'));
 		}		
 	},
 
 	'click .next': function(event, template) {
 		if(Number(Session.get('docCursor')) + 4 < Counts.get('numberOfPosts')) {
 			Session.set('docCursor', Number(Session.get('docCursor')) + 4);
-			console.log("Cursor: " + Session.get('docCursor'));
+			console.log("docCursor: " + Session.get('docCursor'));
 		};
 	}
 })

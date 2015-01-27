@@ -9,16 +9,27 @@
 		{{#each showPix}}
 			<div class="pixDoc">
 				<figcaption>
-					<div>_id: {{this._id}}</div>
+					<div>_id: <a href="{{ pathFor 'doc' }}">{{this._id}}</a></div>
 					<div>{{thedate}}</div>
 				</figcaption>
 				<span class='remove'>Remove</span>
-				<div class="imagebox"><img src="{{this.url store='ScaledPix'}}"></div>
+				<div class="imagebox"><img src="{{ this.url store='ScaledPix' }}"></div>
 			</div>
 		{{/each}}
 	</div>
 </template>
 
-<template name="document">
-	DOCUMENT!
+<template name="doc">
+	<a href="{{ pathFor 'home' }}" class='linkToSingleView'>Back to List</a>
+	<h1>{{this.name}}</h1>
+
+	<div class="showDocFull">
+		<figcaption>
+			<div>_id: {{this._id}}</div>
+			<div>uploadedAt: {{this.uploadedAt}}</div>
+			<div>metadata.width: {{this.metadata.width}}, metadata.height: {{this.metadata.height}}</div>
+			<div>metadata.copyright: {{this.metadata.copyright}}</div>
+		</figcaption>
+		<img src="{{ this.url store='OriginalRetinaPix' }}" width="{{ this.metadata.width }}" height="{{ this.metadata.height }}" />
+	</div>
 </template>
