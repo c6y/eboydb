@@ -5,11 +5,6 @@ Meteor.publish('MyPix', function(cursor) {
 	return MyPix.find({}, {sort: {uploadedAt: -1}, limit: 4, skip: cursor});
 });
 
-// Meteor.publish('aPix', function(id) {
-// 	check(id, String);
-// 	return MyPix.find(_id);
-// });
-
 Meteor.publish('aPix', function(id) {
   check(id, String);
   console.log('id: ' + id);
