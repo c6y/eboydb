@@ -1,20 +1,17 @@
 <template name="home">
-	<div id="container">
-		<h1>Images in eboydb: {{posts}} / page: {{currentPage}}</h1>
-		<input type="file" name="myFile" class="myPixInput">
-		<div class="paging">
+	<h1>eBoy {{posts}}/P{{currentPage}}</h1>
+	<input type="file" name="myFile" class="myPixInput">
+	<div class="paging">
 		<span class="previous">previous</span> | 
 		<span class="next">next</span>
-		</div>
+	</div>
+	<div class="container">
 		{{#each showPix}}
-			<div class="pixDoc">
-				<figcaption>
-					<div>_id: <a href="{{ pathFor 'doc' }}">{{this._id}}</a></div>
-					<div>{{thedate}}</div>
-				</figcaption>
-				<span class='remove'>Remove</span>
-				<div class="imagebox"><img src="{{ this.url store='ScaledPix' }}"></div>
-			</div>
+			<span class="item">
+				<!-- <figcaption>_id: <a href="{{ pathFor 'doc' }}">{{this._id}}</a> {{thedate}} <span class='remove'>Remove</span></figcaption> -->
+				<!-- <div class="imagebox"><img src="{{ this.url store='ScaledPix' }}"></div> -->
+				<a href="{{ pathFor 'doc' }}"><img src="{{ this.url store='OriginalRetinaPix' }}" width="{{ this.metadata.width }}" height="{{ this.metadata.height }}" /></a>
+			</span>
 		{{/each}}
 	</div>
 </template>
@@ -29,7 +26,12 @@
 			<div>uploadedAt: {{this.uploadedAt}}</div>
 			<div>metadata.width: {{this.metadata.width}}, metadata.height: {{this.metadata.height}}</div>
 			<div>metadata.copyright: {{this.metadata.copyright}}</div>
+			<div>tags: {{this.tags}}</div>
 		</figcaption>
 		<img src="{{ this.url store='OriginalRetinaPix' }}" width="{{ this.metadata.width }}" height="{{ this.metadata.height }}" />
+		<form>
+			tags: <input type="text" name="tags" value="{{this.tags}}">
+			<input type="submit" name="updatetags">
+		</form>
 	</div>
 </template>

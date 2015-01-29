@@ -2,30 +2,43 @@
 body {
 	font-family: monospace;
 	font-size: 10pt;
-	text-align: center;
-}
-
-#container {
-	display: block;
-	width: auto;
-	display: inline-block;
-	background-color: #eee;
 	text-align: left;
 }
 
-.pixDoc {
-	background-color: #ddd;
-	margin: 12px;
-	padding: 6px;
-	width: 432px;
-	max-height: 216px;
-	overflow-y: hidden;
+.container {
+	display: flex;
+	/*background-color: #eee;*/
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	/*width: auto;*/
+	/*display: inline-block;*/
+	/*text-align: left;*/
 }
 
-.pixDoc img {
-	width: 100%;
-  height: auto;
-	background-color: #352545;
+.item {
+	background-color: #eee;
+	padding: 0px;
+	/*margin: 12px;*/
+	/*padding: 6px;*/
+	/*flex-grow: 4;*/
+	/*align-self: flex-start;*/
+	max-width: 216px;
+	max-height: 216px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	/*width: 216px;*/
+	/*height: 216px;*/
+	/*margin: 6px;*/
+}
+
+.item img {
+	/*width: 50%;*/
+	/*width: 128px;
+  height: auto;*/
+	background-color: #eee;
+	display: block;
+	text-align: center;
 }
 
 .showDocFull img {
@@ -35,31 +48,34 @@ body {
 
 h1 {
 	font-family: sans-serif;
-	padding-left: 18px;
+	/*padding-left: 18px;*/
 }
 
 .myPixInput {
-	width: 100%;
-	padding: 6px;
-	margin-bottom: 12px;
-	background-color: white;
-	display: block;
+	/*width: auto;*/
+	padding: 12px 10px;
+	/*margin-bottom: 12px;*/
+	background-color: yellow;
+	/*display: block;*/
 }
 
 .remove {
 	background-color: orange;
 	padding: 4px 8px;
-	position: absolute;
+	/*position: absolute;*/
 	/*float: right;*/
-	margin-left: 392px;
+	/*margin-left: 392px;*/
 }
 
 .paging {
-	text-align: center;
+	/*text-align: center;*/
+	background-color: cyan;
+	padding: 12px;
 }
 
 .previous:hover, .next:hover {
-	background-color: cyan;
+	color: white;
+	background-color: blue;
 }
 
 .previous:active, .next:active {

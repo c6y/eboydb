@@ -38,16 +38,27 @@ Template.home.events({
 	},
 
 	'click .previous': function(event, template) {
-		if(Number(Session.get('docCursor') > 3)) {
-			Session.set('docCursor', Number(Session.get('docCursor')) - 4);
+		if(Number(Session.get('docCursor') > (displayQty-1))) {
+			Session.set('docCursor', Number(Session.get('docCursor')) - displayQty);
 			console.log("docCursor: " + Session.get('docCursor'));
 		}		
 	},
 
 	'click .next': function(event, template) {
-		if(Number(Session.get('docCursor')) + 4 < Counts.get('numberOfPosts')) {
-			Session.set('docCursor', Number(Session.get('docCursor')) + 4);
+		if(Number(Session.get('docCursor')) + displayQty < Counts.get('numberOfPosts')) {
+			Session.set('docCursor', Number(Session.get('docCursor')) + displayQty);
 			console.log("docCursor: " + Session.get('docCursor'));
 		};
 	}
 })
+
+Template.doc.events({
+	'submit form': function (event) {
+		event.preventDefault();
+		var updatedTags =  event.target.tags.value;
+		MyPix.update(this._id, {$set: {tags: updatedTags}})
+		// console.log('event.target.name: ' + event.target.tags.value);
+	}
+});
+
+
