@@ -56,8 +56,8 @@ Template.doc.events({
 	'submit form': function (event) {
 		event.preventDefault();
 		var updatedTags =  event.target.tags.value;
-		MyPix.update(this._id, {$set: {tags: updatedTags}})
-		// console.log('event.target.name: ' + event.target.tags.value);
+		var updatedColor = event.target.backColor.value;
+		MyPix.update(this._id, {$set: {tags: updatedTags, backColor: updatedColor}});
 	}
 });
 

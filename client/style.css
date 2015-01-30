@@ -17,33 +17,29 @@ body {
 }
 
 .item {
-	background-color: #eee;
 	padding: 0px;
 	/*margin: 12px;*/
 	/*padding: 6px;*/
 	/*flex-grow: 4;*/
 	/*align-self: flex-start;*/
-	max-width: 216px;
-	max-height: 216px;
+	/*max-width: 216px;*/
+	/*max-height: 216px;*/
 	overflow-x: hidden;
 	overflow-y: hidden;
-	/*width: 216px;*/
-	/*height: 216px;*/
-	/*margin: 6px;*/
+	width: 216px;
+	height: 216px;
+	display: flex;
+	justify-content: center;
+	justify-items: center;
+	align-items: center;
 }
 
 .item img {
-	/*width: 50%;*/
-	/*width: 128px;
-  height: auto;*/
-	background-color: #eee;
-	display: block;
-	text-align: center;
 }
 
 .showDocFull img {
-	border: 48px #eee solid;
-	background-color: #eee;
+	border: 1px #eee solid;
+	/*background-color: #eee;*/
 }
 
 h1 {
@@ -62,7 +58,7 @@ h1 {
 .remove {
 	background-color: orange;
 	padding: 4px 8px;
-	/*position: absolute;*/
+	position: absolute;
 	/*float: right;*/
 	/*margin-left: 392px;*/
 }
