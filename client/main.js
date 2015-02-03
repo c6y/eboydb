@@ -1,9 +1,9 @@
 Template.home.helpers({
-	'posts': function() {
+	'postsCount': function() {
 		return Counts.get('numberOfPosts')
 	},
 	'currentPage': function() {
-		var page = Math.floor(Session.get('docCursor') / 4) + 1;
+		var page = Math.floor(Session.get('docCursor') / displayQty) + 1;
 		return page;
 	}, 
 	'showPix': function() {
@@ -16,7 +16,40 @@ Template.home.helpers({
 	'img': function() {
 		var bin = this.binary;
 		return bin;
-	}
+	},
+	// return the scaling factor for thumbnails based on longer side of image
+	'factor': function() {
+		var wDim = this.metadata.width;
+		var hDim = this.metadata.height;
+		var maxDim = Math.max(wDim, hDim);
+		var possibleOverlap = 0;
+		var thumbnailbox = thumbnailDimension + possibleOverlap; // global variable is set in settings.js
+		var scale = thumbnailbox/maxDim;
+		var scaleInt;
+		if (scale > 1) {
+			scaleInt = Math.floor(scale)
+		} else {
+			scaleInt = (Math.ceil(scale * 10)) / 10 // Math.ceil(scale)
+		}
+		return scaleInt;
+	},
+	// return scaling width for thumbnails based on longer side of image
+	'toWidth': function() {
+		var wDim = this.metadata.width;
+		var hDim = this.metadata.height;
+		var maxDim = Math.max(wDim, hDim); // returns the loger side
+		var possibleOverlap = 0;
+		var thumbnailbox = thumbnailDimension + possibleOverlap; // global variable is set in settings.js
+		var scale = thumbnailbox/maxDim;
+		var scaleInt;
+		if (scale > 1) {
+			scaleInt = Math.floor(scale)
+		} else {
+			scaleInt = (Math.ceil(scale * 10)) / 10
+		}
+		var scaleToWidth = Math.floor(wDim * scaleInt);
+		return scaleToWidth;
+	},
 })
 
 Template.home.events({
@@ -24,7 +57,8 @@ Template.home.events({
 		FS.Utility.eachFile(event, function(file) {
 	
 			var newFile = new FS.File(file);
-			newFile.metadata = {copyright: "eBoy"};
+			newFile.metadata = {copyright: ""};
+			newFile.metadata = {backColor: ""};
 
 			MyPix.insert(newFile, function(err, fileObj) {
 				//If !err, we have inserted new doc with ID fileObj._id, and

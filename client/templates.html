@@ -1,5 +1,5 @@
 <template name="home">
-	<h1>eBoy {{posts}}/P{{currentPage}}</h1>
+	<h1>eBoy {{ postsCount }}/P{{ currentPage }}</h1>
 	<input type="file" name="myFile" class="myPixInput">
 	<div class="paging">
 		<span class="previous">previous</span> | 
@@ -8,8 +8,8 @@
 	<div class="container">
 		{{#each showPix}}
 			<span class="item" style="background-color: {{ this.backColor }}">
-				<div class='remove'>X {{ this.backColor }}</div>
-				<a href="{{ pathFor 'doc' }}"><img src="{{ this.url store='OriginalRetinaPix' }}" width="{{ this.metadata.width }}" height="{{ this.metadata.height }}" /></a>
+				<div class='remove'>X {{ this.backColor }} {{ toWidth }}px {{ factor }}</div>
+				<a href="{{ pathFor 'doc' }}"><img src="{{ this.url store='OriginalPix' }}" width="{{ toWidth }}" /></a>
 			</span>
 		{{/each}}
 	</div>

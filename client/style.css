@@ -16,27 +16,6 @@ body {
 	/*text-align: left;*/
 }
 
-.item {
-	padding: 0px;
-	/*margin: 12px;*/
-	/*padding: 6px;*/
-	/*flex-grow: 4;*/
-	/*align-self: flex-start;*/
-	/*max-width: 216px;*/
-	/*max-height: 216px;*/
-	overflow-x: hidden;
-	overflow-y: hidden;
-	width: 216px;
-	height: 216px;
-	display: flex;
-	justify-content: center;
-	justify-items: center;
-	align-items: center;
-}
-
-.item img {
-}
-
 .showDocFull img {
 	border: 1px #eee solid;
 	/*background-color: #eee;*/
@@ -51,7 +30,7 @@ h1 {
 	/*width: auto;*/
 	padding: 12px 10px;
 	/*margin-bottom: 12px;*/
-	background-color: yellow;
+	background-color: nonce;
 	/*display: block;*/
 }
 
@@ -65,7 +44,7 @@ h1 {
 
 .paging {
 	/*text-align: center;*/
-	background-color: cyan;
+	background-color: none;
 	padding: 12px;
 }
 

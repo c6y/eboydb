@@ -1,0 +1,22 @@
+@thumbnailDim: 216px;
+
+.item {
+	padding: 0px;
+	margin: 3px;
+	/*padding: 6px;*/
+	flex-grow: 1;
+	/*align-self: flex-start;*/
+	/*max-width: 216px;*/
+	/*max-height: 216px;*/
+	overflow-x: hidden;
+	overflow-y: hidden;
+	width: @thumbnailDim;
+	height: @thumbnailDim;
+	display: flex;
+	justify-content: center;
+	justify-items: center;
+	align-items: center;
+	.item img {
+		margin-left: -40px;
+	}
+}
