@@ -1,6 +1,11 @@
-<template name="home">
-	<h1>eboydb {{ postsCount }}/P{{ currentPage }}</h1>
+<template name="navigation">
+	<h1><a href="{{ pathFor 'browse' page=1 }}">eboydb</a>: {{ postsCount }} docs – p{{ currentPage }}/{{ totalPages }}</h1>
 	<input type="file" name="myFile" class="myPixInput">
+</template>
+
+
+<template name="browse">
+	{{> navigation }}
 	<div class="paging">
 		<span class="previous">previous</span> | 
 		<span class="next">next</span>
@@ -16,12 +21,10 @@
 </template>
 
 <template name="doc">
-	<a href="{{ pathFor 'home' }}" class='linkToSingleView'>Back to List</a>
-	<h1>{{this.name}}</h1>
-
+	<h1><a href="" class="goBack">eboydb</a>: {{ this._id }} </h1>
 	<div class="showDocFull">
 		<figcaption>
-			<div>_id: {{this._id}}</div>
+			<div>name: {{ this.name }}</div>
 			<div>uploadedAt: {{this.uploadedAt}}</div>
 			<div>metadata.width: {{this.metadata.width}}, metadata.height: {{this.metadata.height}}</div>
 			<div>metadata.copyright: {{this.metadata.copyright}}</div>

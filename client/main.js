@@ -1,11 +1,18 @@
-Template.home.helpers({
+Template.navigation.helpers({
 	'postsCount': function() {
 		return Counts.get('numberOfPosts')
 	},
 	'currentPage': function() {
-		var page = Math.floor(Session.get('docCursor') / displayQty) + 1;
-		return page;
-	}, 
+		var currentPage = Number(Router.current().params.page);
+		return currentPage;
+	},
+	'totalPages': function() {
+		return Math.ceil(Counts.get('numberOfPosts') / displayQty);
+	}
+});
+
+
+Template.browse.helpers({
 	'showPix': function() {
 		return MyPix.find({}, {sort: {uploadedAt: -1}});
 	},
@@ -54,7 +61,7 @@ Template.home.helpers({
 	},
 })
 
-Template.home.events({
+Template.browse.events({
 	'change .myPixInput': function(event, template) {
 		FS.Utility.eachFile(event, function(file) {
 	
@@ -74,17 +81,20 @@ Template.home.events({
 	},
 
 	'click .previous': function(event, template) {
-		if(Number(Session.get('docCursor') > (displayQty-1))) {
-			Session.set('docCursor', Number(Session.get('docCursor')) - displayQty);
-			console.log("docCursor: " + Session.get('docCursor'));
-		}		
+		var currentPage = Number(Router.current().params.page);
+		if (currentPage > 1) {
+			var previousPage = currentPage - 1;
+			Router.go('browse', {page: previousPage});
+		}
 	},
 
 	'click .next': function(event, template) {
-		if(Number(Session.get('docCursor')) + displayQty < Counts.get('numberOfPosts')) {
-			Session.set('docCursor', Number(Session.get('docCursor')) + displayQty);
-			console.log("docCursor: " + Session.get('docCursor'));
-		};
+		var currentPage = Number(Router.current().params.page);
+		var maxPages = Math.ceil(Counts.get('numberOfPosts') / displayQty);
+		if (currentPage < maxPages) {
+			var nextPage = currentPage + 1;
+			Router.go('browse', {page: nextPage});
+		}
 	}
 })
 
@@ -94,6 +104,9 @@ Template.doc.events({
 		var updatedTags =  event.target.tags.value;
 		var updatedColor = event.target.backColor.value;
 		MyPix.update(this._id, {$set: {tags: updatedTags, backColor: updatedColor}});
+	},
+	'click .goBack': function(event) {
+		history.back();
 	}
 });
 
