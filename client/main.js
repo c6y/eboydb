@@ -29,7 +29,8 @@ Template.home.helpers({
 		if (scale > 1) {
 			scaleInt = Math.floor(scale)
 		} else {
-			scaleInt = (Math.ceil(scale * 10)) / 10 // Math.ceil(scale)
+			// scaleInt = (Math.ceil(scale * 10)) / 10
+			scaleInt = 1; // not scaled down so stays at 1x
 		}
 		return scaleInt;
 	},
@@ -45,7 +46,8 @@ Template.home.helpers({
 		if (scale > 1) {
 			scaleInt = Math.floor(scale)
 		} else {
-			scaleInt = (Math.ceil(scale * 10)) / 10
+			// scaleInt = (Math.ceil(scale * 10)) / 10
+			scaleInt = 1; // not scaled down so stays at 1x
 		}
 		var scaleToWidth = Math.floor(wDim * scaleInt);
 		return scaleToWidth;
