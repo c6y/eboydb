@@ -111,3 +111,10 @@ Template.doc.events({
 });
 
 
+//////////////////////////////////// TESTS
+
+Template.tester.helpers({
+	'myColor': function () {
+		return '#444222'
+	}
+});

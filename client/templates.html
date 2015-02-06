@@ -45,3 +45,24 @@
 		</form>
 	</div>
 </template>
+
+<!-- //////////////////////////////////// TESTS -->
+<template name="tester">
+	<img id="scream" src="{{ this.url store='OriginalRetinaPix' }}" width="{{ this.metadata.width }}" height="{{ this.metadata.height }}" />
+	<div>name: {{ this.name }}</div>
+		<canvas id="myCanvas" width="864" height="864" style="border:1px solid #c3c3c3; width: 432px; height:432px">
+			Your browser does not support the HTML5 
+		</canvas>
+	<script>
+		var myImage = new Image();
+		myImage.onload = function() {
+			var c=document.getElementById("myCanvas");
+			var ctx=c.getContext("2d");
+			ctx.fillStyle = "{{ this.backColor }}";
+			ctx.fillRect(0, 0, 864, 864);
+			ctx.imageSmoothingEnabled= false;
+			ctx.drawImage(myImage, 0, 0, 864, 864);
+		}
+		myImage.src="{{ this.url store='OriginalRetinaPix' }}";
+	</script>
+</template>
