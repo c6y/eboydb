@@ -12,10 +12,14 @@
 	</div>
 	<div class="container">
 		{{#each showPix}}
-			<span class="item" style="background-color: {{ this.backColor }}">
-				<div class='remove'>X {{ this.backColor }} {{ toWidth }}px {{ factor }}x</div>
-				<a href="{{ pathFor 'doc' }}"><img src="{{ this.url store='OriginalPix' }}" width="{{ toWidth }}" /></a>
-			</span>
+
+			<div class="docbox" style="background-color: {{ this.backColor }}">
+				<div class="docinfo"><span class='remove'>X</span> {{ this.backColor }} {{ toWidth }}px {{ factor }}x</div>
+				<figure>
+					<a href="{{ pathFor 'doc' }}"><img src="{{ this.url store='OriginalPix' }}" width="{{ toWidth }}" /></a>
+				</figure>
+			</div>
+
 		{{/each}}
 	</div>
 </template>
@@ -23,15 +27,17 @@
 <template name="doc">
 	<h1><a href="" class="goBack">eboydb</a>: {{ this._id }} </h1>
 	<div class="showDocFull">
-		<figcaption>
-			<div>name: {{ this.name }}</div>
-			<div>uploadedAt: {{this.uploadedAt}}</div>
-			<div>metadata.width: {{this.metadata.width}}, metadata.height: {{this.metadata.height}}</div>
-			<div>metadata.copyright: {{this.metadata.copyright}}</div>
-			<div>tags: {{this.tags}}</div>
-			<div>background-color: {{ this.backColor }}</div>
-		</figcaption>
-		<img style="background-color: {{ this.backColor }}" src="{{ this.url store='OriginalRetinaPix' }}" width="{{ this.metadata.width }}" height="{{ this.metadata.height }}" />
+		<figure>
+			<img style="background-color: {{ this.backColor }}" src="{{ this.url store='OriginalRetinaPix' }}" width="{{ this.metadata.width }}" height="{{ this.metadata.height }}" />
+			<figcaption>
+				<div>name: {{ this.name }}</div>
+				<div>uploadedAt: {{this.uploadedAt}}</div>
+				<div>metadata.width: {{this.metadata.width}}, metadata.height: {{this.metadata.height}}</div>
+				<div>metadata.copyright: {{this.metadata.copyright}}</div>
+				<div>tags: {{this.tags}}</div>
+				<div>background-color: {{ this.backColor }}</div>
+			</figcaption>
+		</figure>
 		<form>
 			<div>tags: <input type="text" name="tags" value="{{this.tags}}"></div>
 			<div>background-color: <input type="text" name="backColor" value="{{this.backColor}}"></div>

@@ -1,22 +1,54 @@
 @thumbnailDim: 216px;
 
-.item {
-	padding: 0px;
-	margin: 3px;
-	/*padding: 6px;*/
-	flex-grow: 1;
-	/*align-self: flex-start;*/
-	/*max-width: 216px;*/
-	/*max-height: 216px;*/
-	overflow-x: hidden;
-	overflow-y: hidden;
-	width: @thumbnailDim;
-	height: @thumbnailDim;
+.showDocFull {
+	figure {
+		margin: 10px;
+		img {
+			border: 1px #aaa solid;
+		}
+	}
+}
+
+.container {
 	display: flex;
-	justify-content: center;
-	justify-items: center;
-	align-items: center;
-	.item img {
-		// margin-left: -40px;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+
+	.docinfo {
+		margin: 0px;
+		background-color: orange;
+		padding: 2px 8px 2px 0px;
+		position: absolute;
+		display: block;
+
+		.remove {
+			color: white;
+			background-color: black;
+			padding: 2px 4px;
+		}
+	}
+	.docbox {
+		padding: 0px;
+		margin: 3px;
+		flex-grow: 1;
+		overflow-x: hidden;
+		overflow-y: hidden;
+		width: @thumbnailDim;
+		height: @thumbnailDim;
+		display: flex;
+		justify-content: center;
+
+		figure {
+			flex-grow: 1;
+			margin: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			img {
+				  display: block;
+			}
+		}
 	}
 }

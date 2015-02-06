@@ -16,11 +16,6 @@ body {
 	/*text-align: left;*/
 }
 
-.showDocFull img {
-	border: 1px #eee solid;
-	/*background-color: #eee;*/
-}
-
 h1 {
 	font-family: sans-serif;
 	padding-left: 10px;
@@ -34,14 +29,6 @@ h1 {
 	/*margin-bottom: 12px;*/
 	background-color: nonce;
 	/*display: block;*/
-}
-
-.remove {
-	background-color: orange;
-	padding: 4px 8px;
-	position: absolute;
-	/*float: right;*/
-	/*margin-left: 392px;*/
 }
 
 .paging {
@@ -58,11 +45,6 @@ h1 {
 .previous:active, .next:active {
 	color: white;
 	background-color: black;
-}
-figcaption {
-	padding-bottom: 3px;
-	margin-bottom: 9px;
-	/*border-bottom: #555 1px dashed;*/
 }
 
 
