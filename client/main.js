@@ -101,6 +101,25 @@ Template.browse.events({
 	}
 })
 
+Template.doc.helpers({
+	'devicePixelRatio': function () {
+		return window.devicePixelRatio;
+	},
+	'deviceDimensions': function () {
+		var widthOriginal = this.metadata.width;
+		var heightOriginal = this.metadata.height;
+		var deviceRatio = window.devicePixelRatio;
+		var deviceWidth = widthOriginal / deviceRatio;
+		var deviceHeight = heightOriginal / deviceRatio;
+		return {
+			ratio: deviceRatio,
+			width: deviceWidth,
+			height: deviceHeight
+		}
+	}
+});
+
+
 Template.doc.events({
 	'submit form': function (event) {
 		event.preventDefault();
@@ -110,14 +129,11 @@ Template.doc.events({
 	},
 	'click .goBack': function(event) {
 		history.back();
-	}
+	},
 });
 
 
-Template.tester.helpers({
-	'myColor': function () {
-		return '#444222'
-	},
+Template.spriteBox.helpers({
 	'devicePixelRatio': function () {
 		return window.devicePixelRatio;
 	},

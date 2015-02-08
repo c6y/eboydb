@@ -28,8 +28,10 @@
 	<h1><a href="" class="goBack">eboydb</a>: {{ this._id }} </h1>
 	<div class="showDocFull">
 		<figure>
-			<a href="{{ pathFor 'tester' }}">
-				<img style="background-color: {{ this.metadata.backColor }}" src="{{ this.url 	store='OriginalPix' }}" width="{{ this.metadata.width }}" height="{{ this.metadata.height }}" />
+			<!-- <img style="background-color: none" src="{{ this.url 	store='OriginalPix' }}" width="{{ this.metadata.width }}" height="{{ this.metadata.height }}" /> -->
+			<img style="background-color: none" src="{{ this.url 	store='OriginalPix' }}" width="{{ deviceDimensions.width }}" height="{{ deviceDimensions.height }}" />
+			<a href="{{ pathFor 'spriteBox' }}">
+				<img style="background-color: {{ this.metadata.backColor }}" src="{{ this.url 	store='OriginalPix' }}" width="{{ deviceDimensions.width }}" height="{{ deviceDimensions.height }}" />
 			</a>
 
 	<figcaption>
@@ -52,8 +54,7 @@
 	</div>
 </template>
 
-<!-- //////////////////////////////////// TESTS -->
-<template name="tester">
+<template name="spriteBox">
 	<script>
 		var myImage = new Image();
 		myImage.src="{{ this.url store='OriginalPix' }}";
