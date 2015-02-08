@@ -1,19 +1,8 @@
 /* CSS declarations go here */
 body {
-	font-family: monospace;
-	font-size: 10pt;
+	font-family: Menlo, monospace;
+	font-size: 9pt;
 	text-align: left;
-}
-
-.container {
-	display: flex;
-	/*background-color: #eee;*/
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-items: flex-start;
-	/*width: auto;*/
-	/*display: inline-block;*/
-	/*text-align: left;*/
 }
 
 h1 {
@@ -47,4 +36,14 @@ h1 {
 	background-color: black;
 }
 
+ol {
+	padding: 0 0 0 1em;
+}
 
+ol li {
+	list-style-type: none;
+}
+
+ol li .property {
+	color: Crimson;
+}

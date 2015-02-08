@@ -13,10 +13,10 @@
 	<div class="container">
 		{{#each showPix}}
 
-			<div class="docbox" style="background-color: {{ this.backColor }}">
-				<div class="docinfo"><span class='remove'>X</span> {{ this.backColor }} {{ toWidth }}px {{ factor }}x</div>
+			<div class="docbox" style="background-color: {{ this.metadata.backColor }}">
+				<div class="docinfo"><span class='remove'>X</span> {{ this.metadata.backColor }} {{ toWidth }}px {{ factor }}x</div>
 				<figure>
-					<a href="{{ pathFor 'doc' }}"><img src="{{ this.url store='OriginalPix' }}" width="{{ toWidth }}" /></a>
+					<a href="{{ pathFor 'doc' }}"><img src="{{ this.url store='ThumbsPix' }}" width="{{ toWidth }}" /></a>
 				</figure>
 			</div>
 
@@ -28,19 +28,25 @@
 	<h1><a href="" class="goBack">eboydb</a>: {{ this._id }} </h1>
 	<div class="showDocFull">
 		<figure>
-			<img style="background-color: {{ this.backColor }}" src="{{ this.url store='OriginalRetinaPix' }}" width="{{ this.metadata.width }}" height="{{ this.metadata.height }}" />
-			<figcaption>
-				<div>name: {{ this.name }}</div>
-				<div>uploadedAt: {{this.uploadedAt}}</div>
-				<div>metadata.width: {{this.metadata.width}}, metadata.height: {{this.metadata.height}}</div>
-				<div>metadata.copyright: {{this.metadata.copyright}}</div>
-				<div>tags: {{this.tags}}</div>
-				<div>background-color: {{ this.backColor }}</div>
-			</figcaption>
+			<a href="{{ pathFor 'tester' }}">
+				<img style="background-color: {{ this.metadata.backColor }}" src="{{ this.url 	store='OriginalPix' }}" width="{{ this.metadata.width }}" height="{{ this.metadata.height }}" />
+			</a>
+
+	<figcaption>
+		<ol>
+			<li><span class="property">name</span>: {{ this.name }}</li>
+			<li><span class="property">uploadedAt</span>: {{this.uploadedAt}}</li>
+			<li><span class="property">metadata.width</span>: {{this.metadata.width}}</li>
+			<li><span class="property">metadata.height</span>: {{this.metadata.height}}</li>
+			<li><span class="property">metadata.copyright</span>: {{this.metadata.copyright}}</li>
+			<li><span class="property">metadata.tags</span>: {{this.metadata.tags}}</li>
+			<li><span class="property">metadata.backColor</span>: {{ this.metadata.backColor }}</li>
+		</ol>
+	</figcaption>
 		</figure>
 		<form>
-			<div>tags: <input type="text" name="tags" value="{{this.tags}}"></div>
-			<div>background-color: <input type="text" name="backColor" value="{{this.backColor}}"></div>
+			<div>tags: <input type="text" name="tags" value="{{this.metadata.tags}}"></div>
+			<div>background-color: <input type="text" name="backColor" value="{{this.metadata.backColor}}"></div>
 			<input type="submit" name="updatetags">
 		</form>
 	</div>
@@ -48,21 +54,54 @@
 
 <!-- //////////////////////////////////// TESTS -->
 <template name="tester">
-	<img id="scream" src="{{ this.url store='OriginalRetinaPix' }}" width="{{ this.metadata.width }}" height="{{ this.metadata.height }}" />
-	<div>name: {{ this.name }}</div>
-		<canvas id="myCanvas" width="864" height="864" style="border:1px solid #c3c3c3; width: 432px; height:432px">
-			Your browser does not support the HTML5 
-		</canvas>
 	<script>
 		var myImage = new Image();
+		myImage.src="{{ this.url store='OriginalPix' }}";
 		myImage.onload = function() {
-			var c=document.getElementById("myCanvas");
-			var ctx=c.getContext("2d");
-			ctx.fillStyle = "{{ this.backColor }}";
-			ctx.fillRect(0, 0, 864, 864);
-			ctx.imageSmoothingEnabled= false;
-			ctx.drawImage(myImage, 0, 0, 864, 864);
+			var c = document.getElementById("myCanvas");
+			var ctx = c.getContext("2d");
+			ctx.fillStyle = "{{ this.metadata.backColor }}";
+			ctx.fillRect(0, 0, {{ scaledSprite.widthDevice }}, {{ scaledSprite.heightDevice }});
+			ctx.imageSmoothingEnabled = false;
+			ctx.drawImage(myImage, 0, 0, {{ scaledSprite.widthDevice }}, {{ scaledSprite.heightDevice }});
+			var ratio = window.devicePixelRatio;
+			console.log('window.devicePixelRatio: ' + window.devicePixelRatio);
+	
+			// generate png from canvas
+			var foo = document.getElementById("genImg");
+			var dataURL = c.toDataURL("image/png");
+			// foo.src = imageGenerated;
+			foo.href = dataURL;
 		}
-		myImage.src="{{ this.url store='OriginalRetinaPix' }}";
 	</script>
+	<div class="box" style="">
+		<canvas id="myCanvas" width="{{ scaledSprite.widthDevice }}" height="{{ scaledSprite.heightDevice }}" style="width:{{ scaledSprite.width }}px; height: {{ scaledSprite.height }}px;">
+			This browser does not support HTML5 canvas
+		</canvas>
+	</div>
+	<!-- <img id="genImg" src="myPicture.png" alt="Description of my picture" /> -->
+	<a id="genImg" href="">Download PNG</a>
+	<figcaption>
+		<ol>
+			<li><span class="property">name</span>: {{ this.name }}</li>
+			<li><span class="property">uploadedAt</span>: {{this.uploadedAt}}</li>
+			<li><span class="property">metadata.width</span>: {{this.metadata.width}}</li>
+			<li><span class="property">metadata.height</span>: {{this.metadata.height}}</li>
+			<li><span class="property">metadata.copyright</span>: {{this.metadata.copyright}}</li>
+			<li><span class="property">metadata.tags</span>: {{this.metadata.tags}}</li>
+			<li><span class="property">metadata.backColor</span>: {{ this.metadata.backColor }}</li>
+		</ol>
+		<ol>
+			<li><span class="property">scaledSprite.width</span>: {{ scaledSprite.width }}</li>
+			<li><span class="property">scaledSprite.height</span>: {{ scaledSprite.height }}</li>
+			<li><span class="property">scaledSprite.scaleFactor</span>: {{ scaledSprite.scaleFactor }}x</li>
+			<li><span class="property">window.devicePixelRatio</span>: {{ devicePixelRatio }} </li>
+			<li><span class="property">scaledSprite.widthDevice</span>: {{ scaledSprite.widthDevice }}</li>
+			<li><span class="property">scaledSprite.heightDevice</span>: {{ scaledSprite.heightDevice }}</li>
+			<li><span class="property">scaledSprite.scaleFactorDevice</span>: {{ scaledSprite.scaleFactorDevice }}x</li>
+		</ol>
+	</figcaption>
+	<div>
+		<img id="scream" src="{{ this.url store='OriginalPix' }}" width="{{ this.metadata.width }}" height="{{ this.metadata.height }}" />
+	</div>
 </template>

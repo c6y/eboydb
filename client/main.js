@@ -30,8 +30,8 @@ Template.browse.helpers({
 		var hDim = this.metadata.height;
 		var maxDim = Math.max(wDim, hDim);
 		var possibleOverlap = 0;
-		var thumbnailbox = thumbnailDimension + possibleOverlap; // global variable is set in settings.js
-		var scale = thumbnailbox/maxDim;
+		var thumbnailBox = thumbnailDimension + possibleOverlap; // global variable is set in settings.js
+		var scale = thumbnailBox/maxDim;
 		var scaleInt;
 		if (scale > 1) {
 			scaleInt = Math.floor(scale)
@@ -47,8 +47,8 @@ Template.browse.helpers({
 		var hDim = this.metadata.height;
 		var maxDim = Math.max(wDim, hDim); // returns the loger side
 		var possibleOverlap = 0;
-		var thumbnailbox = thumbnailDimension + possibleOverlap; // global variable is set in settings.js
-		var scale = thumbnailbox/maxDim;
+		var thumbnailBox = thumbnailDimension + possibleOverlap; // global variable is set in settings.js
+		var scale = thumbnailBox/maxDim;
 		var scaleInt;
 		if (scale > 1) {
 			scaleInt = Math.floor(scale)
@@ -66,8 +66,11 @@ Template.browse.events({
 		FS.Utility.eachFile(event, function(file) {
 	
 			var newFile = new FS.File(file);
-			newFile.metadata = {copyright: ""};
-			newFile.metadata = {backColor: ""};
+			newFile.metadata = {
+				copyright: "©eBoy",
+				backColor: "#f2f2f2",
+				tags: "sprite"
+			};
 
 			MyPix.insert(newFile, function(err, fileObj) {
 				//If !err, we have inserted new doc with ID fileObj._id, and
@@ -103,7 +106,7 @@ Template.doc.events({
 		event.preventDefault();
 		var updatedTags =  event.target.tags.value;
 		var updatedColor = event.target.backColor.value;
-		MyPix.update(this._id, {$set: {tags: updatedTags, backColor: updatedColor}});
+		MyPix.update(this._id, {$set: {'metadata.tags': updatedTags, 'metadata.backColor': updatedColor}});
 	},
 	'click .goBack': function(event) {
 		history.back();
@@ -111,10 +114,27 @@ Template.doc.events({
 });
 
 
-//////////////////////////////////// TESTS
-
 Template.tester.helpers({
 	'myColor': function () {
 		return '#444222'
-	}
+	},
+	'devicePixelRatio': function () {
+		return window.devicePixelRatio;
+	},
+	'scaledSprite': function () {
+		var widthOriginal = this.metadata.width;
+		var heightOriginal = this.metadata.height;
+		var widthMax = zoomDimension;
+		var dimensionsTo = Meteor.myFunctions.scaleToByInt(widthOriginal, heightOriginal, widthMax);
+		return {
+			width: dimensionsTo.width,
+			height: dimensionsTo.height,
+			scaleFactor: dimensionsTo.factor,
+			widthDevice: dimensionsTo.width * window.devicePixelRatio,
+			heightDevice: dimensionsTo.height * window.devicePixelRatio,
+			scaleFactorDevice: dimensionsTo.factor * window.devicePixelRatio
+		}
+	},
 });
+
+
