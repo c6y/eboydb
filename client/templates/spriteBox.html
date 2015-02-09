@@ -1,0 +1,51 @@
+<template name="spriteBox">
+	<script>
+		var myImage = new Image();
+		myImage.src="{{ sprite.url store='OriginalPix' }}";
+		myImage.onload = function() {
+			var c = document.getElementById("myCanvas");
+			var ctx = c.getContext("2d");
+			ctx.fillStyle = "{{ sprite.metadata.backColor }}";
+			ctx.fillRect(0, 0, {{ scaledSprite.widthDevice }}, {{ scaledSprite.heightDevice }});
+			ctx.imageSmoothingEnabled = false;
+			ctx.drawImage(myImage, 0, 0, {{ scaledSprite.widthDevice }}, {{ scaledSprite.heightDevice }});
+			var ratio = window.devicePixelRatio;
+			console.log('window.devicePixelRatio: ' + window.devicePixelRatio);
+	
+			// generate png from canvas
+			var foo = document.getElementById("genImg");
+			var dataURL = c.toDataURL("image/png");
+			// foo.src = imageGenerated;
+			foo.href = dataURL;
+		}
+	</script>
+	<div class="box" style="">
+		<canvas id="myCanvas" width="{{ scaledSprite.widthDevice }}" height="{{ scaledSprite.heightDevice }}" style="width:{{ scaledSprite.width }}px; height: {{ scaledSprite.height }}px;">
+			This browser does not support HTML5 canvas
+		</canvas>
+	</div>
+	<!-- <img id="genImg" src="myPicture.png" alt="Description of my picture" /> -->
+	<span class="spriteBoxInfoToggle">...</span>
+	<figcaption id="spriteBoxInfo" style="display: {{ visibility }}">
+		<ol>
+			<li><span class="property">name</span>: {{ sprite.name }}</li>
+			<li><span class="property">uploadedAt</span>: {{sprite.uploadedAt}}</li>
+			<li><span class="property">metadata.width</span>: {{sprite.metadata.width}}</li>
+			<li><span class="property">metadata.height</span>: {{sprite.metadata.height}}</li>
+			<li><span class="property">metadata.copyright</span>: {{sprite.metadata.copyright}}</li>
+			<li><span class="property">metadata.tags</span>: {{sprite.metadata.tags}}</li>
+			<li><span class="property">metadata.backColor</span>: {{ sprite.metadata.backColor }}</li>
+		</ol>
+		<ol>
+			<li><span class="property">boxsize</span>: {{ boxsize }}</li>
+			<li><span class="property">scaledSprite.width</span>: {{ scaledSprite.width }}</li>
+			<li><span class="property">scaledSprite.height</span>: {{ scaledSprite.height }}</li>
+			<li><span class="property">scaledSprite.scaleFactor</span>: {{ scaledSprite.scaleFactor }}x</li>
+			<li><span class="property">window.devicePixelRatio</span>: {{ devicePixelRatio }} </li>
+			<li><span class="property">scaledSprite.widthDevice</span>: {{ scaledSprite.widthDevice }}</li>
+			<li><span class="property">scaledSprite.heightDevice</span>: {{ scaledSprite.heightDevice }}</li>
+			<li><span class="property">scaledSprite.scaleFactorDevice</span>: {{ scaledSprite.scaleFactorDevice }}x</li>
+			<li><span class="property">download</span>: <a id="genImg" href="" target="_blank">PNG</a></li>
+		</ol>
+	</figcaption>
+</template>

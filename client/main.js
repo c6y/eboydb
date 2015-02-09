@@ -133,24 +133,3 @@ Template.doc.events({
 });
 
 
-Template.spriteBox.helpers({
-	'devicePixelRatio': function () {
-		return window.devicePixelRatio;
-	},
-	'scaledSprite': function () {
-		var widthOriginal = this.metadata.width;
-		var heightOriginal = this.metadata.height;
-		var widthMax = zoomDimension;
-		var dimensionsTo = Meteor.myFunctions.scaleToByInt(widthOriginal, heightOriginal, widthMax);
-		return {
-			width: dimensionsTo.width,
-			height: dimensionsTo.height,
-			scaleFactor: dimensionsTo.factor,
-			widthDevice: dimensionsTo.width * window.devicePixelRatio,
-			heightDevice: dimensionsTo.height * window.devicePixelRatio,
-			scaleFactorDevice: dimensionsTo.factor * window.devicePixelRatio
-		}
-	},
-});
-
-
