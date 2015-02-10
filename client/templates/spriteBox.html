@@ -9,8 +9,6 @@
 			ctx.fillRect(0, 0, {{ scaledSprite.widthDevice }}, {{ scaledSprite.heightDevice }});
 			ctx.imageSmoothingEnabled = false;
 			ctx.drawImage(myImage, 0, 0, {{ scaledSprite.widthDevice }}, {{ scaledSprite.heightDevice }});
-			var ratio = window.devicePixelRatio;
-			console.log('window.devicePixelRatio: ' + window.devicePixelRatio);
 	
 			// generate png from canvas
 			var foo = document.getElementById("genImg");
@@ -19,7 +17,7 @@
 			foo.href = dataURL;
 		}
 	</script>
-	<div class="box" style="">
+	<div>
 		<canvas id="myCanvas" width="{{ scaledSprite.widthDevice }}" height="{{ scaledSprite.heightDevice }}" style="width:{{ scaledSprite.width }}px; height: {{ scaledSprite.height }}px;">
 			This browser does not support HTML5 canvas
 		</canvas>
