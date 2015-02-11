@@ -40,14 +40,25 @@
 			this[varbase+'_{{ this._id }}'] = '{{ this._id }}';			
 			myThumb_{{ this._id }} = new Image();
 			myThumb_{{ this._id }}.src = "{{ this.url store='OriginalPix' }}";
+
+			// console.log('this.type: ' + '{{ this.type }}');
 			
 			myThumb_{{ this._id }}.onload = function() {
 				var canvas = document.getElementById('{{ this._id }}');
 				var context = canvas.getContext("2d");			
-				// context.fillStyle = '{{ this.metadata.backColor }}';
-				// context.fillRect(0, 0, '{{ this.metadata.width }}', '{{ this.metadata.height }}');
+				// context.fillStyle = '#999999'; //'{{ this.metadata.backColor }}';
+				// context.fillRect(0, 0, '{{ scaledSprite.widthDevice }}', '{{ scaledSprite.heightDevice }}');
+				context.mozImageSmoothingEnabled = false;
+				context.webkitImageSmoothingEnabled = false;
+				context.msImageSmoothingEnabled = false;
 				context.imageSmoothingEnabled = false;
-				context.drawImage(myThumb_{{ this._id }}, 0, 0, {{ scaledSprite.widthDevice }}, {{ scaledSprite.heightDevice }});
+				context.drawImage(
+					myThumb_{{ this._id }},
+					{{ scaledSprite.offsetWidth }},
+					{{ scaledSprite.offsetHeight }},
+					{{ scaledSprite.widthDevice }},
+					{{ scaledSprite.heightDevice }}
+				);
 			}
 			</script>
 
@@ -55,7 +66,12 @@
 				<div class="docinfo"><span class='remove'>X</span> {{ this.metadata.backColor }} {{ toWidth }}px {{ scaledSprite.scaleFactor }}x</div>
 				<figure>
 					<a href="{{ pathFor 'doc' }}">
-						<canvas id='{{ this._id }}' width="{{ scaledSprite.widthDevice }}" height="{{ scaledSprite.heightDevice }}" style="width:{{ scaledSprite.width }}px; height: {{ scaledSprite.height }}px;">This browser does not support HTML5 canvas</canvas>
+						<canvas id='{{ this._id }}'
+							width="{{ scaledSprite.tnWidthDevice }}"
+							height="{{ scaledSprite.tnHeightDevice }}"
+							style="width:{{ scaledSprite.tnWidth }}px; height: {{ scaledSprite.tnHeight }}px;">
+								This browser does not support HTML5 canvas
+						</canvas>
 					</a>
 				</figure>
 			</div>
