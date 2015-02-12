@@ -1,30 +1,10 @@
 <template name="navigation">
-	<h1><a href="{{ pathFor 'browse' page=1 }}">eboydb</a>: {{ postsCount }} docs – p{{ currentPage }}/{{ totalPages }}</h1>
+	<h1><a href="{{ pathFor 'pool' page=1 }}">eboydb</a>: {{ postsCount }} docs – p{{ currentPage }}/{{ totalPages }}</h1>
 	<input type="file" name="myFile" class="myPixInput">
+	<input type="text" name='searchDB' value='Search' class="searchFor">
 </template>
 
-
-<template name="browse">
-	{{> navigation }}
-	<div class="paging">
-		<span class="previous">previous</span> | 
-		<span class="next">next</span>
-	</div>
-	<div class="container">
-		{{#each showPix}}
-
-			<div class="docbox" style="background-color: {{ this.metadata.backColor }}">
-				<div class="docinfo"><span class='remove'>X</span> {{ this.metadata.backColor }} {{ toWidth }}px {{ factor }}x</div>
-				<figure>
-					<a href="{{ pathFor 'doc' }}"><img src="{{ this.url store='ThumbsPix' }}" width="{{ toWidth }}" /></a>
-				</figure>
-			</div>
-
-		{{/each}}
-	</div>
-</template>
-
-<template name="browsethumbs">
+<template name="pool">
 	{{> navigation }}
 	<div class="paging">
 		<span class="previous">previous</span> | 
@@ -63,7 +43,7 @@
 			</script>
 
 			<div class="docbox" style="background-color: {{ this.metadata.backColor }}">
-				<div class="docinfo"><span class='remove'>X</span> {{ this.metadata.backColor }} {{ toWidth }}px {{ scaledSprite.scaleFactor }}x</div>
+				<div class="docinfo"><span class='remove'>X</span> {{ this.metadata.backColor }} {{ this.metadata.width }}w {{ scaledSprite.scaleFactor }}x</div>
 				<figure>
 					<a href="{{ pathFor 'doc' }}">
 						<canvas id='{{ this._id }}'

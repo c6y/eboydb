@@ -1,27 +1,3 @@
-// Template.spriteBox.rendered = function () {
-// 	var myImage = new Image();
-// 	// myImage.src= this.data.sprite.url({store: 'OriginalPix'});
-// 	myImage.src= this.data.sprite.url();
-// 	console.log('myImage.src: ' + myImage.src); // returns the path – everything ok
-	
-// 	myImage.onload = function() {
-// 		var c = document.getElementById("myCanvas");
-// 		var ctx = c.getContext("2d");
-
-// 		ctx.fillStyle = this.data.sprite.metadata.backColor; 
-// 		ctx.fillRect(0, 0, scaledSprite.widthDevice, scaledSprite.heightDevice);
-// 		ctx.imageSmoothingEnabled = false;
-// 		ctx.drawImage(myImage, 0, 0, scaledSprite.widthDevice, scaledSprite.heightDevice);
-// 		var ratio = window.devicePixelRatio;
-	
-// 		// generate png from canvas
-// 		var foo = document.getElementById("genImg");
-// 		var dataURL = c.toDataURL("image/png");
-// 		// foo.src = imageGenerated;
-// 		foo.href = dataURL;
-// 	}
-// };
-
 Template.spriteBox.helpers({
 	'devicePixelRatio': function () {
 		return window.devicePixelRatio;
