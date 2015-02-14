@@ -49,7 +49,20 @@ Template.doc.events({
 		event.preventDefault();
 		var updatedTags =  event.target.tags.value;
 		var updatedColor = event.target.backColor.value;
-		MyPix.update(this._id, {$set: {'metadata.tags': updatedTags, 'metadata.backColor': updatedColor}});
+		if (!!updatedTags) { // if not empty
+			MyPix.update(this._id, {
+				$addToSet: {
+					'metadata.tags': {
+							$each: [ updatedTags ],
+					}
+				}
+			});
+		}
+		MyPix.update(this._id, {
+			$set: {
+				'metadata.backColor': updatedColor
+			}
+		});
 	},
 	'click .goBack': function(event) {
 		history.back();
@@ -108,7 +121,7 @@ Template.pool.events({
 			newFile.metadata = {
 				copyright: "©eBoy",
 				backColor: "#f2f2f2",
-				tags: "sprite"
+				tags: ["sprite", "ecity"]
 			};
 
 			MyPix.insert(newFile, function(err, fileObj) {
