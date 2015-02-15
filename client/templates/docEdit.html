@@ -1,0 +1,28 @@
+<template name="doc">
+	<h1><a href="" class="goBack">eboydb</a>: {{ this._id }} </h1>
+	<div class="showDocFull">
+		<figure>
+			<!-- <img style="background-color: none" src="{{ this.url 	store='OriginalPix' }}" width="{{ this.metadata.width }}" height="{{ this.metadata.height }}" /> -->
+			<img style="background-color: none" src="{{ this.url 	store='OriginalPix' }}" width="{{ deviceDimensions.width }}" height="{{ deviceDimensions.height }}" />
+			<a href="{{ pathFor 'spriteBox' boxsize='512'}}">
+				<img style="background-color: {{ backColor }}" src="{{ this.url store='OriginalPix' }}" width="{{ deviceDimensions.width }}" height="{{ deviceDimensions.height }}" />
+			</a>
+			<figcaption>
+				<ol>
+					<li><span class="property">name</span>: {{ this.name }}</li>
+					<li><span class="property">uploadedAt</span>: {{this.uploadedAt}}</li>
+					<li><span class="property">metadata.width</span>: {{this.metadata.width}}</li>
+					<li><span class="property">metadata.height</span>: {{this.metadata.height}}</li>
+					<li><span class="property">metadata.copyright</span>: {{this.metadata.copyright}}</li>
+					<li><span class="property">metadata.tags</span>: {{this.metadata.tags}}</li>
+					<li><span class="property">metadata.backColor</span>: {{ this.metadata.backColor }}</li>
+				</ol>
+			</figcaption>
+		</figure>
+		<form>
+			<div>add tags: <input type="text" name="tags" value=""></div>
+			<div>background-color: <input type="text" name="backColor" value="{{ this.metadata.backColor }}"></div>
+			<input type="submit" name="updatetags">
+		</form>
+	</div>
+</template>

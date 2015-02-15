@@ -22,6 +22,13 @@ Template.spriteBox.helpers({
 		} else {
 			return 'none';
 		};
+	},
+	'backColor': function() {
+		if (this.sprite.metadata.backColor != 'default') {
+			return this.sprite.metadata.backColor;
+		} else {
+			return defaultBackColor;
+		}	
 	}
 });
 

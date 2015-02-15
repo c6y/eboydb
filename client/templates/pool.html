@@ -1,0 +1,55 @@
+<template name="pool">
+	{{> mainHeader }}
+	<div class="paging">
+		<span class="previous">previous</span> | 
+		<span class="next">next</span>
+	</div>
+	<div class="container">
+		{{#each showPix}}
+
+			<script type="text/javascript">
+			
+			// generate a new myThumb variable for each thumbnail
+			var varbase = 'myThumb';
+			this[varbase+'_{{ this._id }}'] = '{{ this._id }}';			
+			myThumb_{{ this._id }} = new Image();
+			myThumb_{{ this._id }}.src = "{{ this.url store='OriginalPix' }}";
+
+			// console.log('this.type: ' + '{{ this.type }}');
+			
+			myThumb_{{ this._id }}.onload = function() {
+				var canvas = document.getElementById('{{ this._id }}');
+				var context = canvas.getContext("2d");			
+				// context.fillStyle = '#999999'; //'{{ this.metadata.backColor }}';
+				// context.fillRect(0, 0, '{{ scaledSprite.widthDevice }}', '{{ scaledSprite.heightDevice }}');
+				context.mozImageSmoothingEnabled = false;
+				context.webkitImageSmoothingEnabled = false;
+				context.msImageSmoothingEnabled = false;
+				context.imageSmoothingEnabled = false;
+				context.drawImage(
+					myThumb_{{ this._id }},
+					{{ scaledSprite.offsetWidth }},
+					{{ scaledSprite.offsetHeight }},
+					{{ scaledSprite.widthDevice }},
+					{{ scaledSprite.heightDevice }}
+				);
+			}
+			</script>
+
+			<div class="docbox" style="background-color: {{ backColor }}">
+				<div class="docinfo"><span class='remove'>X</span> {{ this.metadata.backColor }} {{ this.metadata.width }}w {{ scaledSprite.scaleFactor }}x</div>
+				<figure>
+					<a href="{{ pathFor 'doc' }}">
+						<canvas id='{{ this._id }}'
+							width="{{ scaledSprite.tnWidthDevice }}"
+							height="{{ scaledSprite.tnHeightDevice }}"
+							style="width:{{ scaledSprite.tnWidth }}px; height: {{ scaledSprite.tnHeight }}px;">
+								This browser does not support HTML5 canvas
+						</canvas>
+					</a>
+				</figure>
+			</div>
+		{{/each}}
+
+	</div>
+</template>

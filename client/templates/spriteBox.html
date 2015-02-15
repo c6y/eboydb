@@ -5,7 +5,7 @@
 		myImage.onload = function() {
 			var c = document.getElementById("myCanvas");
 			var ctx = c.getContext("2d");
-			ctx.fillStyle = "{{ sprite.metadata.backColor }}";
+			ctx.fillStyle = "{{ backColor }}";
 			ctx.fillRect(0, 0, {{ scaledSprite.widthDevice }}, {{ scaledSprite.heightDevice }});
 			ctx.mozImageSmoothingEnabled = false;
 			ctx.webkitImageSmoothingEnabled = false;
@@ -26,7 +26,7 @@
 			foo.href = dataURL;
 		}
 	</script>
-	<div class="contentbackground" style="background-color: {{ sprite.metadata.backColor }}">
+	<div class="contentbackground" style="background-color: {{ backColor }}">
 		<div class="contentdisplay">
 			<div>
 				<canvas id="myCanvas" width="{{ scaledSprite.widthDevice }}" height="{{ scaledSprite.heightDevice }}" style="width:{{ scaledSprite.width }}px; 	height: {{ scaledSprite.height }}px;	">

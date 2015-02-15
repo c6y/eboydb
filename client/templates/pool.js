@@ -1,74 +1,3 @@
-Template.navigation.helpers({
-	'postsCount': function() {
-		return Counts.get('numberOfPosts')
-	},
-	'currentPage': function() {
-		var currentPage = Number(Router.current().params.page);
-		return currentPage;
-	},
-	'totalPages': function() {
-		return Math.ceil(Counts.get('numberOfPosts') / displayQty);
-	},
-	'searchSlug': function() {
-		return Session.get('slug');
-	}
-});
-
-Template.navigation.events({
-	'keypress input.searchFor': function (event) {
-		if (event.which === 13) {
-			var searching = event.currentTarget.value;
-			Session.set('slug', searching);
-			console.log(Session.get('slug'));
-			// console.log('slug: ' + slug);
-			Router.go('pool', {slug: searching, page: 1});
-		}
-	}
-});
-
-Template.doc.helpers({
-	'devicePixelRatio': function () {
-		return window.devicePixelRatio;
-	},
-	'deviceDimensions': function () {
-		var widthOriginal = this.metadata.width;
-		var heightOriginal = this.metadata.height;
-		var deviceRatio = window.devicePixelRatio;
-		var deviceWidth = widthOriginal / deviceRatio;
-		var deviceHeight = heightOriginal / deviceRatio;
-		return {
-			ratio: deviceRatio,
-			width: deviceWidth,
-			height: deviceHeight
-		}
-	}
-});
-
-Template.doc.events({
-	'submit form': function (event) {
-		event.preventDefault();
-		var updatedTags =  event.target.tags.value;
-		var updatedColor = event.target.backColor.value;
-		if (!!updatedTags) { // if not empty
-			MyPix.update(this._id, {
-				$addToSet: {
-					'metadata.tags': {
-							$each: [ updatedTags ],
-					}
-				}
-			});
-		}
-		MyPix.update(this._id, {
-			$set: {
-				'metadata.backColor': updatedColor
-			}
-		});
-	},
-	'click .goBack': function(event) {
-		history.back();
-	},
-});
-
 Template.pool.helpers({
 	'scaledSprite': function () {
 		var widthOriginal = this.metadata.width;
@@ -111,25 +40,16 @@ Template.pool.helpers({
 	'showPix': function() {
 		return MyPix.find({}, {sort: {uploadedAt: -1}});
 	},
+	'backColor': function() {
+		if (this.metadata.backColor != 'default') {
+			return this.metadata.backColor;
+		} else {
+			return defaultBackColor;
+		}	
+	}
 })
 
 Template.pool.events({
-	'change .myPixInput': function(event, template) {
-		FS.Utility.eachFile(event, function(file) {
-	
-			var newFile = new FS.File(file);
-			newFile.metadata = {
-				copyright: "©eBoy",
-				backColor: "#f2f2f2",
-				tags: ["sprite", "ecity"]
-			};
-
-			MyPix.insert(newFile, function(err, fileObj) {
-				//If !err, we have inserted new doc with ID fileObj._id, and
-				//kicked off the data upload using HTTP
-			});
-		});
-	},
 	'click .remove': function(event, template) {
 		console.log("Removing \"" + this._id + "\"");
 		MyPix.remove(this._id);
@@ -154,6 +74,3 @@ Template.pool.events({
 		}
 	}
 })
-
-
-
