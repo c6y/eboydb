@@ -23,19 +23,48 @@ Template.doc.helpers({
 	}
 });
 
+// Template.doc.events({
+// 	'submit form': function (event) {
+// 		event.preventDefault();
+// 		var updatedTags =  event.target.tags.value;
+// 		var updatedColor = event.target.backColor.value;
+// 		if (!!updatedTags) { // if not empty
+// 			MyPix.update(this._id, {
+// 				$addToSet: {
+// 					'metadata.tags': {
+// 							$each: [ updatedTags ]
+// 					}
+// 				}
+// 			});
+// 		}
+// 		MyPix.update(this._id, {
+// 			$set: {
+// 				'metadata.backColor': updatedColor
+// 			}
+// 		});
+// 		event.target.tags.value = ""; // empty input field  
+// 	},
+// 	'click .goBack': function(event) {
+// 		history.back();
+// 	},
+// });
+
 Template.doc.events({
 	'submit form': function (event) {
 		event.preventDefault();
 		var updatedTags =  event.target.tags.value;
 		var updatedColor = event.target.backColor.value;
 		if (!!updatedTags) { // if not empty
-			MyPix.update(this._id, {
-				$addToSet: {
-					'metadata.tags': {
-							$each: [ updatedTags ]
+			MyPix.update (
+				this._id,
+				{
+					$addToSet: {
+						'metadata.tags': {
+								$each: [ updatedTags ]
+						}
 					}
 				}
-			});
+			);
 		}
 		MyPix.update(this._id, {
 			$set: {
@@ -47,4 +76,19 @@ Template.doc.events({
 	'click .goBack': function(event) {
 		history.back();
 	},
+	'click .remove': function(event, template) {
+		var thisTag = String(this);
+		console.log("removing thisTag: " + thisTag);
+
+		MyPix.update (
+			template.data._id,
+			{ $pull: { 'metadata.tags': thisTag }},
+			{ multi: true }
+		);
+	},
 });
+
+
+
+
+
