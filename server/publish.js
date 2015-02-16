@@ -25,6 +25,7 @@ Meteor.publish('PixPage', function(slug, page) {
 // })
 
 Meteor.publish('PixQuery', function(slug, page) {
+	Counts.publish(this, 'numberOfPosts', MyPix.find(), { noReady: true });
 	var reg = RegExp(slug, 'i', 's')
 	return MyPix.find({
 		$or: [

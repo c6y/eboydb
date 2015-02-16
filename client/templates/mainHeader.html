@@ -1,5 +1,28 @@
 <template name="mainHeader">
-	<h1><a href="{{ pathFor route='pool' page=1 slug='all' }}">eboydb</a>: {{ postsCount }} docs – p{{ currentPage }}/{{ totalPages }}</h1>
-	<input type="file" name="myFile" class="myPixInput">
-	<input type="text" name='searchDB' value='Search' class="searchFor">
+	<div class="header">
+		<span class="headline">
+			<a href="{{ pathFor route='pool' page=1 slug='all' }}">eboydb</a>: {{ postsCount }} docs – p{{ 	currentPage }}/{{ totalPages }}
+		</span>
+		{{> searchPool}}
+	</div>
+	<!-- {{> addDocument}} -->
+</template>
+
+
+<template name="addDocument">
+	<span class="addDoc">
+		<input type="file" name="myFile" class="myPixInput">
+	</span>
+</template>
+
+<template name="searchPool">
+	<span class="search">
+		<input 
+			type="text"
+			name="searchDB"
+			value="{{ searchSlug }}"
+			class="searchFor"
+			maxlength="24"
+			size="9">
+	</span>
 </template>

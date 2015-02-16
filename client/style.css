@@ -6,13 +6,6 @@ body {
 	margin: 0;
 }
 
-h1 {
-	font-family: sans-serif;
-	padding-left: 10px;
-	color: #444;
-	/*padding-left: 18px;*/
-}
-
 .myPixInput {
 	/*width: auto;*/
 	padding: 12px 10px;

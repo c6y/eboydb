@@ -1,6 +1,57 @@
 @thumbnailDim: 216px;
 
+.header {
+	// background-color: orange;
+	margin: 12px;
+	padding: 0px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	font-family: 'Helvetica Neue';
+	font-size: 24pt;
+	.headline{
+		font-family: inherit;
+		font-size: inherit;
+		// background-color: yellow;
+		flex-grow: 1;
+		color: #444;
+	}
+	.search {
+		padding: 0px;
+		border: 0px;
+		align-self: flex-end;
+		// flex-grow: 2;
+		input[type=text]{
+			font-family: inherit;
+			font-size: inherit;
+			// background-color: Linen;
+			padding: 0px 6px;
+			border: 0px;
+			text-align: right;
+		}
+	}
+}
+
+.addDoc {
+	margin: 12px;
+	padding: 0px;
+	border: 0px;
+	input[type=file] {
+		font-family: Menlo, monospace;
+		font-size: 9pt;
+		background-color: Wheat;
+		padding: 0px;
+		height: 2em;
+		top: 0;
+  	right: 0;
+  	position: fixed;
+	}	
+}
+
+
 .showDocFull {
+	background-color: yellow;
 	figure {
 		margin: 10px;
 		img {
@@ -24,6 +75,9 @@
 	}
 	form {
 		margin: 10px;
+	}
+	.editDocValues {
+		background-color: cyan;
 	}
 }
 

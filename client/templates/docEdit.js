@@ -24,40 +24,36 @@ Template.docEdit.helpers({
 });
 
 Template.docEdit.events({
-	'keypress input.addtag': function (event) {
+	'keypress input.addTag': function (event) {
 		if (event.which === 13) {
-
-			console.log('YES');
-
-			// var searching = event.currentTarget.value;
-			// Session.set('slug', searching);
-			// console.log(Session.get('slug'));
-			// // console.log('slug: ' + slug);
-			// Router.go('pool', {slug: searching, page: 1});
-		}
-	},
-	'submit form': function (event) {
-		event.preventDefault();
-		var newTag =  event.target.tags.value.toLowerCase().replace(/ /gi, "-");
-		var updatedColor = event.target.backColor.value;
-		if (!!newTag) { // if not empty
-			MyPix.update (
-				this._id,
-				{
-					$addToSet: {
-						'metadata.tags': {
-								$each: [ newTag ]
+			event.preventDefault();
+			// var newTag =  event.target.tags.value.toLowerCase().replace(/ /gi, "-");
+			var newTag =  event.currentTarget.value.toLowerCase().replace(/ /gi, "-");
+			if (!!newTag) { // if not empty
+				MyPix.update (
+					this._id,
+					{
+						$addToSet: {
+							'metadata.tags': {
+									$each: [ newTag ]
+							}
 						}
 					}
-				}
-			);
-		}
-		MyPix.update(this._id, {
-			$set: {
-				'metadata.backColor': updatedColor
+				);
 			}
-		});
-		event.target.tags.value = ""; // empty input field  
+			event.currentTarget.value = ""; // empty input field  
+		}
+	},
+	'keypress input.editBackColor': function (event) {
+		if (event.which === 13) {
+			event.preventDefault();
+			var updatedColor = event.currentTarget.value;
+			MyPix.update(this._id, {
+				$set: {
+					'metadata.backColor': updatedColor
+				}
+			});
+		}
 	},
 	'click .goBack': function(event) {
 		history.back();
@@ -72,8 +68,5 @@ Template.docEdit.events({
 		);
 	},
 });
-
-
-
 
 

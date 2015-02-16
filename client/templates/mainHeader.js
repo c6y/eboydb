@@ -1,3 +1,10 @@
+
+Template.searchPool.helpers({
+	'searchSlug': function() {
+		return Router.current().params.slug;
+	}
+});
+
 Template.mainHeader.helpers({
 	'postsCount': function() {
 		return Counts.get('numberOfPosts')
@@ -9,19 +16,16 @@ Template.mainHeader.helpers({
 	'totalPages': function() {
 		return Math.ceil(Counts.get('numberOfPosts') / displayQty);
 	},
-	'searchSlug': function() {
-		return Session.get('slug');
-	}
 });
 
 Template.mainHeader.events({
 	'keypress input.searchFor': function (event) {
 		if (event.which === 13) {
-			var searching = event.currentTarget.value;
-			Session.set('slug', searching);
+			var searchingFor = event.currentTarget.value;
+			Session.set('slug', searchingFor);
 			console.log(Session.get('slug'));
 			// console.log('slug: ' + slug);
-			Router.go('pool', {slug: searching, page: 1});
+			Router.go('pool', {slug: searchingFor, page: 1});
 		}
 	},
 

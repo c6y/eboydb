@@ -1,11 +1,13 @@
 <template name="docEdit">
-	<h1><a href="" class="goBack">eboydb</a>: {{ this._id }} </h1>
+	<div class="header">
+		<h1><a href="" class="goBack">eboydb</a>: {{ this._id }} </h1>
+	</div>
 	<div class="showDocFull">
 		<figure>
-			<!-- <img style="background-color: none" src="{{ this.url 	store='OriginalPix' }}" width="{{ this.metadata.width }}" height="{{ this.metadata.height }}" /> -->
-			<img style="background-color: none" src="{{ this.url 	store='OriginalPix' }}" width="{{ deviceDimensions.width }}" height="{{ deviceDimensions.height }}" />
+			<!-- <img style="background-color: none" src="{{ this.url 	store='OriginalPix' }}" width="{{ this.	metadata.width }}" height="{{ this.metadata.height }}" /> -->
+			<img style="background-color: none" src="{{ this.url 	store='OriginalPix' }}" width="{{ 	deviceDimensions.width }}" height="{{ deviceDimensions.height }}" />
 			<a href="{{ pathFor 'spriteBox' boxsize='512' }}">
-				<img style="background-color: {{ backColor }}" src="{{ this.url store='OriginalPix' }}" width="{{ deviceDimensions.width }}" height="{{ deviceDimensions.height }}" />
+				<img style="background-color: {{ backColor }}" src="{{ this.url store='OriginalPix' }}" width="{{ 	deviceDimensions.width }}" height="{{ deviceDimensions.height }}" />
 			</a>
 			<figcaption>
 				<ol>
@@ -24,10 +26,9 @@
 				</ol>
 			</figcaption>
 		</figure>
-		<form>
-			<div>add tag: <input type="text" name="tags" value="" class="addtag"></div>
-			<div>background-color: <input type="text" name="backColor" value="{{ this.metadata.backColor }}"></div>
-			<input type="submit" name="updatetags">
-		</form>
+		<div class="editDocValues">
+			<div>add tag: <input type="text" name="tags" value="" class="addTag"></div>
+			<div>background-color: <input type="text" name="backColor" value="{{ this.metadata.backColor }}" 	class="editBackColor"></div>
+		</div>
 	</div>
 </template>
