@@ -1,10 +1,10 @@
-<template name="doc">
+<template name="docEdit">
 	<h1><a href="" class="goBack">eboydb</a>: {{ this._id }} </h1>
 	<div class="showDocFull">
 		<figure>
 			<!-- <img style="background-color: none" src="{{ this.url 	store='OriginalPix' }}" width="{{ this.metadata.width }}" height="{{ this.metadata.height }}" /> -->
 			<img style="background-color: none" src="{{ this.url 	store='OriginalPix' }}" width="{{ deviceDimensions.width }}" height="{{ deviceDimensions.height }}" />
-			<a href="{{ pathFor 'spriteBox' boxsize='512'}}">
+			<a href="{{ pathFor 'spriteBox' boxsize='512' }}">
 				<img style="background-color: {{ backColor }}" src="{{ this.url store='OriginalPix' }}" width="{{ deviceDimensions.width }}" height="{{ deviceDimensions.height }}" />
 			</a>
 			<figcaption>
@@ -25,7 +25,7 @@
 			</figcaption>
 		</figure>
 		<form>
-			<div>add tags: <input type="text" name="tags" value=""></div>
+			<div>add tag: <input type="text" name="tags" value="" class="addtag"></div>
 			<div>background-color: <input type="text" name="backColor" value="{{ this.metadata.backColor }}"></div>
 			<input type="submit" name="updatetags">
 		</form>

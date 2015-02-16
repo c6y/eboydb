@@ -41,5 +41,8 @@ Template.spriteBox.events({
 		} else {
 			Session.set('displaySpriteBoxInfo' + this.sprite._id, 'block');
 		};
-	}
+	},
+	'click .goBack': function(event) {
+		history.back();
+	},
 });
