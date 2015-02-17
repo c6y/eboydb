@@ -66,7 +66,7 @@ Template.pool.events({
 
 	'click .next': function(event, template) {
 		var currentPage = Number(Router.current().params.page);
-		var maxPages = Math.ceil(Counts.get('numberOfPosts') / displayQty);
+		var maxPages = Math.ceil(Counts.get('numberOfFinds') / displayQty);
 		var currentSlug = Router.current().params.slug;
 		if (currentPage < maxPages) {
 			var nextPage = currentPage + 1;

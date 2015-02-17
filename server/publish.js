@@ -25,7 +25,8 @@ Meteor.publish('PixPage', function(slug, page) {
 // })
 
 Meteor.publish('PixQuery', function(slug, page) {
-	var reg = RegExp(slug, 'i', 's')
+	var reg = RegExp(slug, 'i', 's');
+	cursor = (displayQty * page) - displayQty;
 	Counts.publish(this, 'numberOfFinds', MyPix.find({
 		$or: [
 			{"metadata.tags" : {$regex: reg}},
@@ -37,6 +38,9 @@ Meteor.publish('PixQuery', function(slug, page) {
 			{"metadata.tags" : {$regex: reg}},
 			{"original.name" : {$regex: reg}}
 		]
-	}
-	)
+	}, {
+		sort: {uploadedAt: -1},
+		limit: displayQty,
+		skip: cursor
+	})
 })
