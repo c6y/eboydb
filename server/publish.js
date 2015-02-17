@@ -25,12 +25,18 @@ Meteor.publish('PixPage', function(slug, page) {
 // })
 
 Meteor.publish('PixQuery', function(slug, page) {
-	Counts.publish(this, 'numberOfPosts', MyPix.find(), { noReady: true });
 	var reg = RegExp(slug, 'i', 's')
+	Counts.publish(this, 'numberOfFinds', MyPix.find({
+		$or: [
+			{"metadata.tags" : {$regex: reg}},
+			{"original.name" : {$regex: reg}}
+		]
+	}), { noReady: true });
 	return MyPix.find({
 		$or: [
 			{"metadata.tags" : {$regex: reg}},
 			{"original.name" : {$regex: reg}}
 		]
-	})
+	}
+	)
 })

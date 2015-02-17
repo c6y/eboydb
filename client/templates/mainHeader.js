@@ -7,14 +7,14 @@ Template.searchPool.helpers({
 
 Template.mainHeader.helpers({
 	'postsCount': function() {
-		return Counts.get('numberOfPosts')
+		return Counts.get('numberOfFinds')
 	},
 	'currentPage': function() {
 		var currentPage = Number(Router.current().params.page);
 		return currentPage;
 	},
 	'totalPages': function() {
-		return Math.ceil(Counts.get('numberOfPosts') / displayQty);
+		return Math.ceil(Counts.get('numberOfFinds') / displayQty);
 	},
 });
 
