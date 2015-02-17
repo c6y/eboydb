@@ -1,10 +1,3 @@
-
-Template.searchPool.helpers({
-	'searchSlug': function() {
-		return Router.current().params.slug;
-	}
-});
-
 Template.mainHeader.helpers({
 	'postsCount': function() {
 		return Counts.get('numberOfFinds')
@@ -27,8 +20,16 @@ Template.mainHeader.events({
 			// console.log('slug: ' + slug);
 			Router.go('pool', {slug: searchingFor, page: 1});
 		}
-	},
+	}
+});
 
+Template.searchPool.helpers({
+	'searchSlug': function() {
+		return Router.current().params.slug;
+	}
+});
+
+Template.addDocument.events({
 	'change .myPixInput': function(event, template) {
 		FS.Utility.eachFile(event, function(file) {
 	
@@ -44,5 +45,6 @@ Template.mainHeader.events({
 				//kicked off the data upload using HTTP
 			});
 		});
+		Router.go('pool', {slug: "all", page: 1});
 	}
 });

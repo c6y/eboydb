@@ -1,4 +1,14 @@
 @thumbnailDim: 216px;
+@linkColor: DodgerBlue;
+@almostBlack: #272822;
+
+body {
+	font-family: Menlo, monospace;
+	font-size: 9pt;
+	text-align: left;
+	margin: 0;
+	color: @almostBlack;
+}
 
 .header {
 	// background-color: orange;
@@ -10,12 +20,26 @@
 	align-items: flex-start;
 	font-family: 'Helvetica Neue';
 	font-size: 24pt;
+	.dblogo {
+		font-weight: bold;
+	}
+	a {
+		text-decoration: none;
+		color: @almostBlack;
+		:visited {
+			color: red;
+		}
+		:hover {
+			color: orange;
+		}
+	}
+
 	.headline{
 		font-family: inherit;
 		font-size: inherit;
 		// background-color: yellow;
 		flex-grow: 1;
-		color: #444;
+		// color: #444;
 	}
 	.search {
 		padding: 0px;
@@ -23,6 +47,7 @@
 		align-self: flex-end;
 		// flex-grow: 2;
 		input[type=text]{
+			color: @almostBlack;
 			font-weight: bold;
 			font-family: inherit;
 			font-size: inherit;
@@ -35,50 +60,62 @@
 }
 
 .addDoc {
-	margin: 12px;
-	padding: 0px;
-	border: 0px;
-	input[type=file] {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0px;
+	color: white;
+	background-color: #272822;
+	width: 100%;
+	height: 100vh;
+	input[type=file], input[type="button"], button {
 		font-family: Menlo, monospace;
-		font-size: 9pt;
-		background-color: Wheat;
-		padding: 0px;
-		height: 2em;
-		top: 0;
-  	right: 0;
-  	position: fixed;
+		// font-size: 18pt;
+		display: block !important;
+   	// width: 157px !important;
+   	// height: 57px !important;
+   	// opacity: 0 !important;
+   	// overflow: hidden !important;
 	}	
 }
 
-
 .showDocFull {
-	background-color: yellow;
-	figure {
-		margin: 10px;
+	// background-color: yellow;
+	margin: 12px;
+	.docOverview {
+		margin: 0px;
 		img {
-			border: 1px #aaa solid;
+			border: 1px #ccc solid;
 		}
-		figcaption {
+		.docMeta {
 			margin: 0px;
 			.tag {
 				background-color: #fff;
-				padding-left: 4px; 
-				border: 1px solid #ddd;
-				margin: 0;
+				// padding-left: 4px; 
+				// border: 0px 1px solid #ddd;
+				// margin: 0;
 				.remove {
-					color: black;
-					background-color: #ddd;
-					padding: 0px 4px;
-					margin-left: 6px;
+					color: white;
+					background-color: @almostBlack;
+					padding: 0px 2px;
+					margin-left: 2px;
+					// border-radius: 12px;
 				}
 			}
 		}
 	}
-	form {
-		margin: 10px;
-	}
 	.editDocValues {
-		background-color: cyan;
+		font-size: 18px;
+		// background-color: cyan;
+		padding: 12px;
+		border-top: 1px #ccc solid;
+		input[type=text] {
+			margin: 0px;
+			padding: 2px;
+			font-family: inherit;
+			font-size: inherit;
+			border: 0px;
+		}
 	}
 }
 
@@ -97,7 +134,7 @@
 
 		.remove {
 			color: white;
-			background-color: black;
+			background-color: @almostBlack;
 			padding: 2px 4px;
 		}
 	}
@@ -136,4 +173,40 @@
 	justify-content: center;
 	align-items: center;
 	margin: 0;
+}
+
+.myPixInput {
+	/*width: auto;*/
+	padding: 12px 10px;
+	/*margin-bottom: 12px;*/
+	background-color: nonce;
+	/*display: block;*/
+}
+
+.paging {
+	/*text-align: center;*/
+	background-color: none;
+	padding: 12px;
+}
+
+.previous:hover, .next:hover {
+	color: white;
+	background-color: blue;
+}
+
+.previous:active, .next:active {
+	color: white;
+	background-color: black;
+}
+
+ol {
+	padding: 0 0 0 1em;
+}
+
+ol li {
+	list-style-type: none;
+}
+
+ol li .property {
+	color: Crimson;
 }

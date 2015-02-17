@@ -1,15 +1,13 @@
 <template name="docEdit">
-	<div class="header">
-		<h1><a href="" class="goBack">eboydb</a>: {{ this._id }} </h1>
-	</div>
+	{{>docHeader}}
 	<div class="showDocFull">
-		<figure>
+		<div class="docOverview">
 			<!-- <img style="background-color: none" src="{{ this.url 	store='OriginalPix' }}" width="{{ this.	metadata.width }}" height="{{ this.metadata.height }}" /> -->
 			<img style="background-color: none" src="{{ this.url 	store='OriginalPix' }}" width="{{ 	deviceDimensions.width }}" height="{{ deviceDimensions.height }}" />
 			<a href="{{ pathFor 'spriteBox' boxsize='512' }}">
 				<img style="background-color: {{ backColor }}" src="{{ this.url store='OriginalPix' }}" width="{{ 	deviceDimensions.width }}" height="{{ deviceDimensions.height }}" />
 			</a>
-			<figcaption>
+			<div class="docMeta">
 				<ol>
 					<li><span class="property">name</span>: {{ this.name }}</li>
 					<li><span class="property">uploadedAt</span>: {{this.uploadedAt}}</li>
@@ -20,15 +18,34 @@
 					<li>
 						<span class="property">metadata.tags</span>: 
 						{{#each this.metadata.tags}}
-							<span class="tag">{{this}}<span class="remove">x</span></span>
+							<span class="tag">{{this}}<span class="remove">X</span></span>
 						{{/each}}
 					</li>
 				</ol>
-			</figcaption>
-		</figure>
+			</div>
+		</div>
 		<div class="editDocValues">
-			<div>add tag: <input type="text" name="tags" value="" class="addTag"></div>
-			<div>background-color: <input type="text" name="backColor" value="{{ this.metadata.backColor }}" 	class="editBackColor"></div>
+			<div>add:
+				<input
+					type="text"
+					name="tags"
+					value=""
+					class="addTag"
+					placeholder="tag"
+					maxlength="24"
+					size="21"
+				>
+			</div>
+			<div>edit:
+				<input
+					type="text"
+					name="backColor"
+					value="{{ this.metadata.backColor }}"
+					class="editBackColor"
+					maxlength="24"
+					size="20"
+				>
+			</div>
 		</div>
 	</div>
 </template>

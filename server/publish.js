@@ -4,16 +4,16 @@ Meteor.publish('aPix', function(id) {
   return MyPix.find(id);
 });
 
-Meteor.publish('PixPage', function(slug, page) {
-	Counts.publish(this, 'numberOfPosts', MyPix.find(), { noReady: true });
-	cursor = (displayQty * page) - displayQty;
-	// return MyPix.find({}, {sort: {uploadedAt: -1}, limit: displayQty, skip: cursor});
-	if (slug == 'all') {
-		return MyPix.find({}, {sort: {uploadedAt: -1}, limit: displayQty, skip: cursor});
-	} else {
-		return MyPix.find({"metadata.tags" : slug}, {sort: {uploadedAt: -1}, limit: displayQty, skip: cursor});
-	}
-});
+// Meteor.publish('PixPage', function(slug, page) {
+// 	Counts.publish(this, 'numberOfPosts', MyPix.find(), { noReady: true });
+// 	cursor = (displayQty * page) - displayQty;
+// 	// return MyPix.find({}, {sort: {uploadedAt: -1}, limit: displayQty, skip: cursor});
+// 	if (slug == 'all') {
+// 		return MyPix.find({}, {sort: {uploadedAt: -1}, limit: displayQty, skip: cursor});
+// 	} else {
+// 		return MyPix.find({"metadata.tags" : slug}, {sort: {uploadedAt: -1}, limit: displayQty, skip: cursor});
+// 	}
+// });
 
 // Meteor.publish('PixQuery', function(slug, page) {
 // 	var reg = RegExp(slug, 'i', 's')

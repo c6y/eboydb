@@ -55,7 +55,7 @@ Template.docEdit.events({
 			});
 		}
 	},
-	'click .goBack': function(event) {
+	'click #goBack': function(event) {
 		history.back();
 	},
 	'click .remove': function(event, template) {

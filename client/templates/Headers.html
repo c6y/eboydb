@@ -1,18 +1,28 @@
 <template name="mainHeader">
 	<div class="header">
 		<span class="headline">
-			<a href="{{ pathFor route='pool' page=1 slug='all' }}">eboydb</a>: {{ postsCount }} docs – p{{ 	currentPage }}/{{ totalPages }}
+			<a href="{{ pathFor route='pool' page=1 slug='all' }}" class="dblogo">eboydb</a>: {{ postsCount }} docs – p{{ 	currentPage }}/{{ totalPages }}
 		</span>
 		{{> searchPool}}
 	</div>
 	<!-- {{> addDocument}} -->
 </template>
 
+<template name="docHeader">
+	<div class="header">
+		<span class="headline">
+			<a href="" id="goBack" class="dblogo">eboydb</a>: {{ this._id }}
+		</span>
+		<a href="{{ pathFor 'docAdd' }}">+</a>
+	</div>
+	<!-- {{> addDocument}} -->
+</template>
+
 
 <template name="addDocument">
-	<span class="addDoc">
+	<div class="addDoc">
 		<input type="file" name="myFile" class="myPixInput">
-	</span>
+	</div>
 </template>
 
 <template name="searchPool">
