@@ -29,7 +29,17 @@ Template.spriteBox.helpers({
 		} else {
 			return defaultBackColor;
 		}	
+	},
+
+
+	'inverseBackColor': function() {
+		invHex =  Meteor.myFunctions.inverseHex(this.sprite.metadata.backColor);
+		console.log('invHex: ' + invHex);
+		return invHex.toString();
+
 	}
+
+
 });
 
 Template.spriteBox.events({

@@ -48,9 +48,12 @@ Template.docEdit.events({
 		if (event.which === 13) {
 			event.preventDefault();
 			var updatedColor = event.currentTarget.value;
+
+			var colorInHex =  Meteor.myFunctions.colourNameToHex(updatedColor);
+
 			MyPix.update(this._id, {
 				$set: {
-					'metadata.backColor': updatedColor
+					'metadata.backColor': colorInHex
 				}
 			});
 		}

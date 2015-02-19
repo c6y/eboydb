@@ -9,7 +9,7 @@ Template.pool.helpers({
 		var thumbnailMaxHeight = Math.min(dimensionsTo.height, thumbnailDimension);
 		var thumbnailMaxWidth = Math.min(dimensionsTo.width, thumbnailDimension * 2); // because css Flexbox set to stretch 2x
 
-		if (heightOriginal > thumbnailDimension) {
+		if (heightOriginal > thumbnailDimension * window.devicePixelRatio) {
 			var heightOffset = thumbnailDimension - (heightOriginal * dimensionsTo.factor);
 		} else {
 			var heightOffset = 0;

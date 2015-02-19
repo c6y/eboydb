@@ -1,3 +1,5 @@
+// Session.setDefault('searchJumpOff', Router.current().route.url);
+
 Template.mainHeader.helpers({
 	'postsCount': function() {
 		return Counts.get('numberOfFinds')
