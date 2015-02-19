@@ -13,3 +13,6 @@ tmeasday:publish-counts
 cfs:graphicsmagick
 iron:router
 less
+accounts-ui
+accounts-password
+accounts-github

@@ -1,0 +1,15 @@
+<template name="login">
+	<div class="loginform">
+		{{> loginButtons}} <a href="{{ pathFor 'pool' slug='all' page='1' }}">proceed ...</a>
+		{{#if currentUser}}
+			<ol>
+				<li><span class="property">_id</span>: {{ currentUser._id }}</li>
+				<li><span class="property">profile.name</span>: {{ currentUser.profile.name }}</li>
+				{{#if currentUser.emails.[0].address}}
+					<li><span class="property">currentUser.emails.[0].address</span>: {{ currentUser.emails.[0].address }}</li>
+				{{/if}}
+			</ol>
+		{{/if}}
+
+	</div>
+</template>

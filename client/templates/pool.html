@@ -38,7 +38,9 @@
 			</script>
 
 			<div class="docbox" style="background-color: {{ backColor }}">
-				<div class="docinfo"><span class='remove'>X</span><a href="{{ pathFor 'docEdit' }}"> {{ this.metadata.backColor }} {{ this.metadata.width }}w {{ scaledSprite.scaleFactor }}x</a></div>
+				{{#if currentUser}}
+					<div class="docinfo"><span class='remove'>X</span><a href="{{ pathFor 'docEdit' }}"> {{ this.metadata.backColor }} {{ this.metadata.width }}w {{ scaledSprite.scaleFactor }}x</a></div>
+				{{/if}}
 				<figure>
 					<a href="{{ pathFor 'spriteBox' boxsize='512' }}">
 						<canvas id='{{ this._id }}'
