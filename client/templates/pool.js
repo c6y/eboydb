@@ -51,8 +51,11 @@ Template.pool.helpers({
 
 Template.pool.events({
 	'click .remove': function(event, template) {
-		console.log("Removing \"" + this._id + "\"");
-		MyPix.remove(this._id);
+		if (Meteor.user().profile.isEditor) {
+			console.log("Removing \"" + this._id + "\"");
+			thisId = this._id;
+			Meteor.call('deleteDocument', thisId);
+		}
 	},
 
 	'click .previous': function(event, template) {

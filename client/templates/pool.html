@@ -8,13 +8,12 @@
 		{{#each showPix}}
 
 			<script type="text/javascript">
-			
+
 			// generate a new myThumb variable for each thumbnail
 			var varbase = 'myThumb';
 			this[varbase+'_{{ this._id }}'] = '{{ this._id }}';			
 			myThumb_{{ this._id }} = new Image();
 			myThumb_{{ this._id }}.src = "{{ this.url store='OriginalPix' }}";
-
 			// console.log('this.type: ' + '{{ this.type }}');
 			
 			myThumb_{{ this._id }}.onload = function() {

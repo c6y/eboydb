@@ -5,11 +5,27 @@
 			<ol>
 				<li><span class="property">_id</span>: {{ currentUser._id }}</li>
 				<li><span class="property">profile.name</span>: {{ currentUser.profile.name }}</li>
+				<li><span class="property">profile.isAdmin</span>: {{ currentUser.profile.isAdmin }}</li>
+				<li><span class="property">profile.isEditor</span>: {{ currentUser.profile.isEditor }}</li>
 				{{#if currentUser.emails.[0].address}}
 					<li><span class="property">currentUser.emails.[0].address</span>: {{ currentUser.emails.[0].address }}</li>
 				{{/if}}
 			</ol>
 		{{/if}}
 
+		{{#if currentUser.profile.isAdmin}}
+			<div class="adminHead">Registered Users</div>
+			<ol>
+			{{#each showUsers}}
+					<li>
+						<li>
+							<span class="property">_id</span>: {{ this._id }},
+							<span class="property">isAdmin</span>: {{ this.profile.isAdmin }},
+							<span class="property">isEditor</span>: {{ this.profile.isEditor }}
+						</li>	
+					</li>
+			{{/each}}
+			</ol>
+		{{/if}}
 	</div>
 </template>
