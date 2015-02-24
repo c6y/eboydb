@@ -1,28 +1,23 @@
 Meteor.publish('aPix', function(id) {
-  check(id, String);
-  console.log('publish: aPix id: ' + id);
-  return MyPix.find(id);
+	check(id, String);
+
+	var selector = id;
+
+	// limit fields to be published
+	var options = {fields: {
+		// '_id': 1,
+		'original.name': 1,
+		'uploadedAt': 1,
+		'copies.OriginalPix.key': 1,
+		'metadata.width': 1,
+		'metadata.height': 1,
+		'metadata.backColor': 1,
+		'metadata.tags': 1,
+		'metadata.copyright': 1,
+	}};
+
+	return MyPix.find(selector, options);
 });
-
-// Meteor.publish('PixPage', function(slug, page) {
-// 	Counts.publish(this, 'numberOfPosts', MyPix.find(), { noReady: true });
-// 	cursor = (displayQty * page) - displayQty;
-// 	// return MyPix.find({}, {sort: {uploadedAt: -1}, limit: displayQty, skip: cursor});
-// 	if (slug == 'all') {
-// 		return MyPix.find({}, {sort: {uploadedAt: -1}, limit: displayQty, skip: cursor});
-// 	} else {
-// 		return MyPix.find({"metadata.tags" : slug}, {sort: {uploadedAt: -1}, limit: displayQty, skip: cursor});
-// 	}
-// });
-
-// Meteor.publish('PixQuery', function(slug, page) {
-// 	var reg = RegExp(slug, 'i', 's')
-// 	return MyPix.find({
-// 		"metadata.tags" : {
-// 			$regex: reg
-// 		}
-// 	})
-// })
 
 Meteor.publish('PixQuery', function(slug, page) {
 	var reg = RegExp(slug, 'i', 's');

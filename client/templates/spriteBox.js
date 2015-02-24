@@ -34,7 +34,7 @@ Template.spriteBox.helpers({
 		invHex =  Meteor.myFunctions.inverseHex(this.sprite.metadata.backColor);
 		// console.log('invHex: ' + invHex);
 		return invHex.toString();
-	}
+	},
 });
 
 Template.spriteBox.events({
@@ -50,4 +50,15 @@ Template.spriteBox.events({
 	'click .goBack': function(event) {
 		history.back();
 	},
+	// 'document keydown': function(event) {
+	// 	console.log('rightkey: 13');
+	// 	if (event.which === 13) {	
+	// 	}
+	// },
+	'click .previousDoc': function() {
+		console.log('previousDoc');
+	},
+	'click .nextDoc': function() {
+		console.log('nextDoc');
+	}
 });
