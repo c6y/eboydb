@@ -50,15 +50,29 @@ Template.spriteBox.events({
 	'click .goBack': function(event) {
 		history.back();
 	},
-	// 'document keydown': function(event) {
-	// 	console.log('rightkey: 13');
-	// 	if (event.which === 13) {	
-	// 	}
+	// // 'document keydown': function(event) {
+	// // 	console.log('rightkey: 13');
+	// // 	if (event.which === 13) {	
+	// // 	}
+	// // },
+	
+	// 'click .previousDoc': function() {
+
+	// 	// var current = MyPix.findOne(this.sprite._id);
+	// 	// var thisDate = current.uploadedAt;
+		
+	// 	// var test = MyPix.findOne({uploadedAt: {$lt: thisDate}});
+
+	// 	// var previousOne = MyPix.find({uploadedAt: {$lt: thisDate}}, {sort: {uploadedAt: -1}, limit: 1});
+	// 	// var previousId = previousOne._id;
+
+	// 	// console.log('test: ' + test._id);
+	// 	// console.log('this.sprite._id: ' + this.sprite._id);
+	// 	// console.log('previousDoc');
+	// 	// console.log('thisDate: ' + thisDate);
+	// 	// console.log('previousId: ' + previousId);
 	// },
-	'click .previousDoc': function() {
-		console.log('previousDoc');
-	},
-	'click .nextDoc': function() {
-		console.log('nextDoc');
-	}
+	// 'click .nextDoc': function() {
+	// 	console.log('nextDoc');
+	// }
 });

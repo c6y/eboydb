@@ -36,6 +36,7 @@
 			}
 			</script>
 
+
 			<div class="docbox" style="background-color: {{ backColor }}">
 				{{#if currentUser.profile.isEditor}}
 					<div class="docinfo"><span class='remove'>X</span>
@@ -45,7 +46,7 @@
 					</div>
 				{{/if}}
 				<figure>
-					<a href="{{ pathFor 'spriteBox' boxsize='512' }}">
+					<a href="{{ pathFor 'spriteBox' boxsize='512' query=theSlug }}">
 						<canvas id='{{ this._id }}'
 							width="{{ scaledSprite.tnWidthDevice }}"
 							height="{{ scaledSprite.tnHeightDevice }}"

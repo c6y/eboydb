@@ -46,7 +46,10 @@ Template.pool.helpers({
 		} else {
 			return defaultBackColor;
 		}	
-	}
+	},
+	'theSlug': function() {
+		return 'q=' + Router.current().params.slug;
+	},
 })
 
 Template.pool.events({

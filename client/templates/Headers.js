@@ -24,9 +24,3 @@ Template.mainHeader.events({
 		}
 	}
 });
-
-Template.searchPool.helpers({
-	'searchSlug': function() {
-		return Router.current().params.slug;
-	}
-});
