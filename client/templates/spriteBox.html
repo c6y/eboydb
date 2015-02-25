@@ -29,14 +29,7 @@
 			{{/if}}
 		}
 	</script>
-	<div class="eboycopyright" style="color:{{ inverseBackColor }}">©eBoy
-<!-- 		<a class="previousDoc">
-			previous
-		</a>
-		<a class="nextDoc">
-			next
-		</a> -->
-	</div>
+	<div class="eboycopyright" style="color:{{ inverseBackColor }}">©eBoy</div>
 	<div class="spriteBoxInfoToggle" style="color:{{ inverseBackColor }}">^</div>
 	<div class="contentbackground" style="background-color: {{ backColor }}">
 		<div class="spriteBoxImage">
@@ -53,6 +46,7 @@
 		<div class="docMeta" id="spriteBoxInfo" style="display: {{ visibility }}">
 			<div class="spriteBoxInfoToggle">X</div>
 			<ol>
+				<li><span class="property">id</span>: {{ sprite._id }}</li>
 				<li><span class="property">name</span>: {{ sprite.name }}</li>
 				<li><span class="property">date-added</span>: {{sprite.uploadedAt}}</li>
 				<li><span class="property">width</span>: {{sprite.metadata.width}}</li>
@@ -74,7 +68,6 @@
 					<li><span class="property">download</span>: <a id="genImg" href="" target="	_blank">PNG</a></li>
 				</ol>
 			{{/if}}
-			<!-- {{ keypress }} -->
 		</div>
 	</div>
 </html>
