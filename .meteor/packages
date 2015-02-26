@@ -15,3 +15,4 @@ less
 accounts-ui
 accounts-password
 accounts-github
+cfs:gridfs
