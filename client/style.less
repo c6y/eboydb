@@ -4,7 +4,6 @@
 
 html {
 	height: 100%;
-	// background-color: blue;
 }
 
 body {
@@ -12,20 +11,28 @@ body {
 	font-size: 9pt;
 	text-align: left;
 	color: @almostBlack;
-	// height: 100%;
 	margin: 0;
 	padding: 0;
 	height: 100%;
 }
 
 .header {
-	// background-color: orange;
 	margin: 12px;
 	padding: 0px;
-	display: flex;
+
+	display: -webkit-box;					/* OLD - iOS 6-, Safari 3.1-6 */
+	display: -moz-box;						/* OLD - Firefox 19- (buggy but mostly works) */
+	display: -ms-flexbox;					/* TWEENER - IE 10 */
+	display: -webkit-flex;				/* NEW - Chrome */
+	display: flex;								/* NEW, Spec - Opera 12.1, Firefox 20+ */
+
+	-webkit-flex-direction: row;
 	flex-direction: row;
+	-webkit-flex-wrap: wrap;
 	flex-wrap: wrap;
+	-webkit-align-items: flex-start;
 	align-items: flex-start;
+
 	font-family: 'Helvetica Neue';
 	font-size: 24pt;
 	.dblogo {
@@ -45,21 +52,19 @@ body {
 	.headline{
 		font-family: inherit;
 		font-size: inherit;
-		// background-color: yellow;
+		-webkit-flex-grow: 1;
 		flex-grow: 1;
-		// color: #444;
 	}
 	.search {
 		padding: 0px;
 		border: 0px;
+		-webkit-align-self: flex-end;
 		align-self: flex-end;
-		// flex-grow: 2;
 		input[type=text]{
 			color: @almostBlack;
 			font-weight: bold;
 			font-family: inherit;
 			font-size: inherit;
-			// background-color: Linen;
 			padding: 0px 6px;
 			border: 0px;
 			text-align: right;
@@ -68,8 +73,15 @@ body {
 }
 
 .addDoc {
-	display: flex;
+	display: -webkit-box;					/* OLD - iOS 6-, Safari 3.1-6 */
+	display: -moz-box;						/* OLD - Firefox 19- (buggy but mostly works) */
+	display: -ms-flexbox;					/* TWEENER - IE 10 */
+	display: -webkit-flex;				/* NEW - Chrome */
+	display: flex;								/* NEW, Spec - Opera 12.1, Firefox 20+ */
+
+	-webkit-justify-content: center;
 	justify-content: center;
+	-webkit-align-items: center;
 	align-items: center;
 	margin: 0px;
 	color: white;
@@ -78,37 +90,26 @@ body {
 	height: 100vh;
 	input[type=file], input[type="button"], button {
 		font-family: Menlo, monospace;
-		// font-size: 18pt;
 		display: block !important;
-   	// width: 157px !important;
-   	// height: 57px !important;
-   	// opacity: 0 !important;
-   	// overflow: hidden !important;
 	}	
 }
 
 .showDocFull {
-	// background-color: yellow;
 	margin: 12px;
 	.docOverview {
 		margin: 0px;
 		img {
 			border: 6px #eee solid;
-			// padding: 12px;
 		}
 		.docMeta {
 			margin: 0px;
 			.tag {
 				background-color: #fff;
-				// padding-left: 4px; 
-				// border: 0px 1px solid #ddd;
-				// margin: 0;
 				.remove {
 					color: white;
 					background-color: @almostBlack;
 					padding: 0px 2px;
 					margin-left: 2px;
-					// border-radius: 12px;
 				}
 			}
 		}
@@ -125,12 +126,18 @@ body {
 	}
 }
 
-
-
 .container {
-	display: flex;
+	display: -webkit-box;					/* OLD - iOS 6-, Safari 3.1-6 */
+	display: -moz-box;						/* OLD - Firefox 19- (buggy but mostly works) */
+	display: -ms-flexbox;					/* TWEENER - IE 10 */
+	display: -webkit-flex;				/* NEW - Chrome */
+	display: flex;								/* NEW, Spec - Opera 12.1, Firefox 20+ */
+
+	-webkit-flex-direction: row;
 	flex-direction: row;
+	-webkit-flex-wrap: wrap;
 	flex-wrap: wrap;
+	-webkit-align-items: flex-start;
 	align-items: flex-start;
 
 	.docinfo {
@@ -149,69 +156,74 @@ body {
 	.docbox {
 		padding: 0px;
 		margin: 3px;
+
+		-webkit-flex-grow: 1;
 		flex-grow: 1;
+
 		overflow-x: hidden;
 		overflow-y: hidden;
 		width: @thumbnailDim;
 		height: @thumbnailDim;
-		display: flex;
+
+		display: -webkit-box;					/* OLD - iOS 6-, Safari 3.1-6 */
+		display: -moz-box;						/* OLD - Firefox 19- (buggy but mostly works) */
+		display: -ms-flexbox;					/* TWEENER - IE 10 */
+		display: -webkit-flex;				/* NEW - Chrome */
+		display: flex;								/* NEW, Spec - Opera 12.1, Firefox 20+ */
+
 		justify-content: center;
 
 		figure {
-			flex-grow: 1;
 			margin: 0;
-			display: flex;
-			justify-content: center;
+
+			-webkit-flex-grow: 1;
+			flex-grow: 1;
+
+			display: -webkit-box;					/* OLD - iOS 6-, Safari 3.1-6 */
+			display: -moz-box;						/* OLD - Firefox 19- (buggy but mostly works) */
+			display: -ms-flexbox;					/* TWEENER - IE 10 */
+			display: -webkit-flex;				/* NEW - Chrome */
+			display: flex;								/* NEW, Spec - Opera 12.1, Firefox 20+ */
+
+			-webkit-align-items: center;
 			align-items: center;
+			-webkit-justify-content: center;
+			justify-content: center;
+			
 			canvas {
 				display: block;
 			}
 
 			img {
-				  display: block;
+					display: block;
 			}
 		}
 	}
 }
-// .imprint {
-// 	// margin-left: 12px;
-// 	z-index: 5;
-// 	top: 0px;
-// 	position: fixed;
-// 	// background-color: yellow;
-// 	margin: 12px;
-// 	text-shadow:
-// 		rgba(0,0,0,0.1) -1px 0,
-// 		rgba(0,0,0,0.1) 0 -1px,
-// 		rgba(255,255,255,0.1) 1px 0,
-// 		rgba(255,255,255,0.1) 0 1px,
-// 		rgba(0,0,0,0.2) -1px -1px,
-// 		rgba(255,255,255,0.1) 1px 1px;
-// }
+
 .contentbackground {
 	width: 100%;
 	height:100%;
-	// display: flex;
-	// justify-content: center;
-	// align-items: center;
-	// flex-direction: column;
-	// margin: 0;
 	.spriteBoxImage {
 		width: 100%;
 		height:100%;
-		// padding-bottom: 2em;
-		// background-color: red;
 		z-index: 0;
+
+		-webkitflex-grow: 1;
 		flex-grow: 1;
-		// padding: 3px;
-		// margin: 24px;
-		display: flex;
+		
+		display: -webkit-box;					/* OLD - iOS 6-, Safari 3.1-6 */
+		display: -moz-box;						/* OLD - Firefox 19- (buggy but mostly works) */
+		display: -ms-flexbox;					/* TWEENER - IE 10 */
+		display: -webkit-flex;				/* NEW - Chrome */
+		display: flex;								/* NEW, Spec - Opera 12.1, Firefox 20+ */
+		
+		-webkit-justify-content: center;
 		justify-content: center;
+		-webkit-align-items: center;
 		align-items: center;
+		-webkit-flex-direction: column;
 		flex-direction: column;
-		canvas {
-			// padding-bottom: 48px;
-		}
 	}
 }
 
@@ -221,17 +233,14 @@ body {
 	position: fixed;
 	z-index: 5;
 	color: #aaa;
-	// align-self: flex-end;
 	width: 100%;
 	background-color: #E6E6E6;
-	// padding-bottom: 1em;
 	padding: 0;
 	a {
 		color: #aaa;
 	}
 	.editMeta {
 		font-size: 18px;
-		// background-color: cyan;
 		padding: 12px;
 		border-top: 1px #ccc solid;
 		input[type=text] {
@@ -256,7 +265,6 @@ body {
 	right: 0px;
 	bottom: 0px;
 	padding: 4px 8px;
-	// background-color: #171714;
 }
 
 ol {
@@ -274,17 +282,12 @@ ol li .property {
 	color: #D39322;
 }
 
-
 .myPixInput {
-	/*width: auto;*/
 	padding: 12px 10px;
-	/*margin-bottom: 12px;*/
 	background-color: nonce;
-	/*display: block;*/
 }
 
 .paging {
-	/*text-align: center;*/
 	background-color: none;
 	padding: 12px;
 }

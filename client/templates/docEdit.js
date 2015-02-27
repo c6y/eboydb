@@ -42,7 +42,7 @@ Template.docEdit.events({
 		if (Meteor.user().profile.isEditor) {
 			if (event.which === 13) {
 				// event.preventDefault();
-				var updatedColor = event.currentTarget.value;
+				var updatedColor = event.currentTarget.value.toLowerCase();
 				var colorInHex = Meteor.myFunctions.colourNameToHex(updatedColor);
 				Meteor.call('updateBackColor', this._id, colorInHex);
 			}
