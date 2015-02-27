@@ -1,6 +1,6 @@
 // Session.setDefault('searchJumpOff', Router.current().route.url);
 
-Template.mainHeader.helpers({
+Template.pagingHeader.helpers({
 	'postsCount': function() {
 		return Counts.get('numberOfFinds')
 	},
@@ -21,6 +21,26 @@ Template.mainHeader.events({
 			console.log(Session.get('slug'));
 			// console.log('slug: ' + slug);
 			Router.go('pool', {slug: searchingFor, page: 1});
+		}
+	}
+});
+
+Template.pagingHeader.events({
+	'click .previous': function(event, template) {
+		var currentPage = Number(Router.current().params.page);
+		var currentSlug = Router.current().params.slug;
+		if (currentPage > 1) {
+			var previousPage = currentPage - 1;
+			Router.go('pool', {slug: currentSlug, page: previousPage});
+		}
+	},
+	'click .next': function(event, template) {
+		var currentPage = Number(Router.current().params.page);
+		var maxPages = Math.ceil(Counts.get('numberOfFinds') / displayQty);
+		var currentSlug = Router.current().params.slug;
+		if (currentPage < maxPages) {
+			var nextPage = currentPage + 1;
+			Router.go('pool', {slug: currentSlug, page: nextPage});
 		}
 	}
 });
