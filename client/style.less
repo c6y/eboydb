@@ -1,10 +1,16 @@
 @thumbnailDim: 216px;
 @linkColor: DodgerBlue;
 @almostBlack: #272822;
+@almostWhite: #fafafa;
 
 html {
 	height: 100%;
 }
+
+// @media only screen 
+// and (min-device-width : 320px) {
+// 	width: 400px;
+// }
 
 body {
 	font-family: Menlo, monospace;
@@ -38,15 +44,19 @@ body {
 	.dblogo {
 		font-weight: bold;
 	}
+
 	a {
 		text-decoration: none;
 		color: @almostBlack;
-		:visited {
-			color: red;
-		}
-		:hover {
-			color: orange;
-		}
+	}
+
+	a:visited {
+		color: @almostBlack;
+	}
+
+	a:hover {
+		color: @almostWhite;
+		background-color: @almostBlack;
 	}
 
 	.headline{
@@ -284,20 +294,27 @@ ol li .property {
 
 .myPixInput {
 	padding: 12px 10px;
-	background-color: nonce;
 }
 
 .paging {
-	background-color: none;
 	padding: 12px;
-}
-
-.previous:hover, .next:hover {
-	color: white;
-	background-color: blue;
-}
-
-.previous:active, .next:active {
-	color: white;
-	background-color: black;
+	.next,
+	.previous {
+		// background-color: yellow;
+		color: @almostBlack;
+		a {
+			text-decoration: none;
+		}
+		a:visited {
+			color: @almostBlack;
+		}
+		a:hover {
+			color: @almostWhite;
+			background-color: @almostBlack;
+		}
+	}
+	.filterstats {
+		float: right;
+		// background-color: red;
+	}
 }

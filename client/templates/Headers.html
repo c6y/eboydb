@@ -4,9 +4,16 @@
 			{{#if currentUser.profile.isEditor}}
 				<a href="{{ pathFor 'addDoc' }}">+</a>
 			{{/if}}
-			<a href="{{ pathFor route='pool' page=1 slug='all' }}" class="dblogo">eboydb</a>: {{ postsCount }} docs – p{{ 	currentPage }}/{{ totalPages }}
+			<a href="{{ pathFor route='pool' page=1 slug='all' }}" class="dblogo">eboydb</a>
 		</span>
 		{{> searchPool}}
+	</div>
+	<div class="paging">
+		<span class="previous"><a href="">previous</a></span> | 
+		<span class="next"><a href="">next</a></span>
+		<span class="filterstats">
+			docs: {{ postsCount }}, page: {{ currentPage }}/{{ totalPages	}}
+		</span>
 	</div>
 </template>
 
