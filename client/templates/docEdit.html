@@ -1,5 +1,4 @@
 <template name="docEdit">
-	{{>docHeader}}
 	<div class="showDocFull">
 		<div class="docOverview">
 			<!-- <img style="background-color: none" src="{{ this.url 	store='OriginalPix' }}" width="{{ this.	metadata.width }}" height="{{ this.metadata.height }}" /> -->
@@ -34,6 +33,7 @@
 			</div>
 		</div>
 		<ol>
+			<li><span class="property">_id</span>: {{ this._id }}</li>
 			<li><span class="property">name</span>: {{ this.name }}</li>
 			<li><span class="property">uploadedAt</span>: {{this.uploadedAt}}</li>
 			<li><span class="property">metadata.width</span>: {{this.metadata.width}}</li>

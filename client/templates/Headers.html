@@ -1,22 +1,11 @@
 <template name="mainHeader">
 	<div class="header">
 		<span class="headline">
-			{{#if currentUser.profile.isEditor}}
-				<a href="{{ pathFor 'addDoc' }}">+</a>
-			{{/if}}
 			<a href="{{ pathFor route='pool' page=1 slug='all' }}" class="dblogo">eboydb</a>
 		</span>
 		{{> searchPool}}
 	</div>
 	{{> pagingHeader }}
-</template>
-
-<template name="docHeader">
-	<div class="header">
-		<span class="headline">
-			<a href="" id="goBack" class="dblogo">eboydb</a>: {{ this._id }}
-		</span>
-	</div>
 </template>
 
 <template name="addDocument">

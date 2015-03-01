@@ -41,7 +41,9 @@
 					</div>
 				{{/if}}
 				<figure>
-					<a href="{{ pathFor 'spriteBox' boxsize='512' query=theSlug }}">
+					<!-- <a href="{{ pathFor 'spriteBox' boxsize='512' query=theSlug }}"> -->
+					<!-- <a href="#{{ this._id }}"> -->
+					<a href="{{ pathFor 'spriteBox' boxsize='512'}}">
 						<canvas id='{{ this._id }}'
 							width="{{ scaledSprite.tnWidthDevice }}"
 							height="{{ scaledSprite.tnHeightDevice }}"
@@ -51,6 +53,7 @@
 					</a>
 				</figure>
 			</div>
+			
 		{{/each}}
 
 	</div>

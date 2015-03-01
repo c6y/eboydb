@@ -1,6 +1,9 @@
 @thumbnailDim: 216px;
 @linkColor: DodgerBlue;
 @almostBlack: #272822;
+@editorBack: #eaeaea; //#eaeaea;
+@editorBorder: 1px solid #afafaf;
+@editorColor: @almostBlack;
 
 html {
 	height: 100%;
@@ -14,6 +17,17 @@ body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
+}
+
+.editor {
+	color: @editorColor;
+	background-color: @editorBack;
+	border-bottom: @editorBorder;
+	padding: 4px 12px;
+	a {
+		color: @editorColor;
+		text-decoration: none;
+	}
 }
 
 .header {
@@ -234,7 +248,7 @@ body {
 	z-index: 5;
 	color: #aaa;
 	width: 100%;
-	background-color: #E6E6E6;
+	background-color: @editorBack;
 	padding: 0;
 	a {
 		color: #aaa;
@@ -242,7 +256,7 @@ body {
 	.editMeta {
 		font-size: 18px;
 		padding: 12px;
-		border-top: 1px #ccc solid;
+		border-top: @editorBorder;
 		input[type=text] {
 			margin: 0px;
 			padding: 2px;
