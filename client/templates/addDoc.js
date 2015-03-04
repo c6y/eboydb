@@ -1,4 +1,4 @@
-Template.addDocument.events({
+Template.addDoc.events({
 	'change .myPixInput': function(event, template) {
 		if (Meteor.user().profile.isEditor) {
 			FS.Utility.eachFile(event, function(file) {

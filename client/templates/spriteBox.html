@@ -54,9 +54,7 @@
 				<li><span class="property">copyright</span>: {{sprite.metadata.copyright}}</li>
 				<li><span class="property">tags</span>: {{sprite.metadata.tags}}</li>
 				<li><span class="property">background-color</span>: {{ sprite.metadata.backColor }}</li>
-			</ol>
-			{{#if currentUser.profile.isEditor}}
-				<ol>
+				{{#if currentUser.profile.isEditor}}
 					<li><span class="property">boxsize</span>: {{ boxsize }}</li>
 					<li><span class="property">scaledSprite-width</span>: {{ scaledSprite.width }}	</li>
 					<li><span class="property">scaledSprite-height</span>: {{ scaledSprite.height 	}}</li>
@@ -66,8 +64,8 @@
 					<li><span class="property">scaledSprite-heightDevice</span>: {{ scaledSprite.heightDevice }}</li>
 					<li><span class="property">scaledSprite-scaleFactorDevice</span>: {{ 	scaledSprite.scaleFactorDevice }}x</li>
 					<li><span class="property">download</span>: <a id="genImg" href="" target="	_blank">PNG</a></li>
-				</ol>
-			{{/if}}
+				{{/if}}
+			</ol>
 		</div>
 	</div>
 </html>

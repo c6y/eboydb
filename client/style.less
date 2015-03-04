@@ -1,9 +1,9 @@
 @thumbnailDim: 216px;
 @linkColor: DodgerBlue;
 @almostBlack: #272822;
-@editorBack: #eaeaea; //#eaeaea;
-@editorBorder: 1px solid #afafaf;
-@editorColor: @almostBlack;
+@editorColor: #c1c7c7;
+@editorBackColor: #28281e; //#eaeaea;
+@editorBorderColor: 1px solid #333326;
 
 html {
 	height: 100%;
@@ -21,8 +21,8 @@ body {
 
 .editor {
 	color: @editorColor;
-	background-color: @editorBack;
-	border-bottom: @editorBorder;
+	background-color: @editorBackColor;
+	border-bottom: @editorBorderColor;
 	padding: 4px 12px;
 	a {
 		color: @editorColor;
@@ -98,14 +98,48 @@ body {
 	-webkit-align-items: center;
 	align-items: center;
 	margin: 0px;
-	color: white;
-	background-color: #272822;
+	color: @editorColor;
+	background-color: @editorBackColor;
 	width: 100%;
 	height: 100vh;
-	input[type=file], input[type="button"], button {
+
+	.fileUpload {
+		position: relative;
+		overflow: hidden;
+		margin: 12px 12px 48px 12px;
+		background-color: @editorBackColor;
+		padding: 6px 12px;
+		border: 1px solid @editorColor;
+		border-radius: 6px;
+		input.myPixInput {
+			padding: 12px;position: absolute;
+			top: 4px;
+			left: -6px;
+			padding: 0px;
+			cursor: pointer;
+			opacity: 0.0;
+			filter: alpha(opacity=0);
+		}
+	}
+
+	.fileUpload:hover {
+		color: @editorBackColor;
+		background-color: @editorColor;
+	}
+
+	.fileUpload:active {
+		color: @editorBackColor;
+		background-color: white;
+	}
+
+	input[type=file],
+	input[type="button"],
+	button {
+		background-color: green;
+		padding: 12px;
 		font-family: Menlo, monospace;
 		display: block !important;
-	}	
+	}
 }
 
 .showDocFull {
@@ -156,14 +190,19 @@ body {
 
 	.docinfo {
 		margin: 0px;
-		background-color: orange;
+		color: @editorColor;
+		background-color: @editorBackColor;
+		// background-color: orange;
 		padding: 2px 8px 2px 0px;
 		position: absolute;
 		display: block;
-
+		a {
+			color: inherit;
+			text-decoration: none;
+		}
 		.remove {
-			color: white;
-			background-color: @almostBlack;
+			color: @editorColor;
+			background-color: @editorBackColor;
 			padding: 2px 4px;
 		}
 	}
@@ -242,27 +281,26 @@ body {
 }
 
 .docMeta {
-	padding: 12px;
 	bottom: 0px;
 	position: fixed;
 	z-index: 5;
-	color: #aaa;
+	color: @editorColor;
 	width: 100%;
-	background-color: @editorBack;
-	padding: 0;
+	background-color: @editorBackColor;
 	a {
 		color: #aaa;
 	}
 	.editMeta {
 		font-size: 18px;
 		padding: 12px;
-		border-top: @editorBorder;
+		border-top: @editorBorderColor;
 		input[type=text] {
 			margin: 0px;
 			padding: 2px;
 			font-family: inherit;
 			font-size: inherit;
 			border: 0px;
+			color: inherit;
 			background-color: inherit;
 		}
 	}
@@ -284,7 +322,7 @@ body {
 ol {
 	background-color: #171714;
 	margin: 0;
-	padding: 0em 0em;
+	padding: 12px;
 }
 
 ol li {
