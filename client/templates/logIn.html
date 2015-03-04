@@ -2,30 +2,27 @@
 	<div class="loginform">
 		{{> loginButtons}} <a href="{{ pathFor 'pool' slug='all' page='1' }}">proceed ...</a>
 		{{#if currentUser}}
-			<ol>
-				<li><span class="property">_id</span>: {{ currentUser._id }}</li>
-				<li><span class="property">profile.name</span>: {{ currentUser.profile.name }}</li>
-				<li><span class="property">profile.isAdmin</span>: {{ currentUser.profile.isAdmin }}</li>
-				<li><span class="property">profile.isEditor</span>: {{ currentUser.profile.isEditor }}</li>
-				{{#if currentUser.emails.[0].address}}
-					<li><span class="property">currentUser.emails.[0].address</span>: {{ currentUser.emails.[0].address }}</li>
-				{{/if}}
-			</ol>
-		{{/if}}
-
-		{{#if currentUser.profile.isAdmin}}
-			<div class="adminHead">Registered Users</div>
-			<ol>
-			{{#each showUsers}}
-					<li>
-						<li>
-							<span class="property">_id</span>: {{ this._id }},
-							<span class="property">isAdmin</span>: {{ this.profile.isAdmin }},
-							<span class="property">isEditor</span>: {{ this.profile.isEditor }}
-						</li>	
-					</li>
-			{{/each}}
-			</ol>
+			<div class="docMeta">
+				<ol>
+					<li><span class="property">_id</span>: {{ currentUser._id }}</li>
+					<li><span class="property">profile.name</span>: {{ currentUser.profile.name }}</li>
+					<li><span class="property">profile.isAdmin</span>: {{ currentUser.profile.isAdmin }}</li>
+					<li><span class="property">profile.isEditor</span>: {{ currentUser.profile.isEditor }}</li>
+					{{#if currentUser.emails.[0].address}}
+						<li><span class="property">currentUser.emails.[0].address</span>: {{ currentUser.emails.[0].address }}</li>
+					{{/if}}
+					{{#if currentUser.profile.isAdmin}}
+						<li><span class="property">Registered Users</span>: {{ usersCount }}</li>
+						{{#each showUsers}}
+							<li>
+								<span class="property">_id</span>: {{ this._id }},
+								<span class="property">isAdmin</span>: {{ this.profile.isAdmin }},
+								<span class="property">isEditor</span>: {{ this.profile.isEditor }}
+							</li>	
+						{{/each}}
+					{{/if}}
+				</ol>
+			</div>
 		{{/if}}
 	</div>
 </template>

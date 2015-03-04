@@ -36,8 +36,8 @@
 			<li><span class="property">_id</span>: {{ this._id }}</li>
 			<li><span class="property">name</span>: {{ this.name }}</li>
 			<li><span class="property">uploadedAt</span>: {{this.uploadedAt}}</li>
-			<li><span class="property">metadata.width</span>: {{this.metadata.width}}</li>
-			<li><span class="property">metadata.height</span>: {{this.metadata.height}}</li>
+			<li><span class="property">metadata.width</span>: {{this.metadata.width}}<span class="unit">px</span></li>
+			<li><span class="property">metadata.height</span>: {{this.metadata.height}}<span class="unit">px</span></li>
 			<li><span class="property">metadata.copyright</span>: {{this.metadata.copyright}}</li>
 			<li><span class="property">metadata.backColor</span>: {{ this.metadata.backColor }}</li>
 			<li>
@@ -46,6 +46,8 @@
 					<span class="tag">{{this}}<span class="remove">(×)</span></span>
 				{{/each}}
 			</li>
+			<li><span class="property">uploadedBy.id</span>: {{this.metadata.uploadedBy.id}}</li>
+			<li><span class="property">uploadedBy.username</span>: {{this.metadata.uploadedBy.username}}</li>
 		</ol>
 	</div>
 </template>

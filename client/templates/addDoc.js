@@ -6,7 +6,8 @@ Template.addDoc.events({
 				newFile.metadata = {
 					copyright: '©eBoy',
 					backColor: defaultBackColor,
-					tags: ['sprite', 'ecity']
+					tags: ['sprite', 'ecity'],
+					uploadedBy: {id: Meteor.userId(), username: Meteor.user().profile.name}
 				};
 				MyPix.insert(newFile, function(err, fileObj) {
 					//If !err, we have inserted new doc with ID fileObj._id, and

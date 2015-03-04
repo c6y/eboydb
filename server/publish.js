@@ -12,6 +12,7 @@ Meteor.publish('aPix', function(id) {
 		'metadata.backColor': 1,
 		'metadata.tags': 1,
 		'metadata.copyright': 1,
+		'metadata.uploadedBy': 1,
 	}};
 	return MyPix.find(selector, options);
 });

@@ -1,9 +1,11 @@
 @thumbnailDim: 216px;
 @linkColor: DodgerBlue;
 @almostBlack: #272822;
-@editorColor: #c1c7c7;
-@editorBackColor: #28281e; //#eaeaea;
+@editorColor: #aaaaaa; //#c1c7c7
+@editorBackColor: #272822; //#eaeaea;
 @editorBorderColor: 1px solid #333326;
+@editorHighlight: #D39322;
+@unitColor: #E42669;
 
 html {
 	height: 100%;
@@ -129,7 +131,8 @@ body {
 
 	.fileUpload:active {
 		color: @editorBackColor;
-		background-color: white;
+		background-color: @editorHighlight;
+		border-color: @editorHighlight;
 	}
 
 	input[type=file],
@@ -148,18 +151,6 @@ body {
 		margin: 0px;
 		img {
 			border: 6px #eee solid;
-		}
-		.docMeta {
-			margin: 0px;
-			.tag {
-				background-color: #fff;
-				.remove {
-					color: white;
-					background-color: @almostBlack;
-					padding: 0px 2px;
-					margin-left: 2px;
-				}
-			}
 		}
 	}
 }
@@ -280,13 +271,43 @@ body {
 	}
 }
 
+.eboycopyright {
+	position: fixed;
+	right: 0px;
+	padding: 6px 12px;
+}
+
+.spriteBoxInfoToggle {
+	position: fixed;
+	right: 0px;
+	bottom: 0px;
+	padding: 6px 12px;
+}
+
 .docMeta {
+	background-color: @editorBackColor; //#171714
+	border-top: @editorBorderColor;
+	color: @editorColor;
+	margin: 0px;
+	left: 0px;
 	bottom: 0px;
 	position: fixed;
 	z-index: 5;
-	color: @editorColor;
 	width: 100%;
-	background-color: @editorBackColor;
+	.property {
+		color: @editorHighlight;
+	}
+	ol {
+		margin: 0;
+		padding: 12px 12px 18px 12px;
+		li {
+		list-style-type: none;
+		}
+	}
+	.remove {
+		padding: 0px 2px;
+		margin-left: 2px;
+	}
 	a {
 		color: #aaa;
 	}
@@ -294,44 +315,21 @@ body {
 		font-size: 18px;
 		padding: 12px;
 		border-top: @editorBorderColor;
+		border-bottom: @editorBorderColor;
 		input[type=text] {
 			margin: 0px;
 			padding: 2px;
+			border: 0px;
 			font-family: inherit;
 			font-size: inherit;
-			border: 0px;
 			color: inherit;
 			background-color: inherit;
 		}
 	}
 }
 
-.eboycopyright {
-	position: fixed;
-	right: 0px;
-	padding: 0 2px;
-}
-
-.spriteBoxInfoToggle {
-	position: fixed;
-	right: 0px;
-	bottom: 0px;
-	padding: 4px 8px;
-}
-
-ol {
-	background-color: #171714;
-	margin: 0;
-	padding: 12px;
-}
-
-ol li {
-	list-style-type: none;
-	color: #aaa;
-}
-
-ol li .property {
-	color: #D39322;
+.unit {
+	color: @unitColor;
 }
 
 .myPixInput {
