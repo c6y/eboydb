@@ -16,5 +16,3 @@ accounts-ui
 accounts-password
 accounts-github
 cfs:gridfs
-meteorhacks:kadira
-reactive-var

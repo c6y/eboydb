@@ -2,96 +2,59 @@
 	{{> mainHeader }}
 	<div class="container">
 		{{#each showPix}}
-			{{> spriteThumb}}
-		{{/each}}
-	</div>
-</template>
 
-<template name="spriteThumb">
-	<script type="text/javascript">
-		// generate a new myThumb variable for each thumbnail
-		var varbase = 'myThumb';
-		this[varbase+'_{{ this._id }}'] = '{{ this._id }}';			
-		myThumb_{{ this._id }} = new Image();
-		myThumb_{{ this._id }}.src = "{{ this.url }}";
-		// console.log('this.type: ' + '{{ this.type }}');
-		
-		myThumb_{{ this._id }}.onload = function() {
-			var canvas = document.getElementById('{{ this._id }}');
-			var context = canvas.getContext("2d");			
-			// context.fillStyle = '#999999'; //'{{ this.metadata.backColor }}';
-			// context.fillRect(0, 0, '{{ tnScaledSprite.widthDevice }}', '{{ tnScaledSprite.heightDevice }}');
-			context.mozImageSmoothingEnabled = false;
-			context.webkitImageSmoothingEnabled = false;
-			context.msImageSmoothingEnabled = false;
-			context.imageSmoothingEnabled = false;
-			context.drawImage(
-				myThumb_{{ this._id }},
-				{{ tnScaledSprite.offsetWidth }},
-				{{ tnScaledSprite.offsetHeight }},
-				{{ tnScaledSprite.widthDevice }},
-				{{ tnScaledSprite.heightDevice }}
-			);
-		}
-	</script>
+			<script type="text/javascript">
 
-	{{#unless displayItBig}}
-		<div class="superSprite" style="background-color:{{ backColor }}">
-			<div class="eboycopyright" style="color:{{ inverseBackColor }}">©eBoy</div>
-			<div class="spriteBoxInfoToggle" style="color:{{ inverseBackColor }}">^</div>
-			<!-- <img src="{{ this.url }}" alt=""> -->
-			<div class="spriteZoom" style="width:{{ scaledSprite.width }}px;height: {{ scaledSprite.height }}px;">
-				<canvas id="myCanvas"
-					width="{{ scaledSprite.widthDevice }}"
-					height="{{ scaledSprite.heightDevice }}"
-					style="width:{{ scaledSprite.width }}px;height: {{ scaledSprite.height }}px;">
-						This browser does not support HTML5 canvas
-				</canvas>
-			</div>
-		</div>
-
-		<script>
-				var c = document.getElementById("myCanvas");
-				var ctx = c.getContext("2d");
-				// ctx.fillStyle = 'rgba(0, 0, 0, 0.0)';;
-				ctx.fillStyle = "{{ backColor }}";
-				ctx.fillRect(
-					0,
-					0,
-					{{ scaledSprite.widthDevice }},
-					{{ scaledSprite.heightDevice }}
-				);
-				ctx.mozImageSmoothingEnabled = false;
-				ctx.webkitImageSmoothingEnabled = false;
-				ctx.msImageSmoothingEnabled = false;
-				ctx.imageSmoothingEnabled = false;
-				ctx.drawImage(
+			// generate a new myThumb variable for each thumbnail
+			var varbase = 'myThumb';
+			this[varbase+'_{{ this._id }}'] = '{{ this._id }}';			
+			myThumb_{{ this._id }} = new Image();
+			myThumb_{{ this._id }}.src = "{{ this.url store='OriginalPix' }}";
+			// console.log('this.type: ' + '{{ this.type }}');
+			
+			myThumb_{{ this._id }}.onload = function() {
+				var canvas = document.getElementById('{{ this._id }}');
+				var context = canvas.getContext("2d");			
+				// context.fillStyle = '#999999'; //'{{ this.metadata.backColor }}';
+				// context.fillRect(0, 0, '{{ scaledSprite.widthDevice }}', '{{ scaledSprite.heightDevice }}');
+				context.mozImageSmoothingEnabled = false;
+				context.webkitImageSmoothingEnabled = false;
+				context.msImageSmoothingEnabled = false;
+				context.imageSmoothingEnabled = false;
+				context.drawImage(
 					myThumb_{{ this._id }},
-					0,
-					0,
+					{{ scaledSprite.offsetWidth }},
+					// 0,
+					{{ scaledSprite.offsetHeight }},
 					{{ scaledSprite.widthDevice }},
 					{{ scaledSprite.heightDevice }}
 				);
-		</script>
-	{{/unless}}
+			}
+			</script>
 
-	<div class="docbox" style="background-color: {{ backColor }}">
-		{{#if currentUser.profile.isEditor}}
-			<div class="docinfo"><span class='remove'>X</span>
-				<a href="{{ pathFor 'docEdit' }}">
-					{{ this.metadata.backColor }} {{ this.metadata.width }}w {{ tnScaledSprite.scaleFactor }}x
-				</a>
+			<div class="docbox" style="background-color: {{ backColor }}">
+				{{#if currentUser.profile.isEditor}}
+					<div class="docinfo"><span class='remove'>X</span>
+						<a href="{{ pathFor 'docEdit' }}">
+							{{ this.metadata.backColor }} {{ this.metadata.width }}w {{ scaledSprite.scaleFactor }}x
+						</a>
+					</div>
+				{{/if}}
+				<figure>
+					<!-- <a href="{{ pathFor 'spriteBox' boxsize='512' query=theSlug }}"> -->
+					<!-- <a href="#{{ this._id }}"> -->
+					<a href="{{ pathFor 'spriteBox' boxsize='512'}}">
+						<canvas id='{{ this._id }}'
+							width="{{ scaledSprite.tnWidthDevice }}"
+							height="{{ scaledSprite.tnHeightDevice }}"
+							style="width:{{ scaledSprite.tnWidth }}px; height: {{ scaledSprite.tnHeight }}px;">
+								This browser does not support HTML5 canvas
+						</canvas>
+					</a>
+				</figure>
 			</div>
-		{{/if}}
-		<figure>
-		<a class="thumbnail">
-			<canvas id='{{ this._id }}'
-				width="{{ tnScaledSprite.tnWidthDevice }}"
-				height="{{ tnScaledSprite.tnHeightDevice }}"
-				style="width:{{ tnScaledSprite.tnWidth }}px; height: {{ tnScaledSprite.tnHeight }}px;">
-					This browser does not support HTML5 canvas
-			</canvas>
-		</a>
-		</figure>
+			
+		{{/each}}
+
 	</div>
 </template>

@@ -1,43 +1,9 @@
 Template.pool.helpers({
-
-	'showPix': function() {
-		return MyPix.find({}, {sort: {uploadedAt: -1}});
-	},
-	'theSlug': function() {
-		return 'q=' + Router.current().params.slug;
-	},
-})
-
-Template.pool.events({
-	'click .remove': function(event, template) {
-		if (Meteor.user().profile.isEditor) {
-			console.log("Removing \"" + this._id + "\"");
-			thisId = this._id;
-			Meteor.call('deleteDocument', thisId);
-		}
-	},
-})
-
-Template.spriteThumb.created = function () {
-	this.hidden = new ReactiveVar(true)
-	// console.log('this.hidden: ' + this.hidden);
-};
-
-Template.spriteThumb.helpers({
-	displayItBig: function () {
-		isHidden = Template.instance().hidden.get();
-		console.log('isHidden: ' + this._id + ' ' +isHidden);
-		if (isHidden) {
-			return true
-		} else {
-			return false
-		}
-	},
-		'tnScaledSprite': function () {
+	'scaledSprite': function () {
 		var widthOriginal = this.metadata.width;
 		var heightOriginal = this.metadata.height;
-		var tnWidthMax = thumbnailDimension + thumbnailBleed;
-		var dimensionsTo = Meteor.myFunctions.scaleToByInt(widthOriginal, heightOriginal, tnWidthMax);
+		var widthMax = thumbnailDimension + thumbnailBleed;
+		var dimensionsTo = Meteor.myFunctions.scaleToByInt(widthOriginal, heightOriginal, widthMax);
 
 		// remove unnecessary canvas area around thumbnail 
 		var thumbnailMaxHeight = Math.min(dimensionsTo.height, thumbnailDimension);
@@ -71,19 +37,8 @@ Template.spriteThumb.helpers({
 			// thumbnailHeightDevice: thumbnailDimension * window.devicePixelRatio,
 		}
 	},
-		'scaledSprite': function () {
-		var widthOriginal = this.metadata.width;
-		var heightOriginal = this.metadata.height;
-		var widthMax =  zoomDimension;
-		var dimensionsTo = Meteor.myFunctions.scaleToByInt(widthOriginal, heightOriginal, widthMax);
-		return {
-			width: dimensionsTo.width,
-			height: dimensionsTo.height,
-			scaleFactor: dimensionsTo.factor,
-			widthDevice: dimensionsTo.width * window.devicePixelRatio,
-			heightDevice: dimensionsTo.height * window.devicePixelRatio,
-			scaleFactorDevice: dimensionsTo.factor * window.devicePixelRatio
-		}
+	'showPix': function() {
+		return MyPix.find({}, {sort: {uploadedAt: -1}});
 	},
 	'backColor': function() {
 		if (this.metadata.backColor != 'default') {
@@ -92,34 +47,17 @@ Template.spriteThumb.helpers({
 			return defaultBackColor;
 		}	
 	},
-	'inverseBackColor': function() {
-		invHex = Meteor.myFunctions.inverseHex(this.metadata.backColor);
-		// console.log('invHex: ' + invHex);
-		return invHex.toString();
+	'theSlug': function() {
+		return 'q=' + Router.current().params.slug;
 	},
 })
 
-Template.spriteThumb.events({
-	'click .thumbnail': function () {
-		Template.instance().hidden.set(false);
+Template.pool.events({
+	'click .remove': function(event, template) {
+		if (Meteor.user().profile.isEditor) {
+			console.log("Removing \"" + this._id + "\"");
+			thisId = this._id;
+			Meteor.call('deleteDocument', thisId);
+		}
 	},
-	'click .spriteZoom': function () {
-		Template.instance().hidden.set(true);
-	},
-	'click .spriteBoxInfoToggle': function () {
-		Session.setDefault('metaInfo', 'none');
-		var theSession = Session.get('metaInfo');
-		if (theSession == 'block') {
-			Session.set('metaInfo', 'none');
-		} else {
-			Session.set('metaInfo', 'block');
-		};
-		console.log('Session.get("metaInfo"): ' + Session.get("metaInfo"));
-	},
-});
-
-// Template.pool.events({
-// 	'click .toggleFull': function () {
-// 		Template.instance().hidden.set(false);
-// 	}
-// });
+})
