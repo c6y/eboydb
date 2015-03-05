@@ -13,6 +13,12 @@ Template.pagingHeader.helpers({
 	},
 });
 
+Template.mainHeader.helpers({
+	name: function () {
+		return siteName;
+	}
+});
+
 Template.mainHeader.events({
 	'keypress input.searchFor': function (event) {
 		if (event.which === 13) {

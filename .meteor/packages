@@ -14,5 +14,5 @@ iron:router
 less
 accounts-ui
 accounts-password
-accounts-github
 cfs:gridfs
+accounts-github
