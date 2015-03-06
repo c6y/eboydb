@@ -1,10 +1,16 @@
 <Template name='mainLayout'>
 	{{#if currentUser.profile.isEditor}}
 		<div class="editor">
-			<a href="{{ pathFor 'pool' slug='all' page='1' }}">home</a> | 
-			<a href="{{ pathFor 'addDoc' }}">add</a> |
+			<a href="{{ pathFor 'pool' slug='all' page='1' }}">pool</a> | 
+			<a href="{{ pathFor 'addDoc' }}">addDoc</a> |
 			<a href="{{ pathFor 'login' }}">{{ currentUser.profile.name }}</a> 
 		</div>
 	{{/if}}
 	{{> yield}}
+</Template>
+
+<Template name='notFound'>
+	<div class="fourOhFour">
+		<a href="{{ pathFor 'pool' slug='all' page='1' }}">404</a>
+	</div>
 </Template>
