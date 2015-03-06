@@ -39,3 +39,14 @@ Meteor.publish('PixQuery', function(slug, page) {
 	);
 	return MyPix.find(selector, options);
 })
+
+Meteor.publish("userStatus", function() {
+	var options = {fields: {
+		'_id': 1,
+		'username': 1,
+		'profile.name': 1,
+		'profile.isAdmin': 1,
+		'profile.isEditor': 1
+	}};
+  return Meteor.users.find({}, options);
+});

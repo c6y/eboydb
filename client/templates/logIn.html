@@ -17,9 +17,13 @@
 						{{#each showUsers}}
 							<li>
 								<span class="property">_id</span>: {{ this._id }},
-								<span class="property">isAdmin</span>: {{ this.profile.isAdmin }},
-								<span class="property">isEditor</span>: {{ this.profile.isEditor }}
-							</li>	
+								<span class="property">username</span>: {{ this.username }},
+								<span class="property">profile.name</span>: {{ this.profile.name }},
+								<span class="property">isAdmin</span>: 
+								<input type="checkbox" class="adminCheck" checked="{{ this.profile.isAdmin }}"/>
+								<span class="property">isEditor</span>: 
+								<input type="checkbox" class="editorCheck" checked="{{ this.profile.isEditor }}"/>
+							</li>
 						{{/each}}
 					{{/if}}
 				</ol>
@@ -27,3 +31,5 @@
 		{{/if}}
 	</div>
 </template>
+
+
