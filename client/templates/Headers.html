@@ -10,20 +10,16 @@
 
 <template name="searchPool">
 	<span class="search">
-		<input 
-			type="text"
-			name="searchDB"
-			value="{{ slug }}"
-			class="searchFor"
-			maxlength="24"
-			size="9">
+		<form class="seachDbForm">
+			<input type="text" name="searchDB" value="{{ slug }}" class="searchFor" maxlength="24" size="9">
+		</form>
 	</span>
 </template>
 
 <template name="pagingHeader">
 	<div class="paging">
-		<a class="previous">previous</a> | 
-		<a class="next">next</a>
+		<a class="previous" onclick="">previous</a> | 
+		<a class="next" onclick="">next</a>
 		<span class="pagestats"> /_
 			(docs: {{ postsCount }}, pages:{{ currentPage }}/{{ totalPages }})
 		</span>
