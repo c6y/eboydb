@@ -24,8 +24,7 @@ Meteor.publish('PixQuery', function(slug, page) {
 
 	if (slug.match(taglabel)) {
 		var tagSearch = slug.substr(2);
-		var reg = RegExp(tagSearch, 'i', 's');
-		var selector = {"metadata.tags" : {$regex: reg}};
+		var selector = {"metadata.tags" : tagSearch};
 	} else if (slug.match(namelabel)){
 		var nameSearch = slug.substr(2);
 		var reg = RegExp(nameSearch, 'i', 's');
