@@ -18,14 +18,30 @@ Meteor.publish('aPix', function(id) {
 });
 
 Meteor.publish('PixQuery', function(slug, page) {
-	var reg = RegExp(slug, 'i', 's');
+	
+	var taglabel = /^t\../;
+	var namelabel = /^n\../;
+
+	if (slug.match(taglabel)) {
+		var tagSearch = slug.substr(2);
+		var reg = RegExp(tagSearch, 'i', 's');
+		var selector = {"metadata.tags" : {$regex: reg}};
+	} else if (slug.match(namelabel)){
+		var nameSearch = slug.substr(2);
+		var reg = RegExp(nameSearch, 'i', 's');
+		var selector = {"original.name" : {$regex: reg}};
+	} else {
+		var reg = RegExp(slug, 'i', 's');
+		var selector = {
+			$or: [
+				{"metadata.tags" : {$regex: reg}},
+				{"original.name" : {$regex: reg}}
+			]
+		}
+	}
+
 	cursor = (displayQty * page) - displayQty;
-	var selector = {
-		$or: [
-			{"metadata.tags" : {$regex: reg}},
-			{"original.name" : {$regex: reg}}
-		]
-	};
+
 	var options = {
 		sort: {uploadedAt: -1},
 		limit: displayQty,

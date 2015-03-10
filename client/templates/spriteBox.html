@@ -5,7 +5,8 @@
 		myImage.onload = function() {
 			var c = document.getElementById("myCanvas");
 			var ctx = c.getContext("2d");
-			ctx.fillStyle = "{{ backColor }}";
+			// ctx.fillStyle = "{{ backColor }}";
+			ctx.fillStyle = "rgba(0, 0, 0, 0.0)";;
 			ctx.fillRect(0, 0, {{ scaledSprite.widthDevice }}, {{ scaledSprite.heightDevice }});
 			ctx.mozImageSmoothingEnabled = false;
 			ctx.webkitImageSmoothingEnabled = false;
