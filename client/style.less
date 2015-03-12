@@ -54,31 +54,41 @@ body {
 	font-size: 24pt;
 	.dblogo {
 		font-weight: bold;
-		color: inherit;
+	}
+	a {
+		text-decoration: none;
+		color: @almostBlack;
 	}
 	.headline{
 		font-family: inherit;
 		font-size: inherit;
-		-webkit-flex-grow: 1.2;
-		flex-grow: 1.2;
-		height: 1em;
-		a {
-			text-decoration: none;
+		-webkit-flex-grow: 1;
+		flex-grow: 1;
+		.dblogo:hover {
+			color: @almostBlack;
+			background-color: @highlight;
+			padding: 0 6px;
+			margin: 0 -6px;
+		}
+		.dblogo:active {
+			color: @highlight;
+			background-color: @almostBlack;
+		}
+		.dblogo:visited {
+			color: @almostBlack;
 		}
 	}
 	.search {
 		padding: 0px;
 		border: 0px;
-		margin: 0px;
 		-webkit-align-self: flex-end;
 		align-self: flex-end;
 		input[type=text]{
-			height: 1.2em;
 			color: @almostBlack;
 			font-weight: bold;
 			font-family: inherit;
 			font-size: inherit;
-			padding: 0px 0px;
+			padding: 0px 6px;
 			border: 0px;
 			text-align: right;
 		}
@@ -322,6 +332,9 @@ body {
 		opacity: 1;
 		cursor: pointer;
 	}
+	a {
+		color: #aaa;
+	}
 	.editMeta {
 		font-size: 18px;
 		padding: 12px;
@@ -357,18 +370,14 @@ body {
 	padding: 12px;
 }
 
-.previous:hover, .next:hover, .dblogo:hover{
+.previous:hover, .next:hover {
 	color: @editorBackColor;
 	background-color: @highlight; //#c1c7c7
-	padding: 2px 4px;
-	margin: -2px -4px;
+	padding: 3px 6px;
+	margin: -3px -6px;
 }
 
-.previous:active, .next:active, .dblogo:active{
+.previous:active, .next:active {
 	color: @highlight;
 	background-color: @editorBackColor;
-}
-
-.pagestats {
-	float: right;
 }
