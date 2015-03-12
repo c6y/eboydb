@@ -18,7 +18,7 @@ Meteor.publish('aPix', function(id) {
 });
 
 Meteor.publish('PixQuery', function(slug, page) {
-	
+
 	var taglabel = /^t\../;
 	var namelabel = /^n\../;
 

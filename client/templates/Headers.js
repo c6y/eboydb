@@ -23,8 +23,10 @@ Template.mainHeader.events({
 	'submit .seachDbForm': function (event) {
 		event.preventDefault();
 		var searchingFor = event.target.searchDB.value.toLowerCase();
-		Session.set('slug', searchingFor);
-		Router.go('pool', {slug: searchingFor, page: 1});
+		re = / /gi;
+		var trimmedSearch = searchingFor.replace(re, ''); // remove whitespace
+		Session.set('slug', trimmedSearch);
+		Router.go('pool', {slug: trimmedSearch, page: 1});
 	}
 });
 
