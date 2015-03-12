@@ -1,4 +1,10 @@
 <template name="spriteBox">
+	<!-- style hack prevents  -->
+	<style type="text/css">
+		body {
+			background-color: {{ backColor }}
+		}
+	</style>
 	<script>
 		var myImage = new Image();
 		myImage.src="{{ sprite.url store='OriginalPix' }}";
