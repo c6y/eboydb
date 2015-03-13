@@ -54,18 +54,19 @@
 			<ol>
 				<li><span class="property">id</span>: {{ sprite._id }}</li>
 				<li><span class="property">name</span>: {{ sprite.name }}</li>
-				<li><span class="property">date-added</span>: {{sprite.uploadedAt}}</li>
+				<li><span class="property">date</span>: {{ formatDate }}</li>
 				<li><span class="property">width</span>: {{sprite.metadata.width}}<span class="unit">px</span></li>
 				<li><span class="property">height</span>: {{sprite.metadata.height}}<span class="unit">px</span></li>
-				<li><span class="property">copyright</span>: {{sprite.metadata.copyright}}</li>
 				<li>
-				<span class="property">metadata.tags</span>: 
+				<li><span class="property">copyright</span>: {{sprite.metadata.copyright}}</li>
+				<li><span class="property">license</span>: {{sprite.metadata.license}}</li>
+				<span class="property">tags</span>: 
 					{{#each sprite.metadata.tags}}
 						<span class="tag">{{ this }}</span>
 					{{/each}}
 				</li>
-				<li><span class="property">background-color</span>: {{ sprite.metadata.backColor }}</li>
 				{{#if currentUser.profile.isEditor}}
+					<li><span class="property">background-color</span>: {{ sprite.metadata.backColor }}</li>
 					<li><span class="property">boxsize</span>: {{ boxsize }}<span class="unit">px</span></li>
 					<li><span class="property">scaledSprite-width</span>: {{ scaledSprite.width }}<span class="unit">px</span></li>
 					<li><span class="property">scaledSprite-height</span>: {{ scaledSprite.height	}}<span class="unit">px</span></li>

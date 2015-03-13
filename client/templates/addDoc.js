@@ -5,6 +5,7 @@ Template.addDoc.events({
 				var newFile = new FS.File(file);
 				newFile.metadata = {
 					copyright: '©eBoy',
+					license: 'CC BY-NC-ND 4.0',
 					backColor: defaultBackColor,
 					tags: ['sprite', 'ecity'],
 					uploadedBy: {id: Meteor.userId(), username: Meteor.user().profile.name}

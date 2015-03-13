@@ -35,6 +35,9 @@ Template.spriteBox.helpers({
 		// console.log('invHex: ' + invHex);
 		return invHex.toString();
 	},
+	'formatDate': function() {
+		return moment(this.sprite.uploadedAt).format('YYYY-MM-DD');
+	}
 });
 
 Template.spriteBox.events({

@@ -48,6 +48,15 @@ Template.docEdit.events({
 			}
 		}
 	},
+	'keypress input.editLicense': function (event) {
+		if (Meteor.user().profile.isEditor) {
+			if (event.which === 13) {
+				// event.preventDefault();
+				var license = event.currentTarget.value.toUpperCase();
+				Meteor.call('updateLicense', this._id, license);
+			}
+		}
+	},
 	'click .remove': function(event, template) {
 		if (Meteor.user().profile.isEditor) {
 			var thisTag = String(this);
