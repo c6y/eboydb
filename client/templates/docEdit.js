@@ -43,7 +43,11 @@ Template.docEdit.events({
 			if (event.which === 13) {
 				// event.preventDefault();
 				var updatedColor = event.currentTarget.value.toLowerCase();
-				var colorInHex = Meteor.myFunctions.colourNameToHex(updatedColor);
+
+				re = / /gi;
+				var trimmedColor = updatedColor.replace(re, ''); // remove whitespace
+				
+				var colorInHex = Meteor.myFunctions.colourNameToHex(trimmedColor);
 				Meteor.call('updateBackColor', this._id, colorInHex);
 			}
 		}
