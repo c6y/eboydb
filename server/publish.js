@@ -5,6 +5,7 @@ Meteor.publish('aPix', function(id) {
 	var options = {fields: {
 		'_id': 1,
 		'original.name': 1,
+		'original.size': 1,
 		'uploadedAt': 1,
 		'copies.OriginalPix.key': 1,
 		'metadata.width': 1,

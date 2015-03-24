@@ -20,6 +20,15 @@ Template.docEdit.helpers({
 		} else {
 			return defaultBackColor;
 		}	
+	},
+	'sizeFormatted': function() {
+		var str = this.formattedSize();
+		var strValue = str.substr(0, str.indexOf(' '));
+		var strUnit = str.substr(str.indexOf(' ') + 1);
+		return {
+			value: strValue,
+			unit: strUnit
+		}
 	}
 });
 

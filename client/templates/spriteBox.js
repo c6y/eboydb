@@ -37,6 +37,15 @@ Template.spriteBox.helpers({
 	},
 	'formatDate': function() {
 		return moment(this.sprite.uploadedAt).format('YYYY-MM-DD');
+	},
+	'sizeFormatted': function() {
+		var str = this.sprite.formattedSize();
+		var strValue = str.substr(0, str.indexOf(' '));
+		var strUnit = str.substr(str.indexOf(' ') + 1);
+		return {
+			value: strValue,
+			unit: strUnit
+		}
 	}
 });
 

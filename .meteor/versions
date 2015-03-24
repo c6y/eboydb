@@ -66,6 +66,7 @@ mongo@1.1.0
 mongo-livedata@1.0.8
 mrt:moment@2.8.1
 npm-bcrypt@0.7.8_1
+numeral:numeral@1.5.3
 oauth@1.1.4
 oauth2@1.1.3
 observe-sequence@1.0.5

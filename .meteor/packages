@@ -16,3 +16,4 @@ accounts-ui
 accounts-password
 cfs:gridfs
 accounts-github
+numeral:numeral
