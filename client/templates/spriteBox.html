@@ -5,49 +5,15 @@
 			background-color: {{ backColor }}
 		}
 	</style>
-	<script>
-		var myImage = new Image();
-		myImage.src="{{ sprite.url store='OriginalPix' }}";
-		myImage.onload = function() {
-			var c = document.getElementById("myCanvas");
-			var ctx = c.getContext("2d");
-			// ctx.fillStyle = "{{ backColor }}";
-			ctx.fillStyle = "rgba(0, 0, 0, 0.0)";;
-			ctx.fillRect(0, 0, {{ scaledSprite.widthDevice }}, {{ scaledSprite.heightDevice }});
-			ctx.mozImageSmoothingEnabled = false;
-			ctx.webkitImageSmoothingEnabled = false;
-			ctx.msImageSmoothingEnabled = false;
-			ctx.imageSmoothingEnabled = false;
-			ctx.drawImage(
-				myImage,
-				0,
-				0,
-				{{ scaledSprite.widthDevice }},
-				{{ scaledSprite.heightDevice }}
-			);
-	
-			// generate png from canvas
-			var foo = document.getElementById("genImg");
-			var dataURL = c.toDataURL("image/png");
-			// foo.src = imageGenerated;
-			{{#if currentUser.profile.isEditor}}
-				foo.href = dataURL;
-			{{/if}}
-		}
-	</script>
 	<div class="eboycopyright" style="color:{{ inverseBackColor }}">©eBoy</div>
 	<div class="spriteBoxInfoToggle" style="color:{{ inverseBackColor }}" onclick="">^</div>
 	<div class="contentbackground" style="background-color: {{ backColor }}">
 		<div class="spriteBoxImage">
 			<div>
 				<a href="" class="goBack">
-					<canvas id="myCanvas" width="{{ scaledSprite.widthDevice }}" height="{{ scaledSprite.heightDevice }}" style="width:{{ scaledSprite.width }}px; height: {{ scaledSprite.height }}px;	">
-						This browser does not support HTML5 canvas
-					</canvas>
+					<img src="{{ sprite.url }}" alt="{{ sprite.name }}" style="width:{{ scaledSprite.width }}px; height: {{ scaledSprite.height }}px;">
 				</a>
-			</div>
-			<!-- <img id="genImg" src="myPicture.png" alt="Description of my picture" /> -->
-			
+			</div>			
 		</div>
 		<div class="docMeta" id="spriteBoxInfo" style="display: {{ visibility }}">
 			<div class="spriteBoxInfoToggle" onclick="">X</div>

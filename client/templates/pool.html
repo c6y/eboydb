@@ -2,36 +2,6 @@
 	{{> mainHeader }}
 	<div class="container">
 		{{#each showPix}}
-
-			<script type="text/javascript">
-
-			// generate a new myThumb variable for each thumbnail
-			var varbase = 'myThumb';
-			this[varbase+'_{{ this._id }}'] = '{{ this._id }}';			
-			myThumb_{{ this._id }} = new Image();
-			myThumb_{{ this._id }}.src = "{{ this.url store='OriginalPix' }}";
-			// console.log('this.type: ' + '{{ this.type }}');
-			
-			myThumb_{{ this._id }}.onload = function() {
-				var canvas = document.getElementById('{{ this._id }}');
-				var context = canvas.getContext("2d");			
-				// context.fillStyle = '#999999'; //'{{ this.metadata.backColor }}';
-				// context.fillRect(0, 0, '{{ scaledSprite.widthDevice }}', '{{ scaledSprite.heightDevice }}');
-				context.mozImageSmoothingEnabled = false;
-				context.webkitImageSmoothingEnabled = false;
-				context.msImageSmoothingEnabled = false;
-				context.imageSmoothingEnabled = false;
-				context.drawImage(
-					myThumb_{{ this._id }},
-					{{ scaledSprite.offsetWidth }},
-					// 0,
-					{{ scaledSprite.offsetHeight }},
-					{{ scaledSprite.widthDevice }},
-					{{ scaledSprite.heightDevice }}
-				);
-			}
-			</script>
-
 			<div class="docbox" style="background-color: {{ backColor }}">
 				{{#if currentUser.profile.isEditor}}
 					<div class="docinfo"><span class='remove'>(×)</span>_
@@ -41,20 +11,11 @@
 					</div>
 				{{/if}}
 				<figure>
-					<!-- <a href="{{ pathFor 'spriteBox' boxsize='512' query=theSlug }}"> -->
-					<!-- <a href="#{{ this._id }}"> -->
 					<a href="{{ pathFor 'spriteBox' boxsize='512'}}">
-						<canvas id='{{ this._id }}'
-							width="{{ scaledSprite.tnWidthDevice }}"
-							height="{{ scaledSprite.tnHeightDevice }}"
-							style="width:{{ scaledSprite.tnWidth }}px; height: {{ scaledSprite.tnHeight }}px;">
-								This browser does not support HTML5 canvas
-						</canvas>
+						<img src="{{ this.url }}" style="width:{{ scaledSprite.width }}px; height: {{ scaledSprite.height }}px;" alt="{{ this.name }}">
 					</a>
 				</figure>
 			</div>
-			
 		{{/each}}
-
 	</div>
 </template>
