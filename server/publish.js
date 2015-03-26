@@ -19,19 +19,21 @@ Meteor.publish('aPix', function(id) {
 	return MyPix.find(selector, options);
 });
 
-Meteor.publish('PixQuery', function(slug, page) {
+Meteor.publish('PixQuery', function(slug, page, query) {
 
-	var taglabel = /^t\../;
-	var namelabel = /^n\../;
+	if (query.q == 'tag') {
 
-	if (slug.match(taglabel)) {
-		var tagSearch = slug.substr(2);
+		var tagSearch = slug;
 		var selector = {"metadata.tags" : tagSearch};
-	} else if (slug.match(namelabel)){
-		var nameSearch = slug.substr(2);
+
+	} else if (query.q == 'name'){
+
+		var nameSearch = slug;
 		var reg = RegExp(nameSearch, 'i', 's');
 		var selector = {"original.name" : {$regex: reg}};
+
 	} else {
+
 		var reg = RegExp(slug, 'i', 's');
 		var selector = {
 			$or: [
