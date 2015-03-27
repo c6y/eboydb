@@ -53,9 +53,10 @@ Template.pagingHeader.events({
 		event.preventDefault();
 		var currentPage = Number(Router.current().params.page);
 		var currentSlug = Router.current().params.slug;
+		var thisQuery = Router.current().params.query;
 		if (currentPage > 1) {
 			var previousPage = currentPage - 1;
-			Router.go('pool', {slug: currentSlug, page: previousPage});
+			Router.go('pool', {slug: currentSlug, page: previousPage}, {query: thisQuery});
 		}
 	},
 	'click .next': function(event, template) {
@@ -63,9 +64,10 @@ Template.pagingHeader.events({
 		var currentPage = Number(Router.current().params.page);
 		var maxPages = Math.ceil(Counts.get('numberOfFinds') / displayQty);
 		var currentSlug = Router.current().params.slug;
+		var thisQuery = Router.current().params.query;
 		if (currentPage < maxPages) {
 			var nextPage = currentPage + 1;
-			Router.go('pool', {slug: currentSlug, page: nextPage});
+			Router.go('pool', {slug: currentSlug, page: nextPage}, {query: thisQuery});
 		}
 	}
 });
