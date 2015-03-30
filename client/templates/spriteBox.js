@@ -63,10 +63,10 @@ Template.spriteBox.events({
 	},
 	'click .spriteBoxClose': function(event) {
 
-		if (document.referrer == "") {
-    	Router.go('pool', {slug: "all", page: 1});
-		} else {
+		if (document.referrer != "") {
     	history.back()
+		} else {
+    	Router.go('pool', {slug: "all", page: 1});
 		}
 	}
 });
