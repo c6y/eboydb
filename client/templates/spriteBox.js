@@ -63,10 +63,12 @@ Template.spriteBox.events({
 	},
 	'click .spriteBoxClose': function(event) {
 
-		if (document.referrer != "") {
-    	history.back()
+		if (Session.get("onPool")) {
+			// console.log('visited pool before: ', Session.get("onPool"));
+			history.back()
 		} else {
-    	Router.go('pool', {slug: "all", page: 1});
+			// console.log('pool not visited before');
+			Router.go('pool', {slug: "all", page: 1});
 		}
 	}
 });
