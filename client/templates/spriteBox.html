@@ -8,10 +8,10 @@
 	<div class="eboycopyright" style="color:{{ inverseBackColor }}">©eBoy</div>
 	<div class="spriteBoxInfoToggle" style="color:{{ inverseBackColor }}" onclick="">^</div>
 	<div class="contentbackground" style="background-color: {{ backColor }}">
-		<div class="spriteBoxImage">
-			<a href="" class="goBack">
+		<div class="spriteBoxFull">
+			<div class="spriteBoxClose">
 				<img src="{{ sprite.url }}" alt="{{ sprite.name }}" style="width:{{ scaledSprite.width }}px; height: {{ scaledSprite.height }}px;">
-			</a>
+			</div>
 		</div>
 		<div class="docMeta" id="spriteBoxInfo" style="display: {{ visibility }}">
 			<div class="spriteBoxInfoToggle" onclick="">X</div>
@@ -19,8 +19,7 @@
 				<li><span class="property">id</span>: {{ sprite._id }}</li>
 				<li><span class="property">name</span>: {{ sprite.name }}</li>
 				<li><span class="property">date</span>: {{ formatDate }}</li>
-				<li><span class="property">width</span>: {{sprite.metadata.width}}<span class="unit">px</span></li>
-				<li><span class="property">height</span>: {{sprite.metadata.height}}<span class="unit">px</span></li>
+				<li><span class="property">dimensions w/h</span>: {{sprite.metadata.width}}<span class="unit">px</span>/{{sprite.metadata.height}}<span class="unit">px</span></li>
 				<li><span class="property">size</span>: {{sizeFormatted.value}}<span class="unit">{{sizeFormatted.unit}}</span></li>
 				<li>
 				<li><span class="property">copyright</span>: {{sprite.metadata.copyright}}</li>
@@ -33,13 +32,12 @@
 				{{#if currentUser.profile.isEditor}}
 					<li><span class="property">background-color</span>: {{ sprite.metadata.backColor }}</li>
 					<li><span class="property">boxsize</span>: {{ boxsize }}<span class="unit">px</span></li>
-					<li><span class="property">scaledSprite-width</span>: {{ scaledSprite.width }}<span class="unit">px</span></li>
-					<li><span class="property">scaledSprite-height</span>: {{ scaledSprite.height	}}<span class="unit">px</span></li>
-					<li><span class="property">scaledSprite-scaleFactor</span>: {{ scaledSprite.scaleFactor }}x</li>
+					<li><span class="property">window w/h</span>: {{ scaledSprite.widthWindow }}<span class="unit">px</span>/{{ scaledSprite.heightWindow }}<span class="unit">px</span></li>
+					<li><span class="property">scaledSprite w/h</span>: {{ scaledSprite.width }}<span class="unit">px</span>/{{ scaledSprite.height	}}<span class="unit">px</span></li>
+					<li><span class="property">scaledSprite-scaleFactor</span>: {{ scaledSprite.scaleFactor }}×</li>
 					<li><span class="property">window-devicePixelRatio</span>: {{ devicePixelRatio }} </li>
-					<li><span class="property">scaledSprite-widthDevice</span>: {{ scaledSprite.widthDevice }}<span class="unit">px</span></li>
-					<li><span class="property">scaledSprite-heightDevice</span>: {{ scaledSprite.heightDevice }}<span class="unit">px</span></li>
-					<li><span class="property">scaledSprite-scaleFactorDevice</span>: {{ 	scaledSprite.scaleFactorDevice }}x</li>
+					<li><span class="property">scaledSprite-Device w/h</span>: {{ scaledSprite.widthDevice }}<span class="unit">px</span>/{{ scaledSprite.heightDevice }}<span class="unit">px</span></li>
+					<li><span class="property">scaledSprite-scaleFactorDevice</span>: {{ 	scaledSprite.scaleFactorDevice }}×</li>
 					<li><span class="property">uploadedBy.id</span>: {{sprite.metadata.uploadedBy.id}}</li>
 					<li><span class="property">uploadedBy.username</span>: {{sprite.metadata.uploadedBy.username}}</li>
 				{{/if}}

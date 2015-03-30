@@ -11,6 +11,8 @@ Template.spriteBox.helpers({
 			width: dimensionsTo.width,
 			height: dimensionsTo.height,
 			scaleFactor: dimensionsTo.factor,
+			widthWindow: window.innerWidth,
+			heightWindow: window.innerHeight,
 			widthDevice: dimensionsTo.width * window.devicePixelRatio,
 			heightDevice: dimensionsTo.height * window.devicePixelRatio,
 			scaleFactorDevice: dimensionsTo.factor * window.devicePixelRatio
@@ -59,7 +61,12 @@ Template.spriteBox.events({
 			Session.set('displaySpriteBoxInfo' + this.sprite._id, 'block');
 		};
 	},
-	'click .goBack': function(event) {
-		history.back();
+	'click .spriteBoxClose': function(event) {
+
+		if (document.referrer == "") {
+    	Router.go('pool', {slug: "all", page: 1});
+		} else {
+    	history.back()
+		}
 	}
 });
