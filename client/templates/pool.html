@@ -1,5 +1,6 @@
 <template name="pool">
 	{{> mainHeader }}
+	{{ devicePixelRatio }}
 	<div class="container">
 		{{#each showPix}}
 			<div class="docbox" style="background-color: {{ backColor }}">
@@ -12,7 +13,7 @@
 				{{/if}}
 				<figure>
 					<a href="{{ pathFor 'spriteBox' boxsize='600'}}">
-						<img src="{{ this.url }}" style="width:{{ scaledSprite.width }}px; height: {{ scaledSprite.height }}px;" alt="{{ this.name }}">
+						<img src="{{ this.url }}" style="width:{{ scaledSprite.width }}px; height: {{ scaledSprite.height }}px;{{ scaledSprite.antialiasing }}" alt="{{ this.name }}">
 					</a>
 				</figure>
 			</div>

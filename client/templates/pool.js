@@ -5,6 +5,10 @@ Template.pool.helpers({
 		var widthMax = thumbnailDimension + thumbnailBleed;
 		var dimensionsTo = Meteor.myFunctions.scaleToByInt(widthOriginal, heightOriginal, widthMax);
 
+
+
+
+ 
 		// remove unnecessary canvas area around thumbnail 
 		var thumbnailMaxHeight = Math.min(dimensionsTo.height, thumbnailDimension);
 		var thumbnailMaxWidth = Math.min(dimensionsTo.width, thumbnailDimension * 2); // because css Flexbox set to stretch 2x
@@ -19,6 +23,9 @@ Template.pool.helpers({
 		} else {
 			var widthOffset = 0;
 		}
+
+
+
 		return {
 			width: dimensionsTo.width,
 			height: dimensionsTo.height,
@@ -35,6 +42,7 @@ Template.pool.helpers({
 			tnWidthDevice: thumbnailMaxWidth * window.devicePixelRatio,
 			tnHeightDevice: thumbnailMaxHeight * window.devicePixelRatio,
 			// thumbnailHeightDevice: thumbnailDimension * window.devicePixelRatio,
+			antialiasing: dimensionsTo.antialiase
 		}
 	},
 	'showPix': function() {
@@ -50,6 +58,9 @@ Template.pool.helpers({
 	'theSlug': function() {
 		return 'q=' + Router.current().params.slug;
 	},
+	'devicePixelRatio': function() {
+		return window.devicePixelRatio;
+	}
 })
 
 Template.pool.events({
