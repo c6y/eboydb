@@ -42,7 +42,6 @@ Template.pool.helpers({
 			tnWidthDevice: thumbnailMaxWidth * window.devicePixelRatio,
 			tnHeightDevice: thumbnailMaxHeight * window.devicePixelRatio,
 			// thumbnailHeightDevice: thumbnailDimension * window.devicePixelRatio,
-			antialiasing: dimensionsTo.antialiase
 		}
 	},
 	'showPix': function() {
@@ -58,9 +57,6 @@ Template.pool.helpers({
 	'theSlug': function() {
 		return 'q=' + Router.current().params.slug;
 	},
-	'devicePixelRatio': function() {
-		return window.devicePixelRatio;
-	}
 })
 
 Template.pool.events({
