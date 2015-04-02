@@ -5,12 +5,22 @@ Template.spriteBox.helpers({
 	'scaledSprite': function () {
 		var widthOriginal = this.sprite.metadata.width;
 		var heightOriginal = this.sprite.metadata.height;
-		var widthMax =  this.boxsize; //zoomDimension;
-		var dimensionsTo = Meteor.myFunctions.scaleToByInt(widthOriginal, heightOriginal, widthMax);
+		
+		var borderFactor = 0.9; // 1 is will cover the whole area, no borders
+		var widthMax =  this.boxwidth * borderFactor; //zoomDimension;
+		var heightMax =  this.boxheight * borderFactor; //zoomDimension;
+
+		var dimensionsTo = Meteor.myFunctions.scaleByIntToFit(
+			widthOriginal,
+			heightOriginal,
+			widthMax,
+			heightMax);
+		
 		return {
 			width: dimensionsTo.width,
 			height: dimensionsTo.height,
 			scaleFactor: dimensionsTo.factor,
+
 			widthWindow: window.innerWidth,
 			heightWindow: window.innerHeight,
 			widthDevice: dimensionsTo.width * window.devicePixelRatio,
