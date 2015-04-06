@@ -7,6 +7,7 @@
 @editorBorderColor: 1px solid #333326;
 @editorHighlight: #D39322;
 @unitColor: #E42669;
+@deleteHighlight: white;
 
 html {
 	height: 100%;
@@ -203,9 +204,15 @@ img {
 			text-decoration: none;
 		}
 		.remove {
-			color: @editorColor;
-			background-color: @editorBackColor;
-			padding: 2px 4px;
+		padding: 0px;
+		opacity: 0.4;
+		padding: 2px 4px;
+			cursor: pointer;
+		}
+		.remove:hover {
+			color: @deleteHighlight;
+			opacity: 1;
+			cursor: pointer;
 		}
 	}
 	.docbox {
@@ -316,7 +323,7 @@ img {
 		opacity: 0.4;
 	}
 	.remove:hover {
-		color: @editorHighlight;
+		color: @deleteHighlight;
 		opacity: 1;
 		cursor: pointer;
 	}

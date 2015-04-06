@@ -62,9 +62,11 @@ Template.pool.helpers({
 Template.pool.events({
 	'click .remove': function(event, template) {
 		if (Meteor.user().profile.isEditor) {
-			console.log("Removing \"" + this._id + "\"");
-			thisId = this._id;
-			Meteor.call('deleteDocument', thisId);
+			if (confirm("Delete Document: " + this._id)) {
+				console.log("Removing \"" + this._id + "\"");
+				thisId = this._id;
+				Meteor.call('deleteDocument', thisId);
+			}
 		}
 	},
 })
