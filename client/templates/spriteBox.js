@@ -40,7 +40,7 @@ Template.spriteBox.helpers({
 			return this.sprite.metadata.backColor;
 		} else {
 			return defaultBackColor;
-		}	
+		}
 	},
 	'inverseBackColor': function() {
 		invHex =  Meteor.myFunctions.inverseHex(this.sprite.metadata.backColor);
@@ -58,6 +58,16 @@ Template.spriteBox.helpers({
 			value: strValue,
 			unit: strUnit
 		}
+	},
+	'olderDoc': function() {
+		var olderDocument = MyPix.findOne({}, {sort: {uploadedAt: 1}});
+		console.log('olderDocument._id: ' + olderDocument._id);
+		return olderDocument._id;
+	},
+	'newerDoc': function() {
+		var newerDocument = MyPix.findOne({}, {sort: {uploadedAt: -1}});
+		console.log('newerDocument._id: ' + newerDocument._id);
+		return newerDocument._id;
 	}
 });
 

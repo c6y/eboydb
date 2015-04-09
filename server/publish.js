@@ -1,7 +1,54 @@
 Meteor.publish('aPix', function(id) {
 	check(id, String);
-	var selector = id;
-	// limit fields to be published
+	
+	// get the date of document
+	var date = MyPix.findOne(id).uploadedAt;
+	console.log('date: ' + date);
+
+	// total number of documents
+	var total = MyPix.find().count();
+	console.log('total: ' + total);
+
+	// show how many documents have been uploaded before
+	var foo = {"uploadedAt": { "$lt" : date}};
+	var index = MyPix.find(foo).count();
+	console.log('index: ' + index);
+
+	// set filter to sort by date and skip to next document
+	var nextIndex = index + 1;
+	var filterNext = {
+		sort: {uploadedAt: 1},
+		skip: nextIndex
+	};
+	if (total > nextIndex) {
+		var newerDocId = MyPix.findOne({}, filterNext)._id;
+	} else {
+		var newerDocId = false;
+	}
+	
+	// set filter to sort by date and skip to previous document
+	var prevIndex = index - 1;
+	var filterPrevious = {
+		sort: {uploadedAt: 1},
+		skip: prevIndex
+	};
+	if (prevIndex > 0) {
+		var olderDocId = MyPix.findOne({}, filterPrevious)._id;
+	} else {
+		var olderDocId = false;
+	}
+
+	console.log('olderDocId: ' + olderDocId);
+	console.log('id: ' + id);
+	console.log('newerDocId: ' + newerDocId + '\n');
+
+	var selector = {'_id': { $in: [
+		olderDocId,
+		id,
+		newerDocId
+	]}}
+
+		// limit fields to be published
 	var options = {fields: {
 		'_id': 1,
 		'original.name': 1,
@@ -16,6 +63,7 @@ Meteor.publish('aPix', function(id) {
 		'metadata.license': 1,
 		'metadata.uploadedBy': 1,
 	}};
+
 	return MyPix.find(selector, options);
 });
 
