@@ -61,12 +61,10 @@ Template.spriteBox.helpers({
 	},
 	'olderDoc': function() {
 		var olderDocument = MyPix.findOne({}, {sort: {uploadedAt: 1}});
-		console.log('olderDocument._id: ' + olderDocument._id);
 		return olderDocument._id;
 	},
 	'newerDoc': function() {
 		var newerDocument = MyPix.findOne({}, {sort: {uploadedAt: -1}});
-		console.log('newerDocument._id: ' + newerDocument._id);
 		return newerDocument._id;
 	}
 });
@@ -82,13 +80,29 @@ Template.spriteBox.events({
 		};
 	},
 	'click .spriteBoxClose': function(event) {
+		var theSlug = Session.get('poolSlug');
+		var thePage = Session.get('poolPage');
 
-		if (Session.get("onPool")) {
-			// console.log('visited pool before: ', Session.get("onPool"));
-			history.back()
+		if (Session.get('poolQuery')) {
+			var queryString = 'q=' + Session.get('poolQuery');
+			var queryObject = {query: queryString}; 
 		} else {
-			// console.log('pool not visited before');
+			var queryObject = false;
+		}		
+
+		if (Session.get("poolSlug")) {
+			Router.go('pool', {slug: theSlug, page: thePage}, queryObject);
+		} else {
 			Router.go('pool', {slug: "all", page: 1});
 		}
+
+	},
+	'click .goNewerDoc': function(event) {
+		var newerDocument = MyPix.findOne({}, {sort: {uploadedAt: -1}});
+		Router.go('spriteBox', {_id: newerDocument._id, boxsize: 'auto'});
+	},
+	'click .goOlderDoc': function(event) {
+		var olderDocument = MyPix.findOne({}, {sort: {uploadedAt: 1}});
+		Router.go('spriteBox', {_id: olderDocument._id, boxsize: 'auto'});
 	}
 });

@@ -1,5 +1,3 @@
-// Session.setDefault('searchJumpOff', Router.current().route.url);
-
 Template.mainHeader.helpers({
 	name: function () {
 		return siteName;
@@ -33,17 +31,14 @@ Template.searchPool.events({
 
 		if (trimmedSearch.match(taglabel)) {
 			var tagSearch = trimmedSearch.substr(2);
-			// Session.set('slug', tagSearch);
 			Router.go('pool', {slug: tagSearch, page: 1}, {query: 'q=tag'});
 
 		} else if (trimmedSearch.match(namelabel)) {
 			var nameSearch = trimmedSearch.substr(2);
-			// Session.set('slug', nameSearch);
 			Router.go('pool', {slug: nameSearch, page: 1}, {query: 'q=name'});
 
 		} else {
 			Router.go('pool', {slug: trimmedSearch, page: 1});
-			// Session.set('slug', trimmedSearch);
 		}
 	}
 });

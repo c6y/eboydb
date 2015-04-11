@@ -9,7 +9,7 @@ Meteor.publish('aPix', function(id) {
 	var total = MyPix.find().count();
 	console.log('total: ' + total);
 
-	// show how many documents have been uploaded before
+	// get number of documents that have been uploaded before
 	var foo = {"uploadedAt": { "$lt" : date}};
 	var index = MyPix.find(foo).count();
 	console.log('index: ' + index);
@@ -32,7 +32,7 @@ Meteor.publish('aPix', function(id) {
 		sort: {uploadedAt: 1},
 		skip: prevIndex
 	};
-	if (prevIndex > 0) {
+	if (prevIndex >= 0) {
 		var olderDocId = MyPix.findOne({}, filterPrevious)._id;
 	} else {
 		var olderDocId = false;

@@ -5,7 +5,11 @@
 			background-color: {{ backColor }}
 		}
 	</style>
-	<div class="eboycopyright" style="color:{{ inverseBackColor }}">{{ olderDoc }}&lt; ©eBoy &gt;{{ newerDoc }}</div>
+	<div class="eboycopyright" style="color:{{ inverseBackColor }}">
+		<span class="goNewerDoc">&lt;</span>
+		©eBoy
+		<span class="goOlderDoc">&gt;</span>
+	</div>
 	<div class="spriteBoxInfoToggle" style="color:{{ inverseBackColor }}" onclick="">^</div>
 	<div class="contentbackground" style="background-color: {{ backColor }}">
 		<div class="spriteBoxFull">

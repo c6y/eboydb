@@ -47,10 +47,7 @@ Template.pool.helpers({
 		} else {
 			return defaultBackColor;
 		}	
-	},
-	'theSlug': function() {
-		return 'q=' + Router.current().params.slug;
-	},
+	}
 })
 
 Template.pool.events({
@@ -63,4 +60,18 @@ Template.pool.events({
 			}
 		}
 	},
+	'click .leavePool': function(event, template) {
+			var poolSlug = Router.current().params.slug;
+			Session.set('poolSlug', poolSlug);
+
+			var poolPage = Router.current().params.page;
+			Session.set('poolPage', poolPage);
+
+			if (Router.current().params.query.q) {
+				var poolQuery = Router.current().params.query.q;
+			} else {
+				var poolQuery = false;
+			};
+			Session.set('poolQuery', poolQuery);
+	}
 })
