@@ -132,7 +132,7 @@ img {
 			padding: 0px;
 			cursor: pointer;
 			opacity: 0.0;
-			filter: alpha(opacity=0);
+			// filter: alpha(opacity=0);
 		}
 	}
 
@@ -272,27 +272,75 @@ img {
 		z-index: 0;
 		text-align: center;
 		display: table;
+
 		.spriteBoxClose {
 			display: table-cell;
 			vertical-align: middle;
+			cursor: pointer;
+		}
+
+		.spriteBoxClose img {
+			 -webkit-animation: fadein 0.3s ease forwards;
+		}
+
+		.spriteBoxClose .fadein {
+			 opacity: 1.0;
+		}
+
+		@-webkit-keyframes fadein {
+     from {
+     	opacity: 0;
+     	// transform: rotate(-720deg);
+     }
+     to {
+     	opacity: 1.0;
+     	// transform: rotate(0deg);
+     }
 		}
 	}
+}
+
+.goOlderDoc, .goNewerDoc {
+	position: fixed;
+	height: 100%;
+	cursor: pointer;
+	opacity: 0;
+	z-index: 10;
+	transform: translateZ(0);
+	display: table;
+	.navButton {
+		font-size: 2em;
+		display: table-cell;
+		vertical-align: middle;
+		padding: 24px;
+		-webkit-filter: invert(100%);
+	}
+}
+
+.goOlderDoc:hover, .goNewerDoc:hover {
+	opacity: 1;
+}
+
+.goOlderDoc {
+	right: 0px;
 }
 
 .eboycopyright {
 	position: fixed;
 	right: 0px;
 	padding: 6px 12px;
-	.goOlderDoc, .goNewerDoc {
-		cursor: pointer;
-	}
+	z-index: 20;
+	-webkit-filter: invert(100%);
 }
 
 .spriteBoxInfoToggle {
+	cursor: pointer;
 	position: fixed;
 	right: 0px;
 	bottom: 0px;
 	padding: 6px 12px;
+	z-index: 12;
+	-webkit-filter: invert(100%);
 }
 
 .docMeta {
@@ -303,7 +351,7 @@ img {
 	left: 0px;
 	bottom: 0px;
 	position: fixed;
-	z-index: 5;
+	z-index: 15;
 	width: 100%;
 	.property {
 		color: @editorHighlight;

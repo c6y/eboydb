@@ -98,10 +98,12 @@ Template.spriteBox.events({
 
 	},
 	'click .goNewerDoc': function(event) {
+		event.preventDefault();
 		var newerDocument = MyPix.findOne({}, {sort: {uploadedAt: -1}});
 		Router.go('spriteBox', {_id: newerDocument._id, boxsize: 'auto'});
 	},
 	'click .goOlderDoc': function(event) {
+		event.preventDefault();
 		var olderDocument = MyPix.findOne({}, {sort: {uploadedAt: 1}});
 		Router.go('spriteBox', {_id: olderDocument._id, boxsize: 'auto'});
 	}

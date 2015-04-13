@@ -1,20 +1,29 @@
 <template name="spriteBox">
 	<!-- style hack prevents  -->
 	<style type="text/css">
-		body {
-			background-color: {{ backColor }}
+		html {
+			background-color: {{ backColor }};
+			color: {{ backColor }};
 		}
 	</style>
-	<div class="eboycopyright" style="color:{{ inverseBackColor }}">
-		<span class="goNewerDoc">&lt;</span>
-		©eBoy
-		<span class="goOlderDoc">&gt;</span>
+	<div class="goNewerDoc">
+		<span class="navButton">
+			&#x25c0;
+		</span>
 	</div>
-	<div class="spriteBoxInfoToggle" style="color:{{ inverseBackColor }}" onclick="">^</div>
+	<div class="goOlderDoc">
+		<span class="navButton">
+			&#x25b6;
+		</span>
+	</div>
+	<div class="eboycopyright">
+		©eBoy
+	</div>
+	<div class="spriteBoxInfoToggle" onclick="">^</div>
 	<div class="contentbackground" style="background-color: {{ backColor }}">
 		<div class="spriteBoxFull">
 			<div class="spriteBoxClose">
-				<img src="{{ sprite.url }}" alt="{{ sprite.name }}" style="width:{{ scaledSprite.width }}px; height: {{ scaledSprite.height }}px;">
+				<img class="fadein" src="{{ sprite.url }}" alt="{{ sprite.name }}" style="width:{{ scaledSprite.width }}px; height: {{ scaledSprite.height }}px;">
 			</div>
 		</div>
 		<div class="docMeta" id="spriteBoxInfo" style="display: {{ visibility }}">
