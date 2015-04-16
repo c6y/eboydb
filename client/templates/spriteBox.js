@@ -3,6 +3,7 @@ Template.spriteBox.helpers({
 		return window.devicePixelRatio;
 	},
 	'scaledSprite': function () {
+
 		var widthOriginal = this.sprite.metadata.width;
 		var heightOriginal = this.sprite.metadata.height;
 		

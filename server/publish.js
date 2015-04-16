@@ -1,39 +1,48 @@
-Meteor.publish('aPix', function(id) {
+Meteor.publish('aPix', function(id, slug, query) {
 	check(id, String);
 	
+	console.log('id: ' + id);
+	console.log('slug: ' + slug);
+	console.log('query: ' + query);
+
 	// get the date of document
 	var date = MyPix.findOne(id).uploadedAt;
 	console.log('date: ' + date);
 
 	// total number of documents
-	var total = MyPix.find().count();
+	var total = MyPix.find({"metadata.tags" : slug}).count();
 	console.log('total: ' + total);
 
 	// get number of documents that have been uploaded before
-	var foo = {"uploadedAt": { "$lt" : date}};
+	var foo = {
+		"metadata.tags" : slug,
+		"uploadedAt": { "$lt" : date}
+	};
 	var index = MyPix.find(foo).count();
 	console.log('index: ' + index);
 
-	// set filter to sort by date and skip to next document
+	// set filter to sort by date and get next document id
 	var nextIndex = index + 1;
 	var filterNext = {
 		sort: {uploadedAt: 1},
 		skip: nextIndex
 	};
 	if (total > nextIndex) {
-		var newerDocId = MyPix.findOne({}, filterNext)._id;
+		var newerDoc = MyPix.findOne({"metadata.tags" : slug}, filterNext);
+		var newerDocId = newerDoc._id;
 	} else {
 		var newerDocId = false;
 	}
 	
-	// set filter to sort by date and skip to previous document
+	// set filter to sort by date and get previous document id
 	var prevIndex = index - 1;
 	var filterPrevious = {
 		sort: {uploadedAt: 1},
 		skip: prevIndex
 	};
 	if (prevIndex >= 0) {
-		var olderDocId = MyPix.findOne({}, filterPrevious)._id;
+		var olderDoc = MyPix.findOne({"metadata.tags" : slug}, filterPrevious);
+		var olderDocId = olderDoc._id;
 	} else {
 		var olderDocId = false;
 	}
@@ -46,9 +55,9 @@ Meteor.publish('aPix', function(id) {
 		olderDocId,
 		id,
 		newerDocId
-	]}}
+	]}};
 
-		// limit fields to be published
+	// limit fields to be published
 	var options = {fields: {
 		'_id': 1,
 		'original.name': 1,
@@ -66,6 +75,7 @@ Meteor.publish('aPix', function(id) {
 
 	return MyPix.find(selector, options);
 });
+
 
 Meteor.publish('PixQuery', function(slug, page, query) {
 
