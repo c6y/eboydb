@@ -4,54 +4,47 @@ Meteor.publish('aPix', function(id, slug, query) {
 	// get the date of document
 	var docDate = MyPix.findOne(id).uploadedAt;
 
+	// check if slug is part of array that contain aliases that will get everything
+	// the aliasesForFullSearch array is defined in environment.js
+	if (aliasesForFullSearch.indexOf(slug) > -1) {
+		slug = '.*';
+	}
+
+	var reg = RegExp(slug, 'i', 's');
+	var slugReg = {$regex: reg};
+
 	// check kind of query (tag, name or none)
 	// set to search in name AND tags if there's no query
 	if (query == 'tag') {
-		var preSelector = {"metadata.tags" : slug};
-		var total = MyPix.find(preSelector).count();
-		var selectOlder = {
+		var selectorGetTotal = {"metadata.tags" : slug};
+		var selectorGetOlder = {
 			"metadata.tags" : slug,
 			"uploadedAt": {"$lt" : docDate}
 		};
-		var index = MyPix.find(selectOlder).count();
 	} else if (query == 'name') {
-		var searchKey = "original.name";
-		var reg = RegExp(slug, 'i', 's');
-		var preSelector = {"original.name" : {$regex: reg}};
-		var total = MyPix.find(preSelector).count();
-		var selectOlder = {
-			"original.name" : {$regex: reg},
+		var selectorGetTotal = {"original.name" : slugReg};
+		var selectorGetOlder = {
+			"original.name" : slugReg,
 			"uploadedAt": {"$lt" : docDate}
 		};
-		var index = MyPix.find(selectOlder).count();
 	} else {
-		console.log('no query set');
-		query = false;
-		var reg = RegExp(slug, 'i', 's');
-		var preSelector = {
+		var selectorGetTotal = {
 			$or: [
-				{"metadata.tags" : {$regex: reg}},
-				{"original.name" : {$regex: reg}}
+				{"metadata.tags" : slugReg},
+				{"original.name" : slugReg}
 			]
 		}
-		var total = MyPix.find(preSelector).count();
-		var selectOlder = {
+		var selectorGetOlder = {
 			$or: [
-				{"metadata.tags" : {$regex: reg}},
-				{"original.name" : {$regex: reg}}
+				{"metadata.tags" : slugReg},
+				{"original.name" : slugReg}
 			],
 			"uploadedAt": {"$lt" : docDate}
 		};
-		var index = MyPix.find(selectOlder).count();
 	}
 
-
-	console.log('id: ' + id);
-	console.log('docDate: ' + docDate);
-	console.log('slug: ' + slug);
-	console.log('query: ' + query);
-	console.log('total: ' + total);
-	console.log('index: ' + index);
+	var total = MyPix.find(selectorGetTotal).count();
+	var index = MyPix.find(selectorGetOlder).count();
 
 	// set filter to sort by date and get next document id
 	var nextIndex = index + 1;
@@ -61,7 +54,7 @@ Meteor.publish('aPix', function(id, slug, query) {
 		skip: nextIndex
 	};
 	if (total > nextIndex) {
-		var newerDoc = MyPix.findOne(preSelector, filterNext);
+		var newerDoc = MyPix.findOne(selectorGetTotal, filterNext);
 		var newerDocId = newerDoc._id;
 	} else {
 		var newerDocId = false;
@@ -74,20 +67,22 @@ Meteor.publish('aPix', function(id, slug, query) {
 		skip: prevIndex
 	};
 	if (prevIndex >= 0) {
-		var olderDoc = MyPix.findOne(preSelector, filterPrevious);
+		var olderDoc = MyPix.findOne(selectorGetTotal, filterPrevious);
 		var olderDocId = olderDoc._id;
 	} else {
 		var olderDocId = false;
 	}
 
-	console.log('olderDocId: ' + olderDocId);
-	console.log('id: ' + id);
-	console.log('newerDocId: ' + newerDocId + '\n');
+	// console.log('id: ' + id);
+	// console.log('docDate: ' + docDate);
+	// console.log('slug: ' + slug);
+	// console.log('query: ' + query);
+	// console.log('total: ' + total);
+	// console.log('index: ' + index);
+	// console.log('olderDocId: ' + olderDocId);
+	// console.log('newerDocId: ' + newerDocId + '\n');
 
-
-
-	// get the 3 specific docs
-
+	// get the previous, main and next document
 	var selector = {'_id': { $in: [
 		olderDocId,
 		id,
@@ -114,34 +109,16 @@ Meteor.publish('aPix', function(id, slug, query) {
 });
 
 
-
-
-
-
-
-
-
-
 Meteor.publish('PixQuery', function(slug, page, query) {
 
-
-
-
-
-
 	if (query.q == 'tag') {
-
 		var tagSearch = slug;
 		var selector = {"metadata.tags" : tagSearch};
-
 	} else if (query.q == 'name'){
-
 		var nameSearch = slug;
 		var reg = RegExp(nameSearch, 'i', 's');
 		var selector = {"original.name" : {$regex: reg}};
-
 	} else {
-
 		var reg = RegExp(slug, 'i', 's');
 		var selector = {
 			$or: [
@@ -150,9 +127,6 @@ Meteor.publish('PixQuery', function(slug, page, query) {
 			]
 		}
 	}
-
-
-
 
 	cursor = (displayQty * page) - displayQty;
 
