@@ -1,34 +1,67 @@
 Meteor.publish('aPix', function(id, slug, query) {
 	check(id, String);
 	
+	// get the date of document
+	var docDate = MyPix.findOne(id).uploadedAt;
+
+	// check kind of query (tag, name or none)
+	// set to search in name AND tags if there's no query
+	if (query == 'tag') {
+		var preSelector = {"metadata.tags" : slug};
+		var total = MyPix.find(preSelector).count();
+		var selectOlder = {
+			"metadata.tags" : slug,
+			"uploadedAt": {"$lt" : docDate}
+		};
+		var index = MyPix.find(selectOlder).count();
+	} else if (query == 'name') {
+		var searchKey = "original.name";
+		var reg = RegExp(slug, 'i', 's');
+		var preSelector = {"original.name" : {$regex: reg}};
+		var total = MyPix.find(preSelector).count();
+		var selectOlder = {
+			"original.name" : {$regex: reg},
+			"uploadedAt": {"$lt" : docDate}
+		};
+		var index = MyPix.find(selectOlder).count();
+	} else {
+		console.log('no query set');
+		query = false;
+		var reg = RegExp(slug, 'i', 's');
+		var preSelector = {
+			$or: [
+				{"metadata.tags" : {$regex: reg}},
+				{"original.name" : {$regex: reg}}
+			]
+		}
+		var total = MyPix.find(preSelector).count();
+		var selectOlder = {
+			$or: [
+				{"metadata.tags" : {$regex: reg}},
+				{"original.name" : {$regex: reg}}
+			],
+			"uploadedAt": {"$lt" : docDate}
+		};
+		var index = MyPix.find(selectOlder).count();
+	}
+
+
 	console.log('id: ' + id);
+	console.log('docDate: ' + docDate);
 	console.log('slug: ' + slug);
 	console.log('query: ' + query);
-
-	// get the date of document
-	var date = MyPix.findOne(id).uploadedAt;
-	console.log('date: ' + date);
-
-	// total number of documents
-	var total = MyPix.find({"metadata.tags" : slug}).count();
 	console.log('total: ' + total);
-
-	// get number of documents that have been uploaded before
-	var foo = {
-		"metadata.tags" : slug,
-		"uploadedAt": { "$lt" : date}
-	};
-	var index = MyPix.find(foo).count();
 	console.log('index: ' + index);
 
 	// set filter to sort by date and get next document id
 	var nextIndex = index + 1;
+
 	var filterNext = {
 		sort: {uploadedAt: 1},
 		skip: nextIndex
 	};
 	if (total > nextIndex) {
-		var newerDoc = MyPix.findOne({"metadata.tags" : slug}, filterNext);
+		var newerDoc = MyPix.findOne(preSelector, filterNext);
 		var newerDocId = newerDoc._id;
 	} else {
 		var newerDocId = false;
@@ -41,7 +74,7 @@ Meteor.publish('aPix', function(id, slug, query) {
 		skip: prevIndex
 	};
 	if (prevIndex >= 0) {
-		var olderDoc = MyPix.findOne({"metadata.tags" : slug}, filterPrevious);
+		var olderDoc = MyPix.findOne(preSelector, filterPrevious);
 		var olderDocId = olderDoc._id;
 	} else {
 		var olderDocId = false;
@@ -50,6 +83,10 @@ Meteor.publish('aPix', function(id, slug, query) {
 	console.log('olderDocId: ' + olderDocId);
 	console.log('id: ' + id);
 	console.log('newerDocId: ' + newerDocId + '\n');
+
+
+
+	// get the 3 specific docs
 
 	var selector = {'_id': { $in: [
 		olderDocId,
@@ -77,7 +114,20 @@ Meteor.publish('aPix', function(id, slug, query) {
 });
 
 
+
+
+
+
+
+
+
+
 Meteor.publish('PixQuery', function(slug, page, query) {
+
+
+
+
+
 
 	if (query.q == 'tag') {
 
@@ -100,6 +150,9 @@ Meteor.publish('PixQuery', function(slug, page, query) {
 			]
 		}
 	}
+
+
+
 
 	cursor = (displayQty * page) - displayQty;
 
