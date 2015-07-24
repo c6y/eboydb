@@ -48,7 +48,6 @@ Meteor.publish('aPix', function(id, slug, query) {
 
 	// set filter to sort by date and get next document id
 	var nextIndex = index + 1;
-
 	var filterNext = {
 		sort: {uploadedAt: 1},
 		skip: nextIndex
