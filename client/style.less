@@ -216,6 +216,9 @@ img {
 			cursor: pointer;
 		}
 	}
+
+
+
 	.docbox {
 		padding: 0px;
 		margin: 0px;
@@ -226,8 +229,15 @@ img {
 		overflow-x: hidden;
 		overflow-y: hidden;
 		width: auto;
-		max-width: 50%;
-		max-height: 50vh;
+
+		@media only screen and (max-width: 512px) {
+			max-width: 100%;
+			max-height: 75vh;
+		}
+		@media only screen and (min-width: 513px) {
+			max-width: 50%;
+			max-height: 50vh;
+		}
 
 		display: -webkit-box;					/* OLD - iOS 6-, Safari 3.1-6 */
 		display: -moz-box;						/* OLD - Firefox 19- (buggy but mostly works) */
@@ -363,6 +373,14 @@ img {
 		padding: 12px 12px 18px 12px;
 		li {
 			list-style-type: none;
+		}
+		a{
+			text-decoration: none;
+			color: @editorColor;
+		}
+		a:hover{
+			background-color: @editorColor;
+			color: @editorBackColor;
 		}
 		.tag:after {
 			content: ','
