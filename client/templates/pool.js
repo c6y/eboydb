@@ -41,13 +41,19 @@ Template.pool.helpers({
 	'showPix': function() {
 		return MyPix.find({}, {sort: {uploadedAt: -1}});
 	},
+
+
 	'backColor': function() {
-		if (this.metadata.backColor != 'default') {
+		if (this.metadata.fullframe) {
+			return "transparent"
+		} else if (this.metadata.backColor != 'default') {
 			return this.metadata.backColor;
 		} else {
 			return defaultBackColor;
-		}	
+		}
 	}
+
+	
 })
 
 Template.pool.events({

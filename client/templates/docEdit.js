@@ -31,7 +31,6 @@ Template.docEdit.helpers({
 		}
 	}
 });
-
 Template.docEdit.events({
 	'keypress input.addTag': function (event, template) {
 		if (Meteor.user().profile.isEditor) {
@@ -59,6 +58,16 @@ Template.docEdit.events({
 				var colorInHex = Meteor.myFunctions.colourNameToHex(trimmedColor);
 				Meteor.call('updateBackColor', this._id, colorInHex);
 			}
+		}
+	},
+	'click input.editFullframe': function (event, template) {
+		if (Meteor.user().profile.isEditor) {
+			// event.preventDefault();
+			if (template.data.metadata.fullframe) {
+				Meteor.call('updateFullframe', this._id, false);
+			} else {
+				Meteor.call('updateFullframe', this._id, true);
+			};
 		}
 	},
 	'keypress input.editLicense': function (event) {
