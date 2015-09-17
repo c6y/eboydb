@@ -1,6 +1,7 @@
 @thumbnailDim: 216px;
 @linkColor: DodgerBlue;
 @highlight: #ffbd4a;
+@backColor: #eaeeee;
 @almostBlack: #272822;
 @editorColor: #aeaea4; //#c1c7c7 #aaaaaa
 @editorBackColor: @almostBlack; //#eaeaea;
@@ -21,6 +22,7 @@ body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
+	background-color: @backColor;
 }
 
 img {
@@ -84,6 +86,7 @@ img {
 		input[type=text]{
 			height: 1.2em;
 			color: @editorColor;
+			background-color: @backColor;
 			font-weight: bold;
 			font-family: inherit;
 			font-size: inherit;
