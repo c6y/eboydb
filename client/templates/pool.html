@@ -2,7 +2,7 @@
 	{{> mainHeader }}
 	<div class="container">
 		{{#each showPix}}
-			<div class="docbox" style="background-color: {{ backColor }}">
+			<div class="docbox" style="background-color: {{ backColor }}; {{ flexOff }}">
 				{{#if currentUser.profile.isEditor}}
 					<div class="docinfo"><span class='remove'>(×)</span>_
 						<a href="{{ pathFor 'docEdit' }}">

@@ -19,7 +19,6 @@ Template.pool.helpers({
 		} else {
 			var widthOffset = 0;
 		}
-
 		return {
 			width: dimensionsTo.width,
 			height: dimensionsTo.height,
@@ -41,8 +40,6 @@ Template.pool.helpers({
 	'showPix': function() {
 		return MyPix.find({}, {sort: {uploadedAt: -1}});
 	},
-
-
 	'backColor': function() {
 		if (this.metadata.fullframe) {
 			return "transparent"
@@ -51,9 +48,14 @@ Template.pool.helpers({
 		} else {
 			return defaultBackColor;
 		}
+	},
+	// turn off flex-grow for images with fullframe property
+	// prevents them to be stretchable
+	'flexOff': function() {
+		if (this.metadata.fullframe) {
+			return "flex-grow: 0"
+		}
 	}
-
-	
 })
 
 Template.pool.events({
