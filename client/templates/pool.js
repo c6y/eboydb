@@ -6,8 +6,13 @@ Template.pool.helpers({
 		var dimensionsTo = Meteor.myFunctions.scaleToByInt(widthOriginal, heightOriginal, widthMax);
 
 		// remove unnecessary area around thumbnail 
-		var thumbnailMaxHeight = Math.min(dimensionsTo.height, thumbnailDimension);
-		var thumbnailMaxWidth = Math.min(dimensionsTo.width, thumbnailDimension * 2); // because css Flexbox set to stretch 2x
+		// var thumbnailMaxHeight = Math.min(dimensionsTo.height, thumbnailDimension);
+		// var thumbnailMaxWidth = Math.min(dimensionsTo.width, thumbnailDimension * 2); // because css Flexbox set to stretch 2x
+
+		// set a max background width for non-fullframe images
+		if (!this.metadata.fullframe) {
+			var maxDocBoxWidth = Math.floor(dimensionsTo.width * 1.4);
+		}
 
 		if (heightOriginal > thumbnailDimension * window.devicePixelRatio) {
 			var heightOffset = thumbnailDimension - (heightOriginal * dimensionsTo.factor);
@@ -22,8 +27,8 @@ Template.pool.helpers({
 		return {
 			width: dimensionsTo.width,
 			height: dimensionsTo.height,
-			tnWidth: thumbnailMaxWidth,
-			tnHeight: thumbnailMaxHeight,
+			// tnWidth: thumbnailMaxWidth,
+			// tnHeight: thumbnailMaxHeight,
 			offsetWidth: widthOffset,
 			offsetHeight: heightOffset,
 			// widthCenter: widthOriginalCenter,
@@ -32,9 +37,10 @@ Template.pool.helpers({
 			widthDevice: dimensionsTo.width * window.devicePixelRatio,
 			heightDevice: dimensionsTo.height * window.devicePixelRatio,
 			scaleFactorDevice: dimensionsTo.factor * window.devicePixelRatio,
-			tnWidthDevice: thumbnailMaxWidth * window.devicePixelRatio,
-			tnHeightDevice: thumbnailMaxHeight * window.devicePixelRatio,
+			// tnWidthDevice: thumbnailMaxWidth * window.devicePixelRatio,
+			// tnHeightDevice: thumbnailMaxHeight * window.devicePixelRatio,
 			// thumbnailHeightDevice: thumbnailDimension * window.devicePixelRatio,
+			styleMaxDocBoxWidth: "max-width:" + maxDocBoxWidth + "px;",
 		}
 	},
 	'showPix': function() {
@@ -49,11 +55,11 @@ Template.pool.helpers({
 			return defaultBackColor;
 		}
 	},
-	// turn off flex-grow for images with fullframe property
+	// turn off flex-grow and padding for images with fullframe property
 	// prevents them to be stretchable
-	'flexOff': function() {
+	'styleFlexOff': function() {
 		if (this.metadata.fullframe) {
-			return "flex-grow: 0"
+			return "flex-grow:0;padding:0"
 		}
 	}
 })
