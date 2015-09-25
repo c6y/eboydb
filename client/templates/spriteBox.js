@@ -30,7 +30,7 @@ Template.spriteBox.helpers({
 		}
 	},
 	'visibility': function () {
-		if (Session.get('displaySpriteBoxInfo' + this.sprite._id) == 'block') {
+		if (Session.get('displaySpriteBoxInfo') == 'block') {
 			return 'block'
 		} else {
 			return 'none';
@@ -45,11 +45,15 @@ Template.spriteBox.helpers({
 	},
 	'inverseBackColor': function() {
 		invHex =  Meteor.myFunctions.inverseHex(this.sprite.metadata.backColor);
-		// console.log('invHex: ' + invHex);
 		return invHex.toString();
 	},
 	'formatDate': function() {
 		return moment(this.sprite.uploadedAt).format('YYYY-MM-DD');
+	},
+	'madeDate': function() {
+		if (this.sprite.metadata.madeDate) {
+			return this.sprite.metadata.madeDate.toISOString().substring(0, 4);
+		};
 	},
 	'sizeFormatted': function() {
 		var str = this.sprite.formattedSize();
@@ -72,12 +76,12 @@ Template.spriteBox.helpers({
 
 Template.spriteBox.events({
 	'click .spriteBoxInfoToggle': function () {
-		Session.setDefault('displaySpriteBoxInfo' + this.sprite._id, 'none');
-		var theSession = Session.get('displaySpriteBoxInfo' + this.sprite._id);
+		Session.setDefault('displaySpriteBoxInfo', 'none');
+		var theSession = Session.get('displaySpriteBoxInfo');
 		if (theSession == 'block') {
-			Session.set('displaySpriteBoxInfo' + this.sprite._id, 'none');
+			Session.set('displaySpriteBoxInfo', 'none');
 		} else {
-			Session.set('displaySpriteBoxInfo' + this.sprite._id, 'block');
+			Session.set('displaySpriteBoxInfo', 'block');
 		};
 	},
 	'click .spriteBoxClose': function(event) {

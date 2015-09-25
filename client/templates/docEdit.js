@@ -21,6 +21,13 @@ Template.docEdit.helpers({
 			return defaultBackColor;
 		}	
 	},
+	'madeDateGMT': function() {
+		return {
+			iso: this.metadata.madeDate.toISOString(),
+			short: this.metadata.madeDate.toISOString().substring(0, 10),
+			utc: this.metadata.madeDate.toUTCString()
+		}
+	},
 	'sizeFormatted': function() {
 		var str = this.formattedSize();
 		var strValue = str.substr(0, str.indexOf(' '));
@@ -57,6 +64,19 @@ Template.docEdit.events({
 				
 				var colorInHex = Meteor.myFunctions.colourNameToHex(trimmedColor);
 				Meteor.call('updateBackColor', this._id, colorInHex);
+			}
+		}
+	},
+	'keypress input.editMadeDate': function (event) {
+		if (Meteor.user().profile.isEditor) {
+			// event.preventDefault();
+			if (event.which === 13) {
+				if (event.currentTarget.value == "now") {
+					var updatedMadeDate = new Date();
+				} else {
+					var updatedMadeDate = new Date(event.currentTarget.value);
+				}
+				Meteor.call('updateMadeDate', this._id, updatedMadeDate);
 			}
 		}
 	},

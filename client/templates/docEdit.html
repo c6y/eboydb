@@ -37,6 +37,16 @@
 					class="editFullframe"
 				>
 			</div>
+			<div><span class="property">madeDate</span>:
+				<input
+					type="text"
+					name="backColor"
+					value = "{{ madeDateGMT.iso }}"
+					class="editMadeDate"
+					maxlength="39"
+					size="24"
+				>
+			</div>
 			<div><span class="property">license</span>:
 				<input
 					type="text"
@@ -71,6 +81,7 @@
 					<span class="remove">(×)</span><span class="tag">{{this}}</span>
 				{{/each}}
 			</li>
+			<li><span class="property">metadata.madeDate</span>: {{ madeDateGMT.iso }}</li>
 			<li><span class="property">uploadedBy.id</span>: {{ this.metadata.uploadedBy.id }}</li>
 			<li><span class="property">uploadedBy.username</span>: {{ this.metadata.uploadedBy.username }}</li>
 		</ol>

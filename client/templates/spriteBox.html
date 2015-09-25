@@ -17,7 +17,7 @@
 		</span>
 	</div>
 	<div class="eboycopyright" style="color:{{ inverseBackColor }}" >
-		©eBoy
+		©eBoy {{ madeDate }}
 	</div>
 	<div class="spriteBoxInfoToggle" onclick="" style="color:{{ inverseBackColor }}">^</div>
 	<div class="contentbackground" style="background-color: {{ backColor }}">
@@ -31,11 +31,18 @@
 			<ol>
 				<li><span class="property">id</span>: {{ sprite._id }}</li>
 				<li><span class="property">name</span>: {{ sprite.name }}</li>
-				<li><span class="property">date</span>: {{ formatDate }}</li>
+				{{#if sprite.metadata.madeDate}}
+					<li><span class="property">year</span>: {{ madeDate }}</li>
+				{{/if}}
+				<li><span class="property">uploaded</span>: {{ formatDate }}</li>
 				<li><span class="property">dimensions w/h</span>: {{sprite.metadata.width}}<span class="unit">px</span>/{{sprite.metadata.height}}<span class="unit">px</span></li>
 				<li><span class="property">size</span>: {{sizeFormatted.value}}<span class="unit">{{sizeFormatted.unit}}</span></li>
 				<li><span class="property">copyright</span>: {{sprite.metadata.copyright}}</li>
-				<li><span class="property">license</span>: {{sprite.metadata.license}}</li>
+				
+				{{#if sprite.metadata.license}}
+					<li><span class="property">license</span>: {{sprite.metadata.license}}</li>
+				{{/if}}
+
 				<li><span class="property">tags</span>: 
 					{{#each sprite.metadata.tags}}
 						<span class="tag"><a href="{{ pathFor 'pool' slug=this page='1' query='q=tag' }}">{{ this }}</a></span>

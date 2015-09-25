@@ -103,6 +103,7 @@ Meteor.publish('aPix', function(id, slug, query) {
 		'metadata.license': 1,
 		'metadata.uploadedBy': 1,
 		'metadata.fullframe': 1,
+		'metadata.madeDate': 1,
 	}};
 
 	return MyPix.find(selector, options);

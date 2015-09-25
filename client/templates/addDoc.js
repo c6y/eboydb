@@ -9,7 +9,8 @@ Template.addDoc.events({
 					fullframe: false,
 					backColor: defaultBackColor,
 					tags: ['sprite', 'ecity'],
-					uploadedBy: {id: Meteor.userId(), username: Meteor.user().profile.name}
+					uploadedBy: {id: Meteor.userId(), username: Meteor.user().profile.name},
+					// madeDate: new Date("1997-05") // better leave this empty
 				};
 				MyPix.insert(newFile, function(err, fileObj) {
 					//If !err, we have inserted new doc with ID fileObj._id, and
