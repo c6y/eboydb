@@ -5,10 +5,18 @@
 			<div class="docMeta">
 				<ol>
 					<li><span class="property">_id</span>: {{ currentUser._id }}</li>
-					<li><span class="property">username</span>: {{ currentUser.username }}</li>
-					<li><span class="property">profile.name</span>: {{ currentUser.profile.name }}</li>
-					<li><span class="property">profile.isAdmin</span>: {{ currentUser.profile.isAdmin }}</li>
-					<li><span class="property">profile.isEditor</span>: {{ currentUser.profile.isEditor }}</li>
+					{{#if currentUser.username}}
+						<li><span class="property">username</span>: {{ currentUser.username }}</li>
+					{{/if}}
+					{{#if currentUser.profile.name}}
+						<li><span class="property">profile.name</span>: {{ currentUser.profile.name }}</li>
+					{{/if}}
+					{{#if currentUser.profile.isAdmin}}
+						<li><span class="property">profile.isAdmin</span>: {{ currentUser.profile.isAdmin }}</li>
+					{{/if}}
+					{{#if currentUser.profile.isEditor}}
+						<li><span class="property">profile.isEditor</span>: {{ currentUser.profile.isEditor }}</li>
+					{{/if}}
 					{{#if currentUser.emails.[0].address}}
 						<li><span class="property">currentUser.emails.[0].address</span>: {{ currentUser.emails.[0].address }}</li>
 					{{/if}}

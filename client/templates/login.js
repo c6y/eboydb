@@ -7,7 +7,7 @@ Template.login.helpers({
 	}
 });
 Template.login.events({
-	'change .editorCheck': function (event, template) {
+	'click .editorCheck': function (event, template) {
 			var thisId = this._id;
 			var checked = event.target.checked;
 			Meteor.call('toggleIsEditor', thisId, checked);
