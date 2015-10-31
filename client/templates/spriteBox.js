@@ -64,14 +64,14 @@ Template.spriteBox.helpers({
 			unit: strUnit
 		}
 	},
-	'olderDoc': function() {
-		var olderDocument = MyPix.findOne({}, {sort: {uploadedAt: 1}});
-		return olderDocument._id;
-	},
-	'newerDoc': function() {
-		var newerDocument = MyPix.findOne({}, {sort: {uploadedAt: -1}});
-		return newerDocument._id;
-	}
+	// 'olderDoc': function() {
+	// 	var olderDocument = MyPix.findOne({}, {sort: {uploadedAt: 1}});
+	// 	return olderDocument._id;
+	// },
+	// 'newerDoc': function() {
+	// 	var newerDocument = MyPix.findOne({}, {sort: {uploadedAt: -1}});
+	// 	return newerDocument._id;
+	// }
 });
 
 Template.spriteBox.events({

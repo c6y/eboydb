@@ -1,11 +1,12 @@
 <template name="spriteBox">
-	<!-- style hack prevents white background when scrolling -->
+
+	<!-- style hack fills hidden part of window with background color-->
 	<style type="text/css">
-		body {
+		.bodySpriteBox {
 			background-color: {{ backColor }};
-			/*color: {{ backColor }};*/
 		}
 	</style>
+	
 	<div class="goNewerDoc" style="color:{{ inverseBackColor }}">
 		<span class="navButton">
 			&#x25c0;
