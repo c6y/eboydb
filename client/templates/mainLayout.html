@@ -3,7 +3,8 @@
 		<div class="editor">
 			<a href="{{ pathFor 'pool' slug='all' page='1' }}">pool</a> | 
 			<a href="{{ pathFor 'addDoc' }}">addDoc</a> |
-			<a href="{{ pathFor 'login' }}">{{ currentUser.profile.name }}</a>
+			<a href="{{ pathFor 'login' }}">{{ currentUser.profile.name }}</a> |
+			<a href="{{ pathFor 'colors' }}">colors</a>
 			{{#if onSpriteBox}}
 				| <a href="{{ pathFor 'docEdit' _id=onSpriteBox.id}}" title="Edit {{onSpriteBox.id}}">{{onSpriteBox.id}}</a>
 			{{/if}}

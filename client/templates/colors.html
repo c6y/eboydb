@@ -1,0 +1,12 @@
+<template name="colors">
+	<table>
+		{{#each colorListArray}}
+			<tr>
+				<td style="background-color:{{value}}; border:12px solid {{value}} "></td>
+				<td>{{value}} – </td>
+				<td>{{name}}</td>
+			</tr>
+		{{/each}}
+	</table>
+</template>
+
