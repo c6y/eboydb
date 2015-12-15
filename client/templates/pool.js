@@ -3,11 +3,18 @@ Template.pool.helpers({
 		var widthOriginal = this.metadata.width;
 		var heightOriginal = this.metadata.height;
 		var widthMax = thumbnailDimension + thumbnailBleed;
-		var dimensionsTo = Meteor.myFunctions.scaleToByInt(widthOriginal, heightOriginal, widthMax);
+		var dimensions;
 
-		// remove unnecessary area around thumbnail 
-		// var thumbnailMaxHeight = Math.min(dimensionsTo.height, thumbnailDimension);
-		// var thumbnailMaxWidth = Math.min(dimensionsTo.width, thumbnailDimension * 2); // because css Flexbox set to stretch 2x
+		// scaling function changes if document has the tag 'photo' 
+		if (this.metadata.tags.indexOf('photo') < 0) {
+			dimensionsTo = Meteor.myFunctions.scaleToByInt(widthOriginal, heightOriginal, widthMax);
+		}
+		else if (this.metadata.tags.indexOf('photo') >= 0) {
+			dimensionsTo = Meteor.myFunctions.scaleToSoft(widthOriginal, heightOriginal, widthMax);
+		} else {
+			// checking for errors
+			console.log("cannot calculate if " + this.name + " has tag 'photo'");
+		}
 
 		// set a max background width for non-fullframe images
 		if (!this.metadata.fullframe) {
@@ -60,6 +67,14 @@ Template.pool.helpers({
 	'styleFlexOff': function() {
 		if (this.metadata.fullframe) {
 			return "flex-grow:0;padding:0"
+		}
+	},
+	// turns on default rendering for all documents with the tag 'photo'
+	// this will avoid pixelated scaling for photos
+	'styleSoftRender': function() {
+		if (this.metadata.tags.indexOf('photo') > 0) {
+			// console.log('softrendering a photo');
+			return "image-rendering:auto;"
 		}
 	}
 })
