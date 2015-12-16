@@ -76,6 +76,14 @@ Template.pool.helpers({
 			// console.log('softrendering a photo');
 			return "image-rendering:auto;"
 		}
+	},
+	// in edit mode, display madeDate – if available. Else remind that date is missing.
+	'madeDate': function() {
+		if (this.metadata.madeDate) {
+			return moment(this.metadata.madeDate).format('YYYY');
+		} else {
+			return "DATE?";
+		}
 	}
 })
 
