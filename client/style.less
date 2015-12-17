@@ -9,6 +9,11 @@
 @editorHighlight: #D39322;
 @unitColor: #E42669;
 @deleteHighlight: white;
+@navBarText: #ff0055;
+@navBarBack: rgba(255, 255, 0, 0.9); //#eaeede
+// @navBarBack: rgba(245, 245, 96, 0.9); //#eaeede
+@navBarSearch: rgba(255, 0, 64, 0.4);
+@navBarSearchBack: rgba(255, 255, 0, 0.0);
 
 html {
 	height: 100%;
@@ -42,18 +47,39 @@ img {
 }
 
 .editor {
+	position: fixed;
+	top: 0;
+	margin-top: 0px;
+	width: 100%;
 	color: @editorColor;
 	background-color: @editorBackColor;
 	border-bottom: @editorBorderColor;
-	padding: 4px 12px;
+	padding: 0px 12px;
+	z-index: 30;
 	a {
 		color: @editorColor;
 		text-decoration: none;
 	}
+	a:hover {
+		color: @editorBackColor;
+		background-color: @editorColor;
+	}
+}
+
+.topnav {
+	position: fixed;
+	top: 0px;
+	background-color: @navBarBack;
+	width: 100%;
+	// padding-top: 4px;
+	padding-top: 16px;
+	box-shadow: 0px 1px 1px rgba(192, 128, 0, 0.1);
+	color: @navBarText;
+	z-index: 20;
 }
 
 .header {
-	margin: 12px;
+	margin: 0px 12px;
 	padding: 0px;
 
 	display: -webkit-box;					/* OLD - iOS 6-, Safari 3.1-6 */
@@ -86,15 +112,17 @@ img {
 		}
 	}
 	.search {
+		right: 0px;
 		padding: 0px;
 		border: 0px;
 		margin: 0px;
+		padding-left: 0px;
 		-webkit-align-self: flex-end;
 		align-self: flex-end;
 		input[type=text]{
 			height: 1.2em;
-			color: @editorColor;
-			background-color: @backColor;
+			color: @navBarSearch;
+			background-color: @navBarSearchBack;
 			font-weight: bold;
 			font-family: inherit;
 			font-size: inherit;
@@ -194,6 +222,9 @@ img {
 	display: -ms-flexbox;					/* TWEENER - IE 10 */
 	display: -webkit-flex;				/* NEW - Chrome */
 	display: flex;								/* NEW, Spec - Opera 12.1, Firefox 20+ */
+
+	padding-top: 76px;
+	// padding-top: 64px;
 
 	-webkit-flex-direction: row;
 	flex-direction: row;
@@ -451,7 +482,7 @@ img {
 
 .paging {
 	background-color: none;
-	padding: 12px;
+	padding: 3px 12px 6px 12px;
 }
 
 @media only screen and (min-width: 513px) {
