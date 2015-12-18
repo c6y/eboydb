@@ -50,7 +50,7 @@ img {
 	position: fixed;
 	top: 0;
 	margin-top: 0px;
-	width: 100%;
+	// width: 100%;
 	color: @editorColor;
 	background-color: @editorBackColor;
 	border-bottom: @editorBorderColor;
@@ -234,23 +234,28 @@ img {
 	align-items: center;
 
 	.docinfo {
-		margin: 0px;
 		color: @editorColor;
 		background-color: @editorBackColor;
-		// background-color: orange;
-		padding: 2px 8px 2px 0px;
+		padding: 3px 3px 6px 3px;
+		width: 42px;
 		position: absolute;
 		display: block;
+    top: 0px;
+    left: 0px;
+    margin:auto;
+
 		a {
 			color: inherit;
 			text-decoration: none;
 			display: table-caption;
 		}
+		a:hover {
+			color: @deleteHighlight;
+		}
+
 		.remove {
-		padding: 0px;
 		opacity: 0.4;
-		padding: 2px 4px;
-			cursor: pointer;
+		cursor: pointer;
 		}
 		.remove:hover {
 			color: @deleteHighlight;
@@ -262,6 +267,8 @@ img {
 	.docbox {
 		padding: 8px 4px; // will be overwritten with inline CSS for fullframe documents
 		margin: 3px;
+
+		position:relative; // important! fixes nasty bug(?)
 
 		-webkit-flex-grow: 1;
 		flex-grow: 1;
@@ -315,10 +322,6 @@ img {
 			align-items: center;
 			-webkit-justify-content: center;
 			justify-content: center;
-			
-			canvas {
-				display: block;
-			}
 
 			img {
 					display: block;
