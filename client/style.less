@@ -3,6 +3,8 @@
 @highlight: #ffbd4a;
 @backColor: #eaeeee;
 @almostBlack: #272822;
+@editorMenuColor: #4c4c3d;
+@editorMenuBackColor: #ffffcf;
 @editorColor: #aeaea4; //#c1c7c7 #aaaaaa
 @editorBackColor: @almostBlack; //#eaeaea;
 @editorBorderColor: 1px solid #333326;
@@ -46,18 +48,18 @@ img {
 	image-rendering: pixelated;
 }
 
-.editor {
+#editorMenu {
 	position: fixed;
 	top: 0;
 	margin-top: 0px;
 	// width: 100%;
-	color: @editorColor;
-	background-color: @editorBackColor;
-	border-bottom: @editorBorderColor;
-	padding: 0px 12px;
+	color: @editorMenuColor;
+	background-color: @editorMenuBackColor;
+	// border-bottom: @editorBorderColor;
+	padding: 3px 12px;
 	z-index: 30;
 	a {
-		color: @editorColor;
+		color: @editorMenuColor;
 		text-decoration: none;
 	}
 	a:hover {
@@ -395,7 +397,7 @@ img {
 .eboycopyright {
 	position: fixed;
 	right: 0px;
-	padding: 6px 12px;
+	padding: 3px 12px;
 	z-index: 20;
 	// -webkit-filter: invert(100%);
 }

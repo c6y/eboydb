@@ -21,10 +21,10 @@ Meteor.startup(function () {
 				// console.log('showing next document: ' + newerDocument._id);
 			}
 			else if (event.keyCode == 73) { // key i
-				if (Session.get('displaySpriteBoxInfo') == 'block') {
-					Session.set('displaySpriteBoxInfo', 'none');
+				if (Session.get('displaySpriteBoxInfo') == 'true') {
+					Session.set('displaySpriteBoxInfo', 'false');
 				} else {
-					Session.set('displaySpriteBoxInfo', 'block');
+					Session.set('displaySpriteBoxInfo', 'true');
 				}
 			}
 		}

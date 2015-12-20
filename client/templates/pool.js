@@ -84,6 +84,13 @@ Template.pool.helpers({
 		} else {
 			return "DATE?";
 		}
+	},
+	showDocInfo: function () {
+		if (Session.get('displayEditor') == 'false') {
+			return false
+		} else {
+			return true;
+		};
 	}
 })
 

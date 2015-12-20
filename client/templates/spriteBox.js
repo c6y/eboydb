@@ -29,9 +29,9 @@ Template.spriteBox.helpers({
 			scaleFactorDevice: dimensionsTo.factor * window.devicePixelRatio
 		}
 	},
-	'visibility': function () {
-		if (Session.get('displaySpriteBoxInfo') == 'block') {
-			return 'block'
+	'isVisible': function () {
+		if (Session.get('displaySpriteBoxInfo') == 'true') {
+			return 'true'
 		} else {
 			return 'none';
 		};
@@ -76,12 +76,12 @@ Template.spriteBox.helpers({
 
 Template.spriteBox.events({
 	'click .spriteBoxInfoToggle': function () {
-		Session.setDefault('displaySpriteBoxInfo', 'none');
+		Session.setDefault('displaySpriteBoxInfo', 'false');
 		var theSession = Session.get('displaySpriteBoxInfo');
-		if (theSession == 'block') {
-			Session.set('displaySpriteBoxInfo', 'none');
+		if (theSession == 'true') {
+			Session.set('displaySpriteBoxInfo', 'false');
 		} else {
-			Session.set('displaySpriteBoxInfo', 'block');
+			Session.set('displaySpriteBoxInfo', 'true');
 		};
 	},
 	'click .spriteBoxClose': function(event) {
