@@ -6,7 +6,6 @@ Template.mainLayout.helpers({
 			return {
 				id: thisDocID
 			};
-			// else this will return false
 		}
 	},
 	showEditor: function () {
