@@ -13,11 +13,11 @@ Template.addDoc.events({
 					// madeDate: new Date("1997-05") // better leave this empty
 				};
 				MyPix.insert(newFile, function(err, fileObj) {
-					//If !err, we have inserted new doc with ID fileObj._id, and
-					//kicked off the data upload using HTTP
+					// If !err, we have inserted new doc with ID fileObj._id, and
+					// kicked off the data upload using HTTP
 				});
 			});
-			Router.go('pool', {slug: "all", page: 1});
-		};
-	}
+			FlowRouter.go('newPool', {slug: 'everything', page: '1'});
+		}
+	},
 });

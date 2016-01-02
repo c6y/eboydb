@@ -1,0 +1,91 @@
+<template name="newDocEdit">
+	{{#with thisPix}}
+		<div class="showDocFull">
+			<div class="docOverview">
+				<a class="goSpriteBox">
+					<img style="background-color: {{ backColor }}" src="{{ this.url }}"/>
+				</a>
+			</div>
+		</div>
+		<div class="docMeta">
+			<div class="editMeta">
+				<div><span class="property">add</span>:
+					<input
+						type="text"
+						name="tags"
+						value=""
+						class="addTag"
+						placeholder="tag"
+						maxlength="24"
+						size="21"
+					>
+				</div>
+				<div><span class="property">background</span>:
+					<input
+						type="text"
+						name="backColor"
+						value="{{ this.metadata.backColor }}"
+						class="editBackColor"
+						maxlength="24"
+						size="20"
+					>
+				</div>
+				<div><span class="property">fullframe</span>:
+					<input
+						type="checkbox"
+						name="rectangle"
+						checked="{{ this.metadata.fullframe }}"
+						class="editFullframe"
+					>
+				</div>
+				<div><span class="property">madeDate</span>:
+					<input
+						type="text"
+						name="backColor"
+						value = "{{ madeDateGMT.iso }}"
+						class="editMadeDate"
+						maxlength="39"
+						size="24"
+					>
+				</div>
+				<div><span class="property">license</span>:
+					<input
+						type="text"
+						name="license"
+						value="{{ this.metadata.license }}"
+						class="editLicense"
+						maxlength="24"
+						size="17"
+					>
+				</div>
+			</div>
+			<ol>
+				<li><span class="property">_id</span>: {{ this._id }}</li>
+				<li><span class="property">name</span>: {{ this.name }}</li>
+				<li><span class="property">uploadedAt</span>: {{ this.uploadedAt }}</li>
+				<li><span class="property">metadata.width</span>: {{ this.metadata.width }}<span class="unit">px</span></li>
+				<li><span class="property">metadata.height</span>: {{ this.metadata.height }}<span class="unit">px</span></li>
+				<li><span class="property">size</span>: {{sizeFormatted.value}}<span class="unit">{{ sizeFormatted.unit }}</span></li>
+				<li><span class="property">metadata.copyright</span>: {{ this.metadata.copyright }}</li>
+				<li><span class="property">metadata.license</span>: {{ this.metadata.license }}</li>
+				<li><span class="property">metadata.backColor</span>: {{ this.metadata.backColor }}</li>
+				<li><span class="property">metadata.fullframe</span>:
+					{{#if this.metadata.fullframe}}
+						{{ this.metadata.fullframe }}
+					{{else}}
+						false
+					{{/if}}
+				</li>
+				<li>
+					<span class="property">metadata.tags</span>: 
+					{{#each this.metadata.tags}}
+						<span class="remove">(×)</span><span class="tag">{{this}}</span>
+					{{/each}}
+				</li>
+				<li><span class="property">metadata.madeDate</span>: {{ madeDateGMT.iso }}</li>
+				<li><span class="property">uploadedBy.id</span>: {{ this.metadata.uploadedBy.id }}</li>
+				<li><span class="property">uploadedBy.username</span>: {{ this.metadata.uploadedBy.username }}</li>
+			</ol>
+		</div>
+	{{/with}}
+</template>

@@ -112,10 +112,11 @@ Meteor.publish('aPix', function(id, slug, query) {
 
 Meteor.publish('PixQuery', function(slug, page, query) {
 
-	if (query.q == 'tag') {
+	// check for type of query
+	if (query == 'tag') {
 		var tagSearch = slug;
 		var selector = {"metadata.tags" : tagSearch};
-	} else if (query.q == 'name'){
+	} else if (query == 'name'){
 		var nameSearch = slug;
 		var reg = RegExp(nameSearch, 'i', 's');
 		var selector = {"original.name" : {$regex: reg}};

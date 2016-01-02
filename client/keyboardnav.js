@@ -1,33 +1,29 @@
-Meteor.startup(function () {
-	$(document).on('keyup', function (event) {
-
-		var thisRoute = Router.current().route.getName();
-		// console.log('thisRoute: ' + thisRoute);
-		// console.log('event.keyCode: ' + event.keyCode);
-
+Meteor.startup(function() {
+	$(document).on('keyup', function(event) {
+		const thisRoute = FlowRouter.getRouteName();
 		// shortcuts for SpriteBox Template
-		if (thisRoute == 'spriteBox') {
-
-			if (event.keyCode == 75) { // key k
+		if (thisRoute === 'newSpriteBox') {
+			if (event.keyCode === 75) { // key k
 				// event.preventDefault(); // why is this not working?
-				var olderDocument = MyPix.findOne({}, {sort: {uploadedAt: 1}});
-				Router.go('spriteBox', {_id: olderDocument._id, boxsize: 'auto'});
-				// console.log('showing previous document: ' + olderDocument._id);
+				const olderDocument = MyPix.findOne({}, {sort: {uploadedAt: 1}});
+				const params = {_id: olderDocument._id, boxsize: 'auto'};
+				FlowRouter.go('newSpriteBox', params);
 			}
-			else if (event.keyCode == 74) { // key j
+			if (event.keyCode === 74) { // key j
 				// event.preventDefault(); // why is this not working?
-				var newerDocument = MyPix.findOne({}, {sort: {uploadedAt: -1}});
-				Router.go('spriteBox', {_id: newerDocument._id, boxsize: 'auto'});
-				// console.log('showing next document: ' + newerDocument._id);
+				const newerDocument = MyPix.findOne({}, {sort: {uploadedAt: -1}});
+				const params = {_id: newerDocument._id, boxsize: 'auto'};
+				FlowRouter.go('newSpriteBox', params);
 			}
-			else if (event.keyCode == 73) { // key i
-				if (Session.get('displaySpriteBoxInfo') == 'true') {
+			if (event.keyCode === 73) { // key i
+				if (Session.get('displaySpriteBoxInfo') === 'true') {
 					Session.set('displaySpriteBoxInfo', 'false');
 				} else {
 					Session.set('displaySpriteBoxInfo', 'true');
 				}
 			}
 		}
+
 		// // shortcuts for pool Template
 		// // (does not work well as the arrow keys can interfere with the search field)
 		// if (thisRoute == 'pool') {
@@ -50,5 +46,5 @@ Meteor.startup(function () {
 		// 		}
 		// 	}
 		// }
-	})
+	});
 });
