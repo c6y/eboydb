@@ -3,6 +3,7 @@ Template.newDocEdit.onCreated(function() {
 	self.autorun(function() {
 		const thisId = FlowRouter.getParam('_id');
 		self.subscribe('aPix', thisId);
+		self.subscribe('userStatus');
 	});
 });
 
@@ -52,6 +53,12 @@ Template.newDocEdit.helpers({
 			value: strValue,
 			unit: strUnit,
 		};
+	},
+	showThisUserName() {
+		const thisUserId = this.metadata.uploadedBy.id;
+		const thisUserObj = Meteor.users.findOne(thisUserId);
+		const thisUserName = thisUserObj.username;
+		return thisUserName;
 	},
 });
 

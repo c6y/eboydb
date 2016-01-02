@@ -1,3 +1,10 @@
+Template.editorMenu.onCreated(function() {
+	const self = this;
+	self.autorun(function() {
+		self.subscribe('userStatus');
+	});
+});
+
 Template.editorMenu.helpers({
 	showEditor() {
 		if (Session.get('displayEditor') === 'false') {
@@ -11,6 +18,12 @@ Template.editorMenu.helpers({
 			const thisId = FlowRouter.getParam('_id');
 			return {id: thisId};
 		}
+	},
+	showThisUserName() {
+		const thisUserId = Meteor.userId();
+		const thisUserObj = Meteor.users.findOne(thisUserId);
+		const thisUserName = thisUserObj.username;
+		return thisUserName;
 	},
 });
 

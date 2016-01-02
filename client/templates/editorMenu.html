@@ -11,7 +11,7 @@
 			{{#if showEditor}}
 				<a class="toPool">pool</a> | 
 				<a class="toAddDoc">addDoc</a> |
-				<a class="toLogin">{{ currentUser.profile.name }}</a> |
+				<a class="toLogin">{{ currentUser.profile.name }}{{ showThisUserName }}</a> |
 				<a class="toColors">colors</a>
 				{{#if onNewSpriteBox}}
 					| <a class="toDocEdit" title="Edit {{onSpriteBox.id}}">{{onNewSpriteBox.id}}</a>

@@ -6,10 +6,10 @@ Template.newLogin.onCreated(function() {
 });
 
 Template.newLogin.helpers({
-	'showUsers': function() {
+	showUsers() {
 		return Meteor.users.find({}, {sort: {createdAt: -1}});
 	},
-	'usersCount': function() {
+	usersCount() {
 		return Meteor.users.find().count();
 	},
 });

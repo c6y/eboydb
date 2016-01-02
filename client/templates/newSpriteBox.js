@@ -12,7 +12,7 @@ Template.newSpriteBox.onCreated(function() {
 				searchSlug = '.*';
 			}
 		}
-
+		self.subscribe('userStatus');
 		self.subscribe('aPix', thisId, searchSlug, searchQuery);
 	});
 });
@@ -98,6 +98,12 @@ Template.newSpriteBox.helpers({
 			unit: strUnit,
 		};
 	},
+	showThisUserName() {
+		const thisUserId = this.metadata.uploadedBy.id;
+		const thisUserObj = Meteor.users.findOne(thisUserId);
+		const thisUserName = thisUserObj.username;
+		return thisUserName;
+	},
 });
 
 Template.newSpriteBox.events({
@@ -110,7 +116,7 @@ Template.newSpriteBox.events({
 			Session.set('displaySpriteBoxInfo', 'true');
 		}
 	},
-	'click .spriteBoxClose': function() {
+	'click .goPool': function() {
 		let params = {slug: 'everything', page: '1'};
 		let poolQuery = {};
 
