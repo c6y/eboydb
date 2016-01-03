@@ -19,11 +19,14 @@ Template.editorMenu.helpers({
 			return {id: thisId};
 		}
 	},
-	showThisUserName() {
-		const thisUserId = Meteor.userId();
-		const thisUserObj = Meteor.users.findOne(thisUserId);
-		const thisUserName = thisUserObj.username;
-		return thisUserName;
+	thisUserName() {
+		let profileName = Meteor.user().profile.name;
+		if (!profileName) {
+			const thisUserId = Meteor.userId();
+			const thisUserObj = Meteor.users.findOne(thisUserId);
+			profileName = thisUserObj.username;
+		}
+		return profileName;
 	},
 });
 
