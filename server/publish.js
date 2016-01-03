@@ -1,10 +1,11 @@
 Meteor.publish('aPix', function(id, slug, query) {
 	check(id, String);
-	
-	// get the date of document
-	var docDate = MyPix.findOne(id).uploadedAt;
 
-	// check if slug is part of array that contain aliases that will get everything
+	// get the date of document
+	const docDate = MyPix.findOne(id).uploadedAt;
+
+	// check if slug is part of array that contain aliases
+	// that will get everything
 	// the aliasesForFullSearch array is defined in environment.js
 	if (aliasesForFullSearch.indexOf(slug) > -1) {
 		slug = '.*';

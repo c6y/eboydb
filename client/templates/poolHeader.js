@@ -13,14 +13,14 @@ Template.poolHeader.events({
 });
 
 Template.newPagingHeader.helpers({
-	'postsCount': function() {
+	postsCount() {
 		return Counts.get('numberOfFinds');
 	},
-	'currentPage': function() {
+	currentPage() {
 		const currentPage = FlowRouter.getParam('page');
 		return currentPage;
 	},
-	'totalPages': function() {
+	totalPages() {
 		return Math.ceil(Counts.get('numberOfFinds') / displayQty);
 	},
 });

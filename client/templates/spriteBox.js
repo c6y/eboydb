@@ -77,6 +77,9 @@ Template.spriteBox.helpers({
 		}
 		return defaultBackColor;
 	},
+	backColorInBetween() {
+		return defaultBackColor;
+	},
 	inverseBackColor() {
 		invHex =  Meteor.myFunctions.inverseHex(this.metadata.backColor);
 		return invHex.toString();
@@ -140,7 +143,8 @@ Template.spriteBox.events({
 	'click .searchForTag': function() {
 		const thisTag = this;
 		const params = {slug: thisTag, page: '1'};
-		FlowRouter.go('pool', params);
+		const queryParams = {q: 'tag'};
+		FlowRouter.go('pool', params, queryParams);
 	},
 	'click .goNewerDoc': function(event) {
 		event.preventDefault();
