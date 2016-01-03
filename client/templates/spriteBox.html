@@ -1,67 +1,71 @@
 <template name="spriteBox">
-
-	<!-- style hack fills hidden part of window with background color-->
-	<style type="text/css">
-		.bodySpriteBox {
-			background-color: {{ backColor }};
-		}
-	</style>
-	
-	<div class="goNewerDoc" style="color:{{ inverseBackColor }}">
-		<span class="navButton">
-			&#x25c0;
-		</span>
-	</div>
-	<div class="goOlderDoc">
-		<span class="navButton" style="color:{{ inverseBackColor }}">
-			&#x25b6;
-		</span>
-	</div>
-	<div class="eboycopyright" style="color:{{ inverseBackColor }}" >
-		©eBoy {{ madeDate }}
-	</div>
-	<div class="spriteBoxInfoToggle" onclick="" style="color:{{ inverseBackColor }}">^</div>
-	<div class="contentbackground" style="background-color: {{ backColor }}">
-		<div class="spriteBoxFull">
-			<div class="spriteBoxClose">
-				<img class="fadein" src="{{ sprite.url }}" alt="{{ sprite.name }}" style="width:{{ scaledSprite.width }}px; height: {{ scaledSprite.height }}px;">
+	{{#if Template.subscriptionsReady}}
+		{{#with showThisPix}}
+			<!-- style hack fills hidden part of window with background color-->
+			<style type="text/css">
+				#bodyBox {
+					background-color: {{ backColor }};
+				}
+			</style>
+			
+			<div class="goNewerDoc" style="color:{{ inverseBackColor }}">
+				<span class="navButton">
+					&#x25c0;
+				</span>
 			</div>
-		</div>
-		<div class="docMeta" id="spriteBoxInfo" style="display: {{ isVisible }}">
-			<div class="spriteBoxInfoToggle" onclick="">X</div>
-			<ol>
-				<li><span class="property">id</span>: {{ sprite._id }}</li>
-				<li><span class="property">name</span>: {{ sprite.name }}</li>
-				{{#if sprite.metadata.madeDate}}
-					<li><span class="property">year</span>: {{ madeDate }}</li>
-				{{/if}}
-				<li><span class="property">uploaded</span>: {{ formatDate }}</li>
-				<li><span class="property">dimensions w/h</span>: {{sprite.metadata.width}}<span class="unit">px</span>/{{sprite.metadata.height}}<span class="unit">px</span></li>
-				<li><span class="property">size</span>: {{sizeFormatted.value}}<span class="unit">{{sizeFormatted.unit}}</span></li>
-				<li><span class="property">copyright</span>: {{sprite.metadata.copyright}}</li>
-				
-				{{#if sprite.metadata.license}}
-					<li><span class="property">license</span>: {{sprite.metadata.license}}</li>
-				{{/if}}
+			<div class="goOlderDoc">
+				<span class="navButton" style="color:{{ inverseBackColor }}">
+					&#x25b6;
+				</span>
+			</div>
+			<div class="eboycopyright" style="color:{{ inverseBackColor }}" >
+				©eBoy {{ madeDate }}
+			</div>
+			<div class="spriteBoxInfoToggle" style="color:{{ inverseBackColor }}">^</div>
+			<div class="contentbackground" style="background-color: {{ backColor }}">
+				<div class="spriteBoxFull">
+					<a class="goPool">
+						<img class="fadein" src="{{ this.url }}" alt="{{ this.name }}" style="width:{{ scaledSprite.width }}px; height: {{ scaledSprite.height }}px;">
+					</a>
+				</div>
+				<div class="docMeta" id="spriteBoxInfo" style="display: {{ isVisible }}">
+					<div class="spriteBoxInfoToggle">X</div>
+					<ol>
+						<li><span class="property">id</span>: {{ this._id }}</li>
+						<li><span class="property">name</span>: {{ this.name }}</li>
+						{{#if this.metadata.madeDate}}
+							<li><span class="property">year</span>: {{ madeDate }}</li>
+						{{/if}}
+						<li><span class="property">uploaded</span>: {{ formatDate }}</li>
+						<li><span class="property">dimensions w/h</span>: {{this.metadata.width}}<span class="unit">px</span>/{{this.metadata.height}}<span class="unit">px</span></li>
+						<li><span class="property">size</span>: {{sizeFormatted.value}}<span class="unit">{{sizeFormatted.unit}}</span></li>
+						<li><span class="property">copyright</span>: {{this.metadata.copyright}}</li>
+						
+						{{#if this.metadata.license}}
+							<li><span class="property">license</span>: {{this.metadata.license}}</li>
+						{{/if}}
 
-				<li><span class="property">tags</span>: 
-					{{#each sprite.metadata.tags}}
-						<span class="tag"><a href="{{ pathFor 'pool' slug=this page='1' query='q=tag' }}">{{ this }}</a></span>
-					{{/each}}
-				</li>
-				{{#if currentUser.profile.isEditor}}
-					<li><span class="property">background-color</span>: {{ sprite.metadata.backColor }}</li>
-					<li><span class="property">boxsize</span>: {{ boxsize }}<span class="unit">px</span></li>
-					<li><span class="property">window w/h</span>: {{ scaledSprite.widthWindow }}<span class="unit">px</span>/{{ scaledSprite.heightWindow }}<span class="unit">px</span></li>
-					<li><span class="property">scaledSprite w/h</span>: {{ scaledSprite.width }}<span class="unit">px</span>/{{ scaledSprite.height	}}<span class="unit">px</span></li>
-					<li><span class="property">scaledSprite-scaleFactor</span>: {{ scaledSprite.scaleFactor }}×</li>
-					<li><span class="property">window-devicePixelRatio</span>: {{ devicePixelRatio }} </li>
-					<li><span class="property">scaledSprite-Device w/h</span>: {{ scaledSprite.widthDevice }}<span class="unit">px</span>/{{ scaledSprite.heightDevice }}<span class="unit">px</span></li>
-					<li><span class="property">scaledSprite-scaleFactorDevice</span>: {{ 	scaledSprite.scaleFactorDevice }}×</li>
-					<li><span class="property">uploadedBy.id</span>: {{sprite.metadata.uploadedBy.id}}</li>
-					<li><span class="property">uploadedBy.username</span>: {{sprite.metadata.uploadedBy.username}}</li>
-				{{/if}}
-			</ol>
-		</div>
-	</div>
+						<li><span class="property">tags</span>: 
+							{{#each this.metadata.tags}}
+								<span class="tag"><a class="searchForTag">{{ this }}</a></span>
+							{{/each}}
+						</li>
+						{{#if currentUser.profile.isEditor}}
+							<li><span class="property">background-color</span>: {{ this.metadata.backColor }}</li>
+							<li><span class="property">boxsize</span>: {{ scaledSprite.boxsize }}<span class="unit">px</span></li>
+							<li><span class="property">window w/h</span>: {{ scaledSprite.widthWindow }}<span class="unit">px</span>/{{ scaledSprite.heightWindow }}<span class="unit">px</span></li>
+							<li><span class="property">scaledSprite w/h</span>: {{ scaledSprite.width }}<span class="unit">px</span>/{{ scaledSprite.height	}}<span class="unit">px</span></li>
+							<li><span class="property">scaledSprite-scaleFactor</span>: {{ scaledSprite.scaleFactor }}×</li>
+							<li><span class="property">window-devicePixelRatio</span>: {{ devicePixelRatio }} </li>
+							<li><span class="property">scaledSprite-Device w/h</span>: {{ scaledSprite.widthDevice }}<span class="unit">px</span>/{{ scaledSprite.heightDevice }}<span class="unit">px</span></li>
+							<li><span class="property">scaledSprite-scaleFactorDevice</span>: {{ 	scaledSprite.scaleFactorDevice }}×</li>
+							<li><span class="property">uploadedBy.id</span>: {{this.metadata.uploadedBy.id}}</li>
+							<li><span class="property">uploadedBy.username</span>: {{this.metadata.uploadedBy.username}}</li>
+							<li><span class="property">users.username</span>: {{ showThisUserName }}</li>
+						{{/if}}
+					</ol>
+				</div>
+			</div>
+		{{/with}}
+	{{/if}}
 </template>

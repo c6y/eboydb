@@ -1,24 +1,24 @@
-<template name="mainHeader">
+<template name="poolHeader">
 	<div class="topnav">
 		<div class="header">
 			<span class="headline">
-				<a href="{{ pathFor route='pool' page=1 slug='all' }}" class=	"dblogo">{{ name }}</a>
+				<a class="dblogo" onclick="">{{ name }}</a>
 			</span>
-			{{> searchPool}}
+			{{> newSearchPool}}
 		</div>
-		{{> pagingHeader }}
+		{{> newPagingHeader }}
 	</div>
 </template>
 
-<template name="searchPool">
+<template name="newSearchPool">
 	<span class="search">
 		<form class="seachDbForm">
-			<input type="text" onclick="this.focus(); this.setSelectionRange(0, 9999);" name="searchDB" value="{{ filter }}" class="searchFor" maxlength="24" size="12">
+			<input type="text" onclick="this.focus(); this.setSelectionRange(0, 9999);" name="searchDB" value="{{ searchTerm }}" class="searchFor" maxlength="24" size="12">
 		</form>
 	</span>
 </template>
 
-<template name="pagingHeader">
+<template name="newPagingHeader">
 	<div class="paging">
 		<span>
 			<a class="previous" onclick="">previous</a> | 

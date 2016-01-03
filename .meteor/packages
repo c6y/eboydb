@@ -9,7 +9,6 @@ cfs:filesystem
 mrt:moment
 tmeasday:publish-counts
 cfs:graphicsmagick
-iron:router
 less
 accounts-ui
 accounts-password
@@ -30,3 +29,6 @@ random
 ejson
 spacebars
 check
+kadira:flow-router
+kadira:blaze-layout
+ecmascript

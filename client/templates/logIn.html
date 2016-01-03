@@ -1,6 +1,6 @@
 <template name="login">
 	<div class="loginform">
-		{{> loginButtons}} <a href="{{ pathFor 'pool' slug='all' page='1' }}">proceed ...</a>
+		{{> loginButtons}}
 		{{#if currentUser}}
 			<div class="docMeta">
 				<ol>
@@ -39,5 +39,3 @@
 		{{/if}}
 	</div>
 </template>
-
-

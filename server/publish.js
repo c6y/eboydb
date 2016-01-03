@@ -112,10 +112,11 @@ Meteor.publish('aPix', function(id, slug, query) {
 
 Meteor.publish('PixQuery', function(slug, page, query) {
 
-	if (query.q == 'tag') {
+	// check for type of query
+	if (query == 'tag') {
 		var tagSearch = slug;
 		var selector = {"metadata.tags" : tagSearch};
-	} else if (query.q == 'name'){
+	} else if (query == 'name'){
 		var nameSearch = slug;
 		var reg = RegExp(nameSearch, 'i', 's');
 		var selector = {"original.name" : {$regex: reg}};
@@ -145,13 +146,13 @@ Meteor.publish('PixQuery', function(slug, page, query) {
 	return MyPix.find(selector, options);
 })
 
-Meteor.publish("userStatus", function() {
-	var options = {fields: {
+Meteor.publish('userStatus', function() {
+	const options = {fields: {
 		'_id': 1,
 		'username': 1,
 		'profile.name': 1,
 		'profile.isAdmin': 1,
-		'profile.isEditor': 1
+		'profile.isEditor': 1,
 	}};
-  return Meteor.users.find({}, options);
+	return Meteor.users.find({}, options);
 });

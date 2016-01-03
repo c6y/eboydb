@@ -1,0 +1,22 @@
+<template name='editorMenu'>
+	{{#if currentUser.profile.isEditor}}
+		<div id="editorMenu">
+			<span id='toggleEditorMenu'>
+				{{#if showEditor }}
+					&lt;
+				{{else}}
+					&gt;
+				{{/if}}
+			</span>
+			{{#if showEditor}}
+				<a class="toPool">pool</a> | 
+				<a class="toAddDoc">addDoc</a> |
+				<a class="toLogin">{{ thisUserName }}</a> |
+				<a class="toColors">colors</a>
+				{{#if onSpriteBox}}
+					| <a class="toDocEdit" title="Edit {{onSpriteBox.id}}">{{onSpriteBox.id}}</a>
+				{{/if}}
+			{{/if}}
+		</div>
+	{{/if}}
+</template>

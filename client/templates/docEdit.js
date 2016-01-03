@@ -1,114 +1,138 @@
+Template.docEdit.onCreated(function() {
+	const self = this;
+	self.autorun(function() {
+		const thisId = FlowRouter.getParam('_id');
+		self.subscribe('aPix', thisId);
+		self.subscribe('userStatus');
+	});
+});
+
 Template.docEdit.helpers({
-	'devicePixelRatio': function () {
+	thisPix() {
+		const thisId = FlowRouter.getParam('_id');
+		const thisDocument = MyPix.findOne(thisId);
+		return thisDocument;
+	},
+	devicePixelRatio() {
 		return window.devicePixelRatio;
 	},
-	'deviceDimensions': function () {
-		var widthOriginal = this.metadata.width;
-		var heightOriginal = this.metadata.height;
-		var deviceRatio = window.devicePixelRatio;
-		var deviceWidth = widthOriginal / deviceRatio;
-		var deviceHeight = heightOriginal / deviceRatio;
+	deviceDimensions() {
+		const widthOriginal = this.metadata.width;
+		const heightOriginal = this.metadata.height;
+		const deviceRatio = window.devicePixelRatio;
+		const deviceWidth = widthOriginal / deviceRatio;
+		const deviceHeight = heightOriginal / deviceRatio;
 		return {
 			ratio: deviceRatio,
 			width: deviceWidth,
-			height: deviceHeight
-		}
+			height: deviceHeight,
+		};
 	},
-	'backColor': function() {
-		if (this.metadata.backColor != 'default') {
+	backColor() {
+		if (this.metadata.backColor !== 'default') {
 			return this.metadata.backColor;
-		} else {
-			return defaultBackColor;
-		}	
-	},
-	'madeDateGMT': function() {
-		return {
-			iso: this.metadata.madeDate.toISOString(),
-			short: this.metadata.madeDate.toISOString().substring(0, 10),
-			utc: this.metadata.madeDate.toUTCString()
 		}
+		return defaultBackColor;
 	},
-	'sizeFormatted': function() {
-		var str = this.formattedSize();
-		var strValue = str.substr(0, str.indexOf(' '));
-		var strUnit = str.substr(str.indexOf(' ') + 1);
-		return {
-			value: strValue,
-			unit: strUnit
-		}
-	}
-});
-Template.docEdit.events({
-	'keypress input.addTag': function (event, template) {
-		if (Meteor.user().profile.isEditor) {
-			if (event.which === 13) {
-				// event.preventDefault();
-				var newTag = event.currentTarget.value.toLowerCase().replace(/ /gi, "-");
-				var thisId = template.data._id;
-	
-				if (!!newTag) { // if not empty
-					Meteor.call('addATag', thisId, newTag);
-				}
-				event.currentTarget.value = ""; // empty input field  
-			}
-		}
-	},
-	'keypress input.editBackColor': function (event) {
-		if (Meteor.user().profile.isEditor) {
-			if (event.which === 13) {
-				// event.preventDefault();
-				var updatedColor = event.currentTarget.value.toLowerCase();
-
-				re = / /gi;
-				var trimmedColor = updatedColor.replace(re, ''); // remove whitespace
-				
-				var colorInHex = Meteor.myFunctions.colourNameToHex(trimmedColor);
-				Meteor.call('updateBackColor', this._id, colorInHex);
-			}
-		}
-	},
-	'keypress input.editMadeDate': function (event) {
-		if (Meteor.user().profile.isEditor) {
-			// event.preventDefault();
-			if (event.which === 13) {
-				if (event.currentTarget.value == "now") {
-					var updatedMadeDate = new Date();
-				} else {
-					var updatedMadeDate = new Date(event.currentTarget.value);
-				}
-				Meteor.call('updateMadeDate', this._id, updatedMadeDate);
-			}
-		}
-	},
-	'click input.editFullframe': function (event, template) {
-		if (Meteor.user().profile.isEditor) {
-			// event.preventDefault();
-			if (template.data.metadata.fullframe) {
-				Meteor.call('updateFullframe', this._id, false);
-			} else {
-				Meteor.call('updateFullframe', this._id, true);
+	madeDateGMT() {
+		const date = this.metadata.madeDate;
+		if (date) {
+			return {
+				iso: date.toISOString(),
+				short: date.toISOString().substring(0, 10),
+				utc: date.toUTCString(),
 			};
 		}
+		return '';
 	},
-	'keypress input.editLicense': function (event) {
+	sizeFormatted() {
+		const str = this.formattedSize();
+		const strValue = str.substr(0, str.indexOf(' '));
+		const strUnit = str.substr(str.indexOf(' ') + 1);
+		return {
+			value: strValue,
+			unit: strUnit,
+		};
+	},
+	showThisUserName() {
+		const thisUserId = this.metadata.uploadedBy.id;
+		const thisUserObj = Meteor.users.findOne(thisUserId);
+		const thisUserName = thisUserObj.username;
+		return thisUserName;
+	},
+});
+
+Template.docEdit.events({
+	'click .goSpriteBox': function() {
+		const thisId = this._id;
+		const params = {_id: thisId, boxsize: 'auto'};
+		FlowRouter.go('spriteBox', params);
+	},
+	'keypress input.addTag': function(event) {
 		if (Meteor.user().profile.isEditor) {
 			if (event.which === 13) {
-				// event.preventDefault();
-				var license = event.currentTarget.value.toUpperCase();
-				Meteor.call('updateLicense', this._id, license);
+				const newTag = event.currentTarget.value;
+				const cleanNewTag = newTag.toLowerCase().replace(/ /gi, '-');
+				const thisId = this._id;
+
+				if (!!newTag) { // if not empty
+					Meteor.call('addATag', thisId, cleanNewTag);
+				}
+				event.currentTarget.value = ''; // empty input field
 			}
 		}
 	},
-	'click .remove': function(event, template) {
+	'keypress input.editBackColor': function(event) {
 		if (Meteor.user().profile.isEditor) {
-			var thisTag = String(this);
-			var thisId = template.data._id;
+			if (event.which === 13) {
+				const updatedColor = event.currentTarget.value.toLowerCase();
+				const thisId = this._id;
+
+				re = / /gi;
+				const trimmedColor = updatedColor.replace(re, ''); // remove whitespace
+
+				const colorInHex = Meteor.myFunctions.colourNameToHex(trimmedColor);
+				Meteor.call('updateBackColor', thisId, colorInHex);
+			}
+		}
+	},
+	'keypress input.editMadeDate': function(event) {
+		if (Meteor.user().profile.isEditor) {
+			if (event.which === 13) {
+				const thisId = this._id;
+				let updatedMadeDate = new Date();
+
+				if (event.currentTarget.value !== 'now') {
+					updatedMadeDate = new Date(event.currentTarget.value);
+				}
+				Meteor.call('updateMadeDate', thisId, updatedMadeDate);
+			}
+		}
+	},
+	'click input.editFullframe': function() {
+		if (Meteor.user().profile.isEditor) {
+			const thisId = this._id;
+			if (this.metadata.fullframe) {
+				Meteor.call('updateFullframe', thisId, false);
+			} else {
+				Meteor.call('updateFullframe', thisId, true);
+			}
+		}
+	},
+	'keypress input.editLicense': function(event) {
+		if (Meteor.user().profile.isEditor) {
+			const thisId = this._id;
+			if (event.which === 13) {
+				const license = event.currentTarget.value.toUpperCase();
+				Meteor.call('updateLicense', thisId, license);
+			}
+		}
+	},
+	'click .remove': function() {
+		if (Meteor.user().profile.isEditor) {
+			const thisId = FlowRouter.getParam('_id');
+			const thisTag = String(this);
 			Meteor.call('removeTag', thisId, thisTag);
 		}
 	},
-	'click #goBack': function(event) {
-		history.back();
-	},
 });
-
-
