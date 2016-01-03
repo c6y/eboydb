@@ -1,4 +1,4 @@
-Template.newSpriteBox.onCreated(function() {
+Template.spriteBox.onCreated(function() {
 	const self = this;
 	self.autorun(function() {
 		const thisId = FlowRouter.getParam('_id');
@@ -17,7 +17,7 @@ Template.newSpriteBox.onCreated(function() {
 	});
 });
 
-Template.newSpriteBox.helpers({
+Template.spriteBox.helpers({
 	showThisPix() {
 		const thisId = FlowRouter.getParam('_id');
 		const thisDocument = MyPix.findOne(thisId);
@@ -106,7 +106,7 @@ Template.newSpriteBox.helpers({
 	},
 });
 
-Template.newSpriteBox.events({
+Template.spriteBox.events({
 	'click .spriteBoxInfoToggle': function() {
 		Session.setDefault('displaySpriteBoxInfo', 'false');
 		let theSession = Session.get('displaySpriteBoxInfo');
@@ -135,23 +135,23 @@ Template.newSpriteBox.events({
 			poolQuery.q = theQuery;
 		}
 
-		FlowRouter.go('newPool', params, poolQuery);
+		FlowRouter.go('pool', params, poolQuery);
 	},
 	'click .searchForTag': function() {
 		const thisTag = this;
 		const params = {slug: thisTag, page: '1'};
-		FlowRouter.go('newPool', params);
+		FlowRouter.go('pool', params);
 	},
 	'click .goNewerDoc': function(event) {
 		event.preventDefault();
 		const newerDocument = MyPix.findOne({}, {sort: {uploadedAt: -1}});
 		const params = {_id: newerDocument._id, boxsize: 'auto'};
-		FlowRouter.go('newSpriteBox', params);
+		FlowRouter.go('spriteBox', params);
 	},
 	'click .goOlderDoc': function(event) {
 		event.preventDefault();
 		const olderDocument = MyPix.findOne({}, {sort: {uploadedAt: 1}});
 		const params = {_id: olderDocument._id, boxsize: 'auto'};
-		FlowRouter.go('newSpriteBox', params);
+		FlowRouter.go('spriteBox', params);
 	},
 });

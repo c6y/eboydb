@@ -1,4 +1,4 @@
-Template.newPool.onCreated(function() {
+Template.pool.onCreated(function() {
 	const self = this;
 	self.autorun(function() {
 		const searchSlug = FlowRouter.getParam('slug');
@@ -16,7 +16,7 @@ Template.newPool.onCreated(function() {
 	});
 });
 
-Template.newPool.helpers({
+Template.pool.helpers({
 	scaledSprite() {
 		const widthOrig = this.metadata.width;
 		const heightOrig = this.metadata.height;
@@ -109,7 +109,7 @@ Template.newPool.helpers({
 	},
 });
 
-Template.newPool.events({
+Template.pool.events({
 	'click .remove': function(event) {
 		event.preventDefault();
 		if (Meteor.user().profile.isEditor) {
@@ -136,12 +136,12 @@ Template.newPool.events({
 		Session.set('poolPage', poolPage);
 		Session.set('poolQuery', poolQuery);
 
-		FlowRouter.go('newSpriteBox', params);
+		FlowRouter.go('spriteBox', params);
 	},
 	'click .goDocEdit': function() {
 		const thisId = this._id;
 		const params = {_id: thisId};
-		FlowRouter.go('newDocEdit', params);
+		FlowRouter.go('docEdit', params);
 	},
 });
 

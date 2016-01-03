@@ -17,7 +17,7 @@ Template.addDoc.events({
 					// kicked off the data upload using HTTP
 				});
 			});
-			FlowRouter.go('newPool', {slug: 'everything', page: '1'});
+			FlowRouter.go('pool', {slug: 'everything', page: '1'});
 		}
 	},
 });

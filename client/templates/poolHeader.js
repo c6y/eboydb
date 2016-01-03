@@ -1,10 +1,10 @@
-Template.newPoolHeader.helpers({
+Template.poolHeader.helpers({
 	name() {
 		return siteName;
 	},
 });
 
-Template.newPoolHeader.events({
+Template.poolHeader.events({
 	'click .dblogo': function(event) {
 		event.preventDefault();
 		FlowRouter.setParams({slug: 'everything', page: '1'});

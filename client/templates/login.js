@@ -1,11 +1,11 @@
-Template.newLogin.onCreated(function() {
+Template.login.onCreated(function() {
 	const self = this;
 	self.autorun(function() {
 		self.subscribe('userStatus');
 	});
 });
 
-Template.newLogin.helpers({
+Template.login.helpers({
 	showUsers() {
 		return Meteor.users.find({}, {sort: {createdAt: -1}});
 	},
@@ -14,7 +14,7 @@ Template.newLogin.helpers({
 	},
 });
 
-Template.newLogin.events({
+Template.login.events({
 	'click .editorCheck': function(event) {
 		const thisId = this._id;
 		const checked = event.target.checked;

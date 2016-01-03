@@ -2,18 +2,18 @@ Meteor.startup(function() {
 	$(document).on('keyup', function(event) {
 		const thisRoute = FlowRouter.getRouteName();
 		// shortcuts for SpriteBox Template
-		if (thisRoute === 'newSpriteBox') {
+		if (thisRoute === 'spriteBox') {
 			if (event.keyCode === 75) { // key k
 				// event.preventDefault(); // why is this not working?
 				const olderDocument = MyPix.findOne({}, {sort: {uploadedAt: 1}});
 				const params = {_id: olderDocument._id, boxsize: 'auto'};
-				FlowRouter.go('newSpriteBox', params);
+				FlowRouter.go('spriteBox', params);
 			}
 			if (event.keyCode === 74) { // key j
 				// event.preventDefault(); // why is this not working?
 				const newerDocument = MyPix.findOne({}, {sort: {uploadedAt: -1}});
 				const params = {_id: newerDocument._id, boxsize: 'auto'};
-				FlowRouter.go('newSpriteBox', params);
+				FlowRouter.go('spriteBox', params);
 			}
 			if (event.keyCode === 73) { // key i
 				if (Session.get('displaySpriteBoxInfo') === 'true') {

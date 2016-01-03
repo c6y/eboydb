@@ -1,4 +1,4 @@
-Template.newDocEdit.onCreated(function() {
+Template.docEdit.onCreated(function() {
 	const self = this;
 	self.autorun(function() {
 		const thisId = FlowRouter.getParam('_id');
@@ -7,7 +7,7 @@ Template.newDocEdit.onCreated(function() {
 	});
 });
 
-Template.newDocEdit.helpers({
+Template.docEdit.helpers({
 	thisPix() {
 		const thisId = FlowRouter.getParam('_id');
 		const thisDocument = MyPix.findOne(thisId);
@@ -62,11 +62,11 @@ Template.newDocEdit.helpers({
 	},
 });
 
-Template.newDocEdit.events({
+Template.docEdit.events({
 	'click .goSpriteBox': function() {
 		const thisId = this._id;
 		const params = {_id: thisId, boxsize: 'auto'};
-		FlowRouter.go('newSpriteBox', params);
+		FlowRouter.go('spriteBox', params);
 	},
 	'keypress input.addTag': function(event) {
 		if (Meteor.user().profile.isEditor) {

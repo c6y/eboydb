@@ -12,9 +12,9 @@ Template.editorMenu.helpers({
 		}
 		return true;
 	},
-	onNewSpriteBox() {
+	onSpriteBox() {
 		const routeName = FlowRouter.getRouteName();
-		if (routeName === 'newSpriteBox') {
+		if (routeName === 'spriteBox') {
 			const thisId = FlowRouter.getParam('_id');
 			return {id: thisId};
 		}
@@ -30,23 +30,23 @@ Template.editorMenu.helpers({
 Template.editorMenu.events({
 
 	'click .toPool': function() {
-		FlowRouter.go('/newpool/everything/1');
+		FlowRouter.go('/pool/everything/1');
 	},
 	'click .toAddDoc': function() {
 		FlowRouter.go('addDoc');
 	},
 	'click .toLogin': function() {
-		FlowRouter.go('newLogin');
+		FlowRouter.go('login');
 	},
 	'click .toColors': function() {
 		FlowRouter.go('colors');
 	},
 	'click .toDocEdit': function() {
 		const routeName = FlowRouter.getRouteName();
-		if (routeName === 'newSpriteBox') {
+		if (routeName === 'spriteBox') {
 			const thisId = FlowRouter.getParam('_id');
 			const params = {_id: thisId};
-			FlowRouter.go('newDocEdit', params);
+			FlowRouter.go('docEdit', params);
 		}
 	},
 	'click #toggleEditorMenu': function() {
