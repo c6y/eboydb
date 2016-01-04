@@ -107,19 +107,7 @@ Template.spriteBox.helpers({
 		const thisUserName = thisUserObj.username;
 		return thisUserName;
 	},
-});
-
-Template.spriteBox.events({
-	'click .spriteBoxInfoToggle': function() {
-		Session.setDefault('displaySpriteBoxInfo', 'false');
-		let theSession = Session.get('displaySpriteBoxInfo');
-		if (theSession === 'true') {
-			Session.set('displaySpriteBoxInfo', 'false');
-		} else {
-			Session.set('displaySpriteBoxInfo', 'true');
-		}
-	},
-	'click .goPool': function() {
+	toPoolPath() {
 		let params = {slug: 'everything', page: '1'};
 		let poolQuery = {};
 
@@ -138,8 +126,41 @@ Template.spriteBox.events({
 			poolQuery.q = theQuery;
 		}
 
-		FlowRouter.go('pool', params, poolQuery);
+		return FlowRouter.path('pool', params, poolQuery);
 	},
+});
+
+Template.spriteBox.events({
+	'click .spriteBoxInfoToggle': function() {
+		Session.setDefault('displaySpriteBoxInfo', 'false');
+		let theSession = Session.get('displaySpriteBoxInfo');
+		if (theSession === 'true') {
+			Session.set('displaySpriteBoxInfo', 'false');
+		} else {
+			Session.set('displaySpriteBoxInfo', 'true');
+		}
+	},
+	// 'click .goPool': function() {
+	// 	let params = {slug: 'everything', page: '1'};
+	// 	let poolQuery = {};
+
+	// 	const theSlug = Session.get('poolSlug');
+	// 	if (theSlug) {
+	// 		params.slug = theSlug;
+	// 	}
+
+	// 	const thePage = Session.get('poolPage');
+	// 	if (thePage) {
+	// 		params.page = thePage;
+	// 	}
+
+	// 	const theQuery = Session.get('poolQuery');
+	// 	if (theQuery) {
+	// 		poolQuery.q = theQuery;
+	// 	}
+
+	// 	FlowRouter.go('pool', params, poolQuery);
+	// },
 	'click .searchForTag': function() {
 		const thisTag = this;
 		const params = {slug: thisTag, page: '1'};
