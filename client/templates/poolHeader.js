@@ -2,13 +2,10 @@ Template.poolHeader.helpers({
 	name() {
 		return siteName;
 	},
-});
-
-Template.poolHeader.events({
-	'click .dblogo': function(event) {
-		event.preventDefault();
-		FlowRouter.setParams({slug: 'everything', page: '1'});
-		FlowRouter.setQueryParams({q: null});
+	toHomePath() {
+		const homeRouteName = 'pool';
+		const params = {slug: 'everything', page: 1};
+		return FlowRouter.path(homeRouteName, params);
 	},
 });
 

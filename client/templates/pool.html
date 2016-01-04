@@ -7,7 +7,7 @@
 				{{#if currentUser.profile.isEditor}}
 					{{#if showDocInfo}}
 					<div class="docinfo"><span class='remove'>(×)</span>_
-						<a class="goDocEdit">
+						<a href="{{ toDocEditPath }}">
 							{{ madeDate }} {{ this.metadata.width }}w {{ scaledSprite.scaleFactor }}x
 						</a>
 					</div>
@@ -15,7 +15,7 @@
 				{{/if}}
 
 					<figure>
-						<a class="toSpriteBox">
+						<a href="{{ toSpriteBoxPath }}">
 							<img src="{{ this.url }}" style="width:{{ scaledSprite.width }}px; height: {{ scaledSprite.height }}px; {{ styleSoftRender }}" alt="{{ this.name }}">
 						</a>
 					</figure>

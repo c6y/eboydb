@@ -107,6 +107,28 @@ Template.pool.helpers({
 		}
 		return true;
 	},
+	toSpriteBoxPath() {
+		const thisId = this._id;
+		const params = {_id: thisId, boxsize: 'auto'};
+		const poolSlug = FlowRouter.getParam('slug');
+		const poolPage = FlowRouter.getParam('page');
+
+		let poolQuery = FlowRouter.getQueryParam('q');
+		if (!poolQuery) {
+			poolQuery = false;
+		}
+		// remember location when leaving pool
+		Session.set('poolSlug', poolSlug);
+		Session.set('poolPage', poolPage);
+		Session.set('poolQuery', poolQuery);
+
+		return FlowRouter.path('spriteBox', params);
+	},
+	toDocEditPath() {
+		const thisId = this._id;
+		const params = {_id: thisId};
+		return FlowRouter.path('docEdit', params);
+	},
 });
 
 Template.pool.events({
@@ -118,30 +140,6 @@ Template.pool.events({
 				Meteor.call('deleteDocument', thisId);
 			}
 		}
-	},
-	'click .toSpriteBox': function(event) {
-		event.preventDefault();
-		const thisId = this._id;
-		const params = {_id: thisId, boxsize: 'auto'};
-		const poolSlug = FlowRouter.getParam('slug');
-		const poolPage = FlowRouter.getParam('page');
-
-		let poolQuery = FlowRouter.getQueryParam('q');
-		if (!poolQuery) {
-			poolQuery = false;
-		}
-
-		// remember location when leaving pool
-		Session.set('poolSlug', poolSlug);
-		Session.set('poolPage', poolPage);
-		Session.set('poolQuery', poolQuery);
-
-		FlowRouter.go('spriteBox', params);
-	},
-	'click .goDocEdit': function() {
-		const thisId = this._id;
-		const params = {_id: thisId};
-		FlowRouter.go('docEdit', params);
 	},
 });
 
