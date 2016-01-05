@@ -140,27 +140,6 @@ Template.spriteBox.events({
 			Session.set('displaySpriteBoxInfo', 'true');
 		}
 	},
-	// 'click .goPool': function() {
-	// 	let params = {slug: 'everything', page: '1'};
-	// 	let poolQuery = {};
-
-	// 	const theSlug = Session.get('poolSlug');
-	// 	if (theSlug) {
-	// 		params.slug = theSlug;
-	// 	}
-
-	// 	const thePage = Session.get('poolPage');
-	// 	if (thePage) {
-	// 		params.page = thePage;
-	// 	}
-
-	// 	const theQuery = Session.get('poolQuery');
-	// 	if (theQuery) {
-	// 		poolQuery.q = theQuery;
-	// 	}
-
-	// 	FlowRouter.go('pool', params, poolQuery);
-	// },
 	'click .searchForTag': function() {
 		const thisTag = this;
 		const params = {slug: thisTag, page: '1'};

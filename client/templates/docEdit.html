@@ -10,7 +10,7 @@
 		{{#if currentUser.profile.isEditor}}
 			<div class="docMeta">
 				<div class="editMeta">
-					<div><span class="property">add</span>:
+					<div><label class="property">add</label>:
 						<input
 							type="text"
 							name="tags"
@@ -21,7 +21,7 @@
 							size="21"
 						>
 					</div>
-					<div><span class="property">background</span>:
+					<div><label class="property">background</label>:
 						<input
 							type="text"
 							name="backColor"
@@ -29,17 +29,17 @@
 							class="editBackColor"
 							maxlength="24"
 							size="20"
-						>
+						/>
 					</div>
-					<div><span class="property">fullframe</span>:
+					<div><label class="property">fullframe</label>:
 						<input
 							type="checkbox"
 							name="rectangle"
 							checked="{{ this.metadata.fullframe }}"
 							class="editFullframe"
-						>
+						/>
 					</div>
-					<div><span class="property">madeDate</span>:
+					<div><label class="property">madeDate</label>:
 						<input
 							type="text"
 							name="backColor"
@@ -47,9 +47,9 @@
 							class="editMadeDate"
 							maxlength="39"
 							size="24"
-						>
+						/>
 					</div>
-					<div><span class="property">license</span>:
+					<div><label class="property">license</label>:
 						<input
 							type="text"
 							name="license"
@@ -57,7 +57,7 @@
 							class="editLicense"
 							maxlength="24"
 							size="17"
-						>
+						/>
 					</div>
 				</div>
 				<ol>
@@ -78,7 +78,7 @@
 						{{/if}}
 					</li>
 					<li>
-						<span class="property">metadata.tags</span>: 
+						<span class="property">metadata.tags</span>:
 						{{#each this.metadata.tags}}
 							<span class="remove">(×)</span><span class="tag">{{this}}</span>
 						{{/each}}

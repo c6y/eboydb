@@ -64,7 +64,6 @@ input.myPixInput,
 	background-color: @almostBlack;
 }
 
-
 img {
 	image-rendering: -moz-crisp-edges;
 	image-rendering: -o-crisp-edges;
@@ -76,7 +75,7 @@ img {
 #editorMenu {
 	position: fixed;
 	top: 0;
-	margin-top: 0px;
+	margin-top: 0;
 	// width: 100%;
 	color: @editorMenuColor;
 	background-color: @editorMenuBackColor;
@@ -95,19 +94,19 @@ img {
 
 .topnav {
 	position: fixed;
-	top: 0px;
+	top: 0;
 	background-color: @navBarBack;
 	width: 100%;
 	// padding-top: 4px;
 	padding-top: 16px;
-	box-shadow: 0px 1px 1px rgba(192, 128, 0, 0.1);
+	box-shadow: 0 1px 1px rgba(192, 128, 0, 0.1);
 	color: @navBarText;
 	z-index: 20;
 }
 
 .header {
-	margin: 0px 12px;
-	padding: 0px;
+	margin: 0 12px;
+	padding: 0;
 
 	display: -webkit-box;					/* OLD - iOS 6-, Safari 3.1-6 */
 	display: -moz-box;						/* OLD - Firefox 19- (buggy but mostly works) */
@@ -139,11 +138,11 @@ img {
 		}
 	}
 	.search {
-		right: 0px;
-		padding: 0px;
-		border: 0px;
-		margin: 0px;
-		padding-left: 0px;
+		right: 0;
+		padding: 0;
+		border: 0;
+		margin: 0;
+		padding-left: 0;
 		-webkit-align-self: flex-end;
 		align-self: flex-end;
 		input[type=text]{
@@ -153,8 +152,8 @@ img {
 			font-weight: bold;
 			font-family: inherit;
 			font-size: inherit;
-			padding: 0px 0px;
-			border: 0px;
+			padding: 0;
+			border: 0;
 			text-align: right;
 		}
 	}
@@ -172,7 +171,7 @@ img {
 	justify-content: center;
 	-webkit-align-items: center;
 	align-items: center;
-	margin: 0px;
+	margin: 0;
 	color: @editorColor;
 	background-color: @editorBackColor;
 	width: 100%;
@@ -226,7 +225,7 @@ img {
 .showDocFull {
 	margin: 12px;
 	.docOverview {
-		margin: 0px;
+		margin: 0;
 		img {
 			border: 6px #eee solid;
 		}
@@ -239,7 +238,7 @@ img {
 		margin-top: 2em;
 	}
 	.adminHead {
-		margin: 24px 0px;
+		margin: 24px 0;
 	}
 }
 
@@ -267,8 +266,8 @@ img {
 		width: 42px;
 		position: absolute;
 		display: block;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     margin:auto;
 
 		a {
@@ -302,17 +301,17 @@ img {
 		overflow-y: hidden;
 		width: auto;
 
-		-moz-box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 2px 0px,
+		-moz-box-shadow: rgba(0, 0, 0, 0.14) 0 2px 2px 0,
 								rgba(0, 0, 0, 0.2) 	0px 3px 1px -2px,
-								rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+								rgba(0, 0, 0, 0.12) 0 1px 5px 0;
 
-		-webkit-box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 2px 0px,
+		-webkit-box-shadow: rgba(0, 0, 0, 0.14) 0 2px 2px 0,
 								rgba(0, 0, 0, 0.2) 	0px 3px 1px -2px,
-								rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+								rgba(0, 0, 0, 0.12) 0 1px 5px 0;
 
-		box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 2px 0px,
+		box-shadow: rgba(0, 0, 0, 0.14) 0 2px 2px 0,
 								rgba(0, 0, 0, 0.2) 	0px 3px 1px -2px,
-								rgba(0, 0, 0, 0.12) 0px 1px 5px 0px;
+								rgba(0, 0, 0, 0.12) 0 1px 5px 0;
 
 		@media only screen and (max-width: 512px) {
 			max-width: 100%;
@@ -412,12 +411,12 @@ img {
 }
 
 .goOlderDoc {
-	right: 0px;
+	right: 0;
 }
 
 .eboycopyright {
 	position: fixed;
-	right: 0px;
+	right: 0;
 	padding: 3px 12px;
 	z-index: 20;
 	// -webkit-filter: invert(100%);
@@ -425,8 +424,8 @@ img {
 
 .spriteBoxInfoToggle {
 	position: fixed;
-	right: 0px;
-	bottom: 0px;
+	right: 0;
+	bottom: 0;
 	padding: 6px 12px;
 	z-index: 12;
 	// -webkit-filter: invert(100%);
@@ -436,9 +435,9 @@ img {
 	background-color: @editorBackColor; //#171714
 	border-top: @editorBorderColor;
 	color: @editorColor;
-	margin: 0px;
-	left: 0px;
-	bottom: 0px;
+	margin: 0;
+	left: 0;
+	bottom: 0;
 	position: fixed;
 	z-index: 15;
 	width: 100%;
@@ -467,7 +466,7 @@ img {
 		}
 	}
 	.remove {
-		padding: 0px;
+		padding: 0;
 		opacity: 0.4;
 	}
 	.remove:hover {
@@ -480,9 +479,9 @@ img {
 		border-top: @editorBorderColor;
 		border-bottom: @editorBorderColor;
 		input[type=text] {
-			margin: 0px;
+			margin: 0;
 			padding: 2px;
-			border: 0px;
+			border: 0;
 			font-family: inherit;
 			font-size: inherit;
 			color: inherit;
@@ -490,7 +489,7 @@ img {
 		}
 	}
 	input[type=checkbox] {
-		margin: 0px;
+		margin: 0;
 		color: red;
 	}
 }
@@ -545,11 +544,11 @@ img {
 }
 
 .colorValue {
-	padding: 3px 6px 0px 6px;
+	padding: 3px 6px 0 6px;
 }
 
 .colorName {
-	padding: 0px 6px 6px 6px;
+	padding: 0 6px 6px 6px;
 }
 
 .loading {
