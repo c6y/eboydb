@@ -36,7 +36,7 @@ input.myPixInput,
 .toPool,
 .goPool,
 .toSpriteBox,
-.goSpriteBox, 
+.goSpriteBox,
 .toDocEdit,
 .goDocEdit,
 .remove,
@@ -51,8 +51,8 @@ input.myPixInput,
 .toColors,
 #toggleEditorMenu,
 .fileUpload,
-.searchForTag,
- {
+.searchForTag
+{
 	cursor: pointer;
 }
 
@@ -557,4 +557,15 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.notFound {
+	color: @almostBlack;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	p {
+		text-align: center;
+	}
 }
