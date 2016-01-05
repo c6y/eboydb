@@ -39,7 +39,7 @@ Template.pool.helpers({
 		}
 
 		// set a max background width for non-fullframe images
-		let maxDocBoxWidth;
+		let maxDocBoxWidth = widthOrig * dimensionsTo.factor;
 		if (!this.metadata.fullframe) {
 			maxDocBoxWidth = Math.floor(dimensionsTo.width * 1.4);
 		}
@@ -142,4 +142,3 @@ Template.pool.events({
 		}
 	},
 });
-
