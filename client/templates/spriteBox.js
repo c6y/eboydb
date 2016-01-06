@@ -29,7 +29,6 @@ Template.spriteBox.helpers({
 	scaledSprite() {
 		const widthOriginal = this.metadata.width;
 		const heightOriginal = this.metadata.height;
-		const borderFactor = 0.9; // 1 is will cover the whole area, no borders
 		const boxSize = FlowRouter.getParam('boxsize');
 		const maxSpriteBoxSize = Math.min(window.innerHeight, window.innerWidth);
 
@@ -42,17 +41,27 @@ Template.spriteBox.helpers({
 			spriteBoxWidth = window.innerWidth;
 			spriteBoxHeight = window.innerHeight;
 		}
-
-		const widthMax =  spriteBoxWidth * borderFactor; // zoomDimension;
-		const heightMax =  spriteBoxHeight * borderFactor; // zoomDimension;
-
-		const dimensionsTo = Meteor.myFunctions.scaleByIntToFit(
-			widthOriginal,
-			heightOriginal,
-			widthMax,
-			heightMax
-		);
-
+		let dimensionsTo;
+		if (this.metadata.tags.indexOf('photo') < 0) {
+			const borderFactor = 0.9; // 1 is will cover the whole area, no borders
+			const widthMax =  spriteBoxWidth * borderFactor; // zoomDimension;
+			const heightMax =  spriteBoxHeight * borderFactor; // zoomDimension;
+			dimensionsTo = Meteor.myFunctions.scaleByIntToFit(
+				widthOriginal,
+				heightOriginal,
+				widthMax,
+				heightMax
+			);
+		} else {
+			const windowWidth =  window.innerWidth; // zoomDimension;
+			const windowHeight =  window.innerHeight; // zoomDimension;
+			dimensionsTo = Meteor.myFunctions.scaleSoftToFit(
+				widthOriginal,
+				heightOriginal,
+				windowWidth,
+				windowHeight
+			);
+		}
 		return {
 			width: dimensionsTo.width,
 			height: dimensionsTo.height,
