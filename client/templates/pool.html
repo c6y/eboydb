@@ -2,7 +2,7 @@
 	<div class="container">
 		{{#if Template.subscriptionsReady}}
 			{{#each showPix}}
-				<div class="docbox" style="background-color: {{ backColor }}; {{ scaledSprite.styleMaxDocBoxWidth }} {{ styleFlexOff }}">
+				<div class="docbox" style="background-color:{{ backColor }}; {{ scaledSprite.styleMaxDocBoxWidth }} {{ styleFlexOff }}">
 
 				{{#if currentUser.profile.isEditor}}
 					{{#if showDocInfo}}

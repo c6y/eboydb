@@ -54,9 +54,8 @@ Template.pool.helpers({
 			widthOffset = thumbnailDimension * 2 - widthOrig * dimensionsTo.factor;
 		}
 
-		// if this is a photo do not set max width style
 		let styleMaxDocBoxWidthString = false;
-		if (this.metadata.tags.indexOf('photo') < 0) {
+		if (!this.metadata.fullframe) {
 			styleMaxDocBoxWidthString = 'max-width:' + maxDocBoxWidth + 'px;';
 		}
 
