@@ -54,6 +54,12 @@ Template.pool.helpers({
 			widthOffset = thumbnailDimension * 2 - widthOrig * dimensionsTo.factor;
 		}
 
+		// if this is a photo do not set max width style
+		let styleMaxDocBoxWidthString = false;
+		if (this.metadata.tags.indexOf('photo') < 0) {
+			styleMaxDocBoxWidthString = 'max-width:' + maxDocBoxWidth + 'px;';
+		}
+
 		return {
 			width: dimensionsTo.width,
 			height: dimensionsTo.height,
@@ -64,7 +70,7 @@ Template.pool.helpers({
 			widthDevice: dimensionsTo.width * window.devicePixelRatio,
 			heightDevice: dimensionsTo.height * window.devicePixelRatio,
 			scaleFactorDevice: dimensionsTo.factor * window.devicePixelRatio,
-			styleMaxDocBoxWidth: 'max-width:' + maxDocBoxWidth + 'px;',
+			styleMaxDocBoxWidth: styleMaxDocBoxWidthString,
 		};
 	},
 	showPix() {
