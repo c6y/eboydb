@@ -64,8 +64,12 @@
 							<li><span class="property">scaledSprite-Device w/h</span>: {{ scaledSprite.widthDevice }}<span class="unit">px</span>/{{ scaledSprite.heightDevice }}<span class="unit">px</span></li>
 							<li><span class="property">scaledSprite-scaleFactorDevice</span>: {{ 	scaledSprite.scaleFactorDevice }}×</li>
 							<li><span class="property">uploadedBy.id</span>: {{this.metadata.uploadedBy.id}}</li>
-							<li><span class="property">uploadedBy.username</span>: {{this.metadata.uploadedBy.username}}</li>
-							<li><span class="property">users.username</span>: {{ showThisUserName }}</li>
+							{{#if this.metadata.uploadedBy.username}}
+								<li><span class="property">uploadedBy.username</span>: {{this.metadata.uploadedBy.username}}</li>
+							{{/if}}
+							{{#if showThisUserName }}
+								<li><span class="property">users.username</span>: {{ showThisUserName }}</li>
+							{{/if}}
 						{{/if}}
 					</ol>
 				</div>
