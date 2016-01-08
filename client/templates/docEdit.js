@@ -163,53 +163,40 @@ Template.docEdit.events({
 			Meteor.call('removeTag', thisId, thisTag);
 		}
 	},
-	// 'keypress input.editLinkLabel': function(event) {
-	// 	if (Meteor.user().profile.isEditor) {
-	// 		if (event.which === 13) {
-	// 			const thisId = this._id;
-	// 			const linkLabel = event.currentTarget.value;
-	// 			Meteor.call('updateLinkLabel', thisId, linkLabel);
-	// 		}
-	// 	}
-	// },
-	// 'keypress input.editLinkName': function(event) {
-	// 	if (Meteor.user().profile.isEditor) {
-	// 		if (event.which === 13) {
-	// 			const thisId = this._id;
-	// 			const linkName = event.currentTarget.value;
-	// 			Meteor.call('updateLinkName', thisId, linkName);
-	// 		}
-	// 	}
-	// },
-	// 'keypress input.editLinkURL': function(event) {
-	// 	if (Meteor.user().profile.isEditor) {
-	// 		if (event.which === 13) {
-	// 			const thisId = this._id;
-	// 			const linkURL = event.currentTarget.value;
-	// 			Meteor.call('updateLinkURL', thisId, linkURL);
-	// 		}
-	// 	}
-	// },
-	// 'click #submitLink': function(event) {
-	// 	if (Meteor.user().profile.isEditor) {
-	// 		// const thisId = this._id;
-	// 		// const linkLabel = element.editLinkLabel(event)
-	// 		// console.log(thisId);
-	// 		// // Meteor.call('updateLinkLabel', thisId, linkLabel);
-	// 	}
-	// },
-	'submit form': function() {
-		event.preventDefault();
-		console.log("Form submitted");
-		console.log(event.type);
-		const linkLabel = event.target.linkLabel.value;
-		const linkName = event.target.linkName.value;
-		const linkURL = event.target.linkURL.value;
-    console.log(linkLabel + ', ' + linkName + ', ' + linkURL);
+	'click #submitLink': function() {
+		const linkLabel = document.getElementById('editLinkLabel').value;
+		const linkName = document.getElementById('editLinkName').value;
+		const linkURL = document.getElementById('editLinkURL').value;
 
-		const thisId = this._id;
-		Meteor.call('updateLinkLabel', thisId, linkLabel);
-		Meteor.call('updateLinkName', thisId, linkName);
-		Meteor.call('updateLinkURL', thisId, linkURL);
-	}
+		// check if fields are empty
+		// if URL starts with 'http'
+		// if label is part of allowed labels
+		if (linkName.length > 0 && linkURL.length > 0 ) {
+			if (linkURL.substring(0, 4) == 'http') {
+				if (linkLabels.indexOf(linkLabel) > -1) {
+					const thisId = this._id;
+					Meteor.call('updateLinkLabel', thisId, linkLabel);
+					Meteor.call('updateLinkName', thisId, linkName);
+					Meteor.call('updateLinkURL', thisId, linkURL);
+				} else {
+					const allowedLabels = linkLabels.join(', ');
+					window.alert(
+						'\"' + linkLabel +
+						'\" label not allowed, please use these: ' +
+						allowedLabels
+					);
+				}
+			} else {
+				window.alert('Error: URL does not start with \"http\"');
+			}
+		} else {
+			window.alert('Error: field empty');
+		}
+	},
+	'click .removelink': function() {
+		if (Meteor.user().profile.isEditor) {
+			const thisId = FlowRouter.getParam('_id');
+			Meteor.call('deleteLink', thisId);
+		}
+	},
 });

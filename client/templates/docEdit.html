@@ -46,7 +46,7 @@
 							value = "{{ madeDateGMT.iso }}"
 							class="editMadeDate"
 							maxlength="39"
-							size="24"
+							size="20"
 						>
 					</div>
 					<div><label class="property">license</label>:
@@ -54,50 +54,47 @@
 							type="text"
 							name="license"
 							value="{{ this.metadata.license }}"
-							class="editLicense"
+							id="editLicense"
 							maxlength="24"
 							size="17"
 						>
 					</div>
+				</div>
 
-					<form id="addLink">
-						<span><label class="property">linkLabel</label>:
-							<input
-								type="text"
-								name="linkLabel"
-								value="{{ showLinkLabel }}"
-								class="editLinkLabel"
-								maxlength="24"
-								size="9"
-							>
+				<div class="editLink">
+					<div><label class="property">label</label>:
+						<input
+							type="text"
+							name="linkLabel"
+							value="{{ showLinkLabel }}"
+							id="editLinkLabel"
+							maxlength="24"
+							size="38"
+						>
+					</div>
+					<div><label class="property">name</label>:
+						<input
+							type="text"
+							name="linkName"
+							value="{{ showLinkName }}"
+							id="editLinkName"
+							maxlength="26"
+							size="39"
+						>
+					</div>
+					<div><label class="property">url</label>:
+						<input
+							type="text"
+							name="linkURL"
+							value="{{ showLinkURL }}"
+							id="editLinkURL"
+							maxlength="256"
+							size="40"
+						>
+						<span class="submitLinkButton">
+							<a id="submitLink">[submit]</a>
 						</span>
-
-						<span><label class="property">linkName</label>:
-							<input
-								type="text"
-								name="linkName"
-								value="{{ showLinkName }}"
-								class="editLinkName"
-								maxlength="24"
-								size="17"
-							>
-						</span>
-
-						<span><label class="property">linkURL</label>:
-							<input
-								type="text"
-								name="linkURL"
-								value="{{ showLinkURL }}"
-								class="editLinkURL"
-								maxlength=256;
-								size="17"
-							>
-						</span>
-						<span>
-							<input type="submit" value="submitLink">
-						</span>
-				</form>
-
+					</div>
 				</div>
 				<ol>
 					<li><span class="property">_id</span>: {{ this._id }}</li>
@@ -122,10 +119,21 @@
 							<span class="remove">(×)</span><span class="tag">{{this}}</span>
 						{{/each}}
 					</li>
-					<li><span class="property">metadata.madeDate</span>: {{ madeDateGMT.iso }}</li>
+					{{#if madeDateGMT.iso }}
+						<li><span class="property">metadata.madeDate</span>: {{ madeDateGMT.iso }}</li>
+					{{/if}}
 					<li><span class="property">uploadedBy.id</span>: {{ this.metadata.uploadedBy.id }}</li>
-					<li><span class="property">uploadedBy.username</span>: {{ this.metadata.uploadedBy.username }}</li>
-					<li><span class="property">users.username</span>: {{ showThisUserName }}</li>
+					{{#if this.metadata.uploadedBy.username }}
+						<li><span class="property">uploadedBy.username</span>: {{ this.metadata.uploadedBy.username }}</li>
+					{{/if}}
+					{{#if showThisUserName }}
+						<li><span class="property">users.username</span>: {{ showThisUserName }}</li>
+					{{/if}}
+					{{#if showLinkLabel }}
+					<li><span class="property">collection.links</span>:
+						<span class="removelink">(×)</span>{{ showLinkLabel }}: <a href="{{ showLinkURL }}">{{ showLinkName }}</a>
+					</li>
+					{{/if}}
 				</ol>
 			</div>
 		{{/if}}

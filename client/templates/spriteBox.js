@@ -14,6 +14,7 @@ Template.spriteBox.onCreated(function() {
 		}
 		self.subscribe('userStatus');
 		self.subscribe('aPix', thisId, searchSlug, searchQuery);
+		self.subscribe('aDocsLinks', thisId);
 	});
 });
 
@@ -136,6 +137,33 @@ Template.spriteBox.helpers({
 		}
 
 		return FlowRouter.path('pool', params, poolQuery);
+	},
+	showLinkLabel() {
+		const thisId = this._id;
+		const selector = { myPixId: thisId };
+		const thisLinkObj = DocLinks.findOne(selector);
+		if (thisLinkObj) {
+			const thisLinkLabel = thisLinkObj.label;
+			return thisLinkLabel;
+		}
+	},
+	showLinkName() {
+		const thisId = this._id;
+		const selector = { myPixId: thisId };
+		const thisLinkObj = DocLinks.findOne(selector);
+		if (thisLinkObj) {
+			const thisLinkName = thisLinkObj.name;
+			return thisLinkName;
+		}
+	},
+	showLinkURL() {
+		const thisId = this._id;
+		const selector = { myPixId: thisId };
+		const thisLinkObj = DocLinks.findOne(selector);
+		if (thisLinkObj) {
+			const thisLinkURL = thisLinkObj.url;
+			return thisLinkURL;
+		}
 	},
 });
 
