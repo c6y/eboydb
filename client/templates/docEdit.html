@@ -29,7 +29,7 @@
 							class="editBackColor"
 							maxlength="24"
 							size="20"
-						/>
+						>
 					</div>
 					<div><label class="property">fullframe</label>:
 						<input
@@ -37,17 +37,17 @@
 							name="rectangle"
 							checked="{{ this.metadata.fullframe }}"
 							class="editFullframe"
-						/>
+						>
 					</div>
 					<div><label class="property">madeDate</label>:
 						<input
 							type="text"
-							name="backColor"
+							name="madeDate"
 							value = "{{ madeDateGMT.iso }}"
 							class="editMadeDate"
 							maxlength="39"
 							size="24"
-						/>
+						>
 					</div>
 					<div><label class="property">license</label>:
 						<input
@@ -57,8 +57,47 @@
 							class="editLicense"
 							maxlength="24"
 							size="17"
-						/>
+						>
 					</div>
+
+					<form id="addLink">
+						<span><label class="property">linkLabel</label>:
+							<input
+								type="text"
+								name="linkLabel"
+								value="{{ showLinkLabel }}"
+								class="editLinkLabel"
+								maxlength="24"
+								size="9"
+							>
+						</span>
+
+						<span><label class="property">linkName</label>:
+							<input
+								type="text"
+								name="linkName"
+								value="{{ showLinkName }}"
+								class="editLinkName"
+								maxlength="24"
+								size="17"
+							>
+						</span>
+
+						<span><label class="property">linkURL</label>:
+							<input
+								type="text"
+								name="linkURL"
+								value="{{ showLinkURL }}"
+								class="editLinkURL"
+								maxlength=256;
+								size="17"
+							>
+						</span>
+						<span>
+							<input type="submit" value="submitLink">
+						</span>
+				</form>
+
 				</div>
 				<ol>
 					<li><span class="property">_id</span>: {{ this._id }}</li>

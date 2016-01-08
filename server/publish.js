@@ -59,7 +59,7 @@ Meteor.publish('aPix', function(id, slug, query) {
 	} else {
 		var newerDocId = false;
 	}
-	
+
 	// set filter to sort by date and get previous document id
 	var prevIndex = index - 1;
 	var filterPrevious = {
@@ -156,4 +156,16 @@ Meteor.publish('userStatus', function() {
 		'profile.isEditor': 1,
 	}};
 	return Meteor.users.find({}, options);
+});
+
+Meteor.publish('aDocsLinks', function(imageId) {
+	const selector = {'myPixId': imageId};
+	// const options = {fields: {
+	// 	'_id': 1,
+	// 	'myPixId': 1,
+	// 	'label': 1,
+	// 	'name': 1,
+	// 	'url': 1,
+	// }};
+	return DocLinks.find(selector);
 });

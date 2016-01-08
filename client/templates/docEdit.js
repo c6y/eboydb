@@ -4,6 +4,7 @@ Template.docEdit.onCreated(function() {
 		const thisId = FlowRouter.getParam('_id');
 		self.subscribe('aPix', thisId);
 		self.subscribe('userStatus');
+		self.subscribe('aDocsLinks', thisId);
 	});
 });
 
@@ -59,6 +60,33 @@ Template.docEdit.helpers({
 		const thisUserObj = Meteor.users.findOne(thisUserId);
 		const thisUserName = thisUserObj.username;
 		return thisUserName;
+	},
+	showLinkLabel() {
+		const thisId = this._id;
+		const selector = { myPixId: thisId };
+		const thisLinkObj = DocLinks.findOne(selector);
+		if (thisLinkObj) {
+			const thisLinkLabel = thisLinkObj.label;
+			return thisLinkLabel;
+		}
+	},
+	showLinkName() {
+		const thisId = this._id;
+		const selector = { myPixId: thisId };
+		const thisLinkObj = DocLinks.findOne(selector);
+		if (thisLinkObj) {
+			const thisLinkName = thisLinkObj.name;
+			return thisLinkName;
+		}
+	},
+	showLinkURL() {
+		const thisId = this._id;
+		const selector = { myPixId: thisId };
+		const thisLinkObj = DocLinks.findOne(selector);
+		if (thisLinkObj) {
+			const thisLinkURL = thisLinkObj.url;
+			return thisLinkURL;
+		}
 	},
 });
 
@@ -135,4 +163,53 @@ Template.docEdit.events({
 			Meteor.call('removeTag', thisId, thisTag);
 		}
 	},
+	// 'keypress input.editLinkLabel': function(event) {
+	// 	if (Meteor.user().profile.isEditor) {
+	// 		if (event.which === 13) {
+	// 			const thisId = this._id;
+	// 			const linkLabel = event.currentTarget.value;
+	// 			Meteor.call('updateLinkLabel', thisId, linkLabel);
+	// 		}
+	// 	}
+	// },
+	// 'keypress input.editLinkName': function(event) {
+	// 	if (Meteor.user().profile.isEditor) {
+	// 		if (event.which === 13) {
+	// 			const thisId = this._id;
+	// 			const linkName = event.currentTarget.value;
+	// 			Meteor.call('updateLinkName', thisId, linkName);
+	// 		}
+	// 	}
+	// },
+	// 'keypress input.editLinkURL': function(event) {
+	// 	if (Meteor.user().profile.isEditor) {
+	// 		if (event.which === 13) {
+	// 			const thisId = this._id;
+	// 			const linkURL = event.currentTarget.value;
+	// 			Meteor.call('updateLinkURL', thisId, linkURL);
+	// 		}
+	// 	}
+	// },
+	// 'click #submitLink': function(event) {
+	// 	if (Meteor.user().profile.isEditor) {
+	// 		// const thisId = this._id;
+	// 		// const linkLabel = element.editLinkLabel(event)
+	// 		// console.log(thisId);
+	// 		// // Meteor.call('updateLinkLabel', thisId, linkLabel);
+	// 	}
+	// },
+	'submit form': function() {
+		event.preventDefault();
+		console.log("Form submitted");
+		console.log(event.type);
+		const linkLabel = event.target.linkLabel.value;
+		const linkName = event.target.linkName.value;
+		const linkURL = event.target.linkURL.value;
+    console.log(linkLabel + ', ' + linkName + ', ' + linkURL);
+
+		const thisId = this._id;
+		Meteor.call('updateLinkLabel', thisId, linkLabel);
+		Meteor.call('updateLinkName', thisId, linkName);
+		Meteor.call('updateLinkURL', thisId, linkURL);
+	}
 });
