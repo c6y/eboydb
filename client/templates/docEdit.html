@@ -131,7 +131,12 @@
 					{{/if}}
 					{{#if showLinkLabel }}
 					<li><span class="property">collection.links</span>:
-						<span class="removelink">(×)</span>{{ showLinkLabel }}: <a href="{{ showLinkURL }}">{{ showLinkName }}</a>
+						<span class="removelink">(×)</span>{{ showLinkLabel }}:
+						{{#if showLinkURL }}
+							<a href="{{ showLinkURL }}">{{ showLinkName }}</a>
+						{{else}}
+							{{ showLinkName }}
+						{{/if}}
 					</li>
 					{{/if}}
 				</ol>

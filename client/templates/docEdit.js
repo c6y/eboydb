@@ -101,10 +101,11 @@ Template.docEdit.events({
 			if (event.which === 13) {
 				const newTag = event.currentTarget.value;
 				const cleanNewTag = newTag.toLowerCase().replace(/ /gi, '-');
+				const checkedTag = Meteor.myFunctions.getTagAlias(cleanNewTag);
 				const thisId = this._id;
 
 				if (!!newTag) { // if not empty
-					Meteor.call('addATag', thisId, cleanNewTag);
+					Meteor.call('addATag', thisId, checkedTag);
 				}
 				event.currentTarget.value = ''; // empty input field
 			}
@@ -167,13 +168,12 @@ Template.docEdit.events({
 		const linkLabel = document.getElementById('editLinkLabel').value;
 		const linkName = document.getElementById('editLinkName').value;
 		const linkURL = document.getElementById('editLinkURL').value;
+		const httpStart = linkURL.match('^http');
 
-		// check if fields are empty
-		// if URL starts with 'http'
-		// if label is part of allowed labels
-		if (linkName.length > 0 && linkURL.length > 0 ) {
-			if (linkURL.substring(0, 4) == 'http') {
-				if (linkLabels.indexOf(linkLabel) > -1) {
+		if (linkName.length > 0) {
+			// URL has to be empty — or start with 'http'
+			if (!linkURL || httpStart ) {
+				if (linkLabels.includes(linkLabel)) {
 					const thisId = this._id;
 					Meteor.call('updateLinkLabel', thisId, linkLabel);
 					Meteor.call('updateLinkName', thisId, linkName);

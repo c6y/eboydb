@@ -19,8 +19,13 @@
 				</span>
 			</div>
 			<div class="eboycopyright" style="color:{{ inverseBackColor }}" >
-				{{ #if showLinkLabel }}
-					{{ showLinkLabel }}: <a target="_blank" href="{{ showLinkURL }}">{{ showLinkName }}</a> |
+				{{#if showLinkLabel }}
+					{{ showLinkLabel }}:
+					{{#if showLinkURL }}
+						<a target="_blank" href="{{ showLinkURL }}">{{ showLinkName }}</a> |
+					{{else}}
+						{{ showLinkName }} |
+					{{/if}}
 				{{/if}}
 				{{this.metadata.copyright}} {{ madeDate }}
 			</div>
