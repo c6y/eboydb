@@ -19,14 +19,14 @@
 				</span>
 			</div>
 			<div class="eboycopyright" style="color:{{ inverseBackColor }}" >
-				{{#if showLinkLabel }}
-					{{ showLinkLabel }}:
-					{{#if showLinkURL }}
-						<a target="_blank" href="{{ showLinkURL }}">{{ showLinkName }}</a> |
+				{{#each showLinks}}
+					{{ this.label }}:
+					{{#if this.url }}
+						<a target="_blank" href="{{ this.url }}">{{ this.name }}</a> |
 					{{else}}
-						{{ showLinkName }} |
+						{{ this.name }} |
 					{{/if}}
-				{{/if}}
+				{{/each}}
 				{{this.metadata.copyright}} {{ madeDate }}
 			</div>
 			<div class="spriteBoxInfoToggle" style="color:{{ inverseBackColor }}">^</div>

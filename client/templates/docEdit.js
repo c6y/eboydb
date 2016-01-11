@@ -61,6 +61,21 @@ Template.docEdit.helpers({
 		const thisUserName = thisUserObj.username;
 		return thisUserName;
 	},
+
+	showLinks() {
+		const thisId = this._id;
+		const selector = { myPixId: thisId };
+		const thisLinkObj = DocLinks.find(selector);
+		return thisLinkObj;
+		//
+		// console.log('thisLinkObj: ' + thisLinkObj);
+		// if (thisLinkObj) {
+		// 	const thisLinkLabel = thisLinkObj.label;
+		// 	return thisLinkLabel;
+		// }
+	},
+
+
 	showLinkLabel() {
 		const thisId = this._id;
 		const selector = { myPixId: thisId };
@@ -197,4 +212,11 @@ Template.docEdit.events({
 			Meteor.call('deleteLink', thisId);
 		}
 	},
+
+	// 'click .removelink': function() {
+	// 	if (Meteor.user().profile.isEditor) {
+	// 		const thisId =  this._id;
+	// 		Meteor.call('deleteLink', thisId);
+	// 	}
+	// },
 });
