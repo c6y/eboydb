@@ -175,9 +175,7 @@ Template.docEdit.events({
 			if (!linkURL || httpStart ) {
 				if (linkLabels.includes(linkLabel)) {
 					const thisId = this._id;
-					Meteor.call('updateLinkLabel', thisId, linkLabel);
-					Meteor.call('updateLinkName', thisId, linkName);
-					Meteor.call('updateLinkURL', thisId, linkURL);
+					Meteor.call('addLink', thisId, linkLabel, linkName, linkURL);
 				} else {
 					const allowedLabels = linkLabels.join(', ');
 					window.alert(
@@ -195,7 +193,7 @@ Template.docEdit.events({
 	},
 	'click .removelink': function() {
 		if (Meteor.user().profile.isEditor) {
-			const thisId = FlowRouter.getParam('_id');
+			const thisId =  this._id;
 			Meteor.call('deleteLink', thisId);
 		}
 	},
