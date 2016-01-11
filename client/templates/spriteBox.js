@@ -143,41 +143,7 @@ Template.spriteBox.helpers({
 		const selector = { myPixId: thisId };
 		const thisLinkObj = DocLinks.find(selector);
 		return thisLinkObj;
-		//
-		// console.log('thisLinkObj: ' + thisLinkObj);
-		// if (thisLinkObj) {
-		// 	const thisLinkLabel = thisLinkObj.label;
-		// 	return thisLinkLabel;
-		// }
 	},
-
-	// showLinkLabel() {
-	// 	const thisId = this._id;
-	// 	const selector = { myPixId: thisId };
-	// 	const thisLinkObj = DocLinks.findOne(selector);
-	// 	if (thisLinkObj) {
-	// 		const thisLinkLabel = thisLinkObj.label;
-	// 		return thisLinkLabel;
-	// 	}
-	// },
-	// showLinkName() {
-	// 	const thisId = this._id;
-	// 	const selector = { myPixId: thisId };
-	// 	const thisLinkObj = DocLinks.findOne(selector);
-	// 	if (thisLinkObj) {
-	// 		const thisLinkName = thisLinkObj.name;
-	// 		return thisLinkName;
-	// 	}
-	// },
-	// showLinkURL() {
-	// 	const thisId = this._id;
-	// 	const selector = { myPixId: thisId };
-	// 	const thisLinkObj = DocLinks.findOne(selector);
-	// 	if (thisLinkObj) {
-	// 		const thisLinkURL = thisLinkObj.url;
-	// 		return thisLinkURL;
-	// 	}
-	// },
 });
 
 Template.spriteBox.events({
