@@ -14,6 +14,7 @@ Template.spriteBox.onCreated(function() {
 		}
 		self.subscribe('userStatus');
 		self.subscribe('aPix', thisId, searchSlug, searchQuery);
+		self.subscribe('aDocsLinks', thisId);
 	});
 });
 
@@ -136,6 +137,12 @@ Template.spriteBox.helpers({
 		}
 
 		return FlowRouter.path('pool', params, poolQuery);
+	},
+	showLinks() {
+		const thisId = this._id;
+		const selector = { myPixId: thisId };
+		const thisLinkObj = DocLinks.find(selector);
+		return thisLinkObj;
 	},
 });
 

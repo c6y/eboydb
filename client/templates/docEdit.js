@@ -4,6 +4,7 @@ Template.docEdit.onCreated(function() {
 		const thisId = FlowRouter.getParam('_id');
 		self.subscribe('aPix', thisId);
 		self.subscribe('userStatus');
+		self.subscribe('aDocsLinks', thisId);
 	});
 });
 
@@ -60,6 +61,12 @@ Template.docEdit.helpers({
 		const thisUserName = thisUserObj.username;
 		return thisUserName;
 	},
+	showLinks() {
+		const thisId = this._id;
+		const selector = { myPixId: thisId };
+		const thisLinkObj = DocLinks.find(selector);
+		return thisLinkObj;
+	},
 });
 
 Template.docEdit.events({
@@ -73,10 +80,11 @@ Template.docEdit.events({
 			if (event.which === 13) {
 				const newTag = event.currentTarget.value;
 				const cleanNewTag = newTag.toLowerCase().replace(/ /gi, '-');
+				const checkedTag = Meteor.myFunctions.getTagAlias(cleanNewTag);
 				const thisId = this._id;
 
 				if (!!newTag) { // if not empty
-					Meteor.call('addATag', thisId, cleanNewTag);
+					Meteor.call('addATag', thisId, checkedTag);
 				}
 				event.currentTarget.value = ''; // empty input field
 			}
@@ -133,6 +141,39 @@ Template.docEdit.events({
 			const thisId = FlowRouter.getParam('_id');
 			const thisTag = String(this);
 			Meteor.call('removeTag', thisId, thisTag);
+		}
+	},
+	'click #submitLink': function() {
+		const linkLabel = document.getElementById('editLinkLabel').value;
+		const linkName = document.getElementById('editLinkName').value;
+		const linkURL = document.getElementById('editLinkURL').value;
+		const httpStart = linkURL.match('^http');
+
+		if (linkName.length > 0) {
+			// URL has to be empty — or start with 'http'
+			if (!linkURL || httpStart ) {
+				if (linkLabels.includes(linkLabel)) {
+					const thisId = this._id;
+					Meteor.call('addLink', thisId, linkLabel, linkName, linkURL);
+				} else {
+					const allowedLabels = linkLabels.join(', ');
+					window.alert(
+						'\"' + linkLabel +
+						'\" label not allowed, please use these: ' +
+						allowedLabels
+					);
+				}
+			} else {
+				window.alert('Error: URL does not start with \"http\"');
+			}
+		} else {
+			window.alert('Error: field empty');
+		}
+	},
+	'click .removelink': function() {
+		if (Meteor.user().profile.isEditor) {
+			const thisId =  this._id;
+			Meteor.call('deleteLink', thisId);
 		}
 	},
 });

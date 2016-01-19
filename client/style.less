@@ -40,6 +40,7 @@ input.myPixInput,
 .toDocEdit,
 .goDocEdit,
 .remove,
+.removelink,
 .goOlderDoc,
 .goNewerDoc,
 .spriteBoxInfoToggle,
@@ -51,7 +52,8 @@ input.myPixInput,
 .toColors,
 #toggleEditorMenu,
 .fileUpload,
-.searchForTag
+.searchForTag,
+.submitLinkButton,
 {
 	cursor: pointer;
 }
@@ -419,7 +421,17 @@ img {
 	right: 0;
 	padding: 3px 12px;
 	z-index: 20;
+	a{
+		text-decoration: none;
+		color: inherit;
+	}
+	a:hover{
+		// background-color: @editorColor;
+		color: inherit;
+		text-decoration: underline;
+	}
 	// -webkit-filter: invert(100%);
+
 }
 
 .spriteBoxInfoToggle {
@@ -444,6 +456,34 @@ img {
 	.property {
 		color: @editorHighlight;
 	}
+	.editLink {
+		margin: 0;
+		padding: 12px 12px;
+		border-bottom: @editorBorderColor;
+		input[type=text] {
+			margin: 0;
+			padding: 2px;
+			border: 0;
+			font-family: inherit;
+			font-size: inherit;
+			color: inherit;
+			background-color: inherit;
+			// background-color: gray;
+		}
+	}
+	.submitLinkButton {
+		a:hover {
+			color: @editorBackColor;
+			background-color: @editorColor;
+		}
+		// text-align: right;
+		// padding: 0 3px;
+		// color: @editorColor;
+		// background-color: @editorBackColor;
+		// border: 1px @editorColor solid;
+		// border-radius: 3px;
+	}
+
 	ol {
 		margin: 0;
 		padding: 12px 12px 18px 12px;
@@ -465,11 +505,11 @@ img {
 			content:''
 		}
 	}
-	.remove {
+	.remove, .removelink {
 		padding: 0;
 		opacity: 0.4;
 	}
-	.remove:hover {
+	.remove:hover, .removelink:hover {
 		color: @deleteHighlight;
 		opacity: 1;
 	}

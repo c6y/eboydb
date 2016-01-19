@@ -38,6 +38,7 @@ cfs:worker@0.1.4
 check@1.1.0
 coffeescript@1.0.11
 cosmos:browserify@0.9.3
+datariot:ganalytics@0.2.1
 ddp@1.2.2
 ddp-client@1.2.1
 ddp-common@1.2.2
@@ -67,6 +68,8 @@ localstorage@1.0.5
 logging@1.0.8
 meteor@1.1.10
 meteor-base@1.0.1
+meteorhacks:kadira@2.27.2
+meteorhacks:meteorx@1.4.1
 minifiers@1.1.7
 minimongo@1.0.10
 mobile-experience@1.0.1

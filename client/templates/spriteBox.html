@@ -7,7 +7,7 @@
 					background-color: {{ backColor }};
 				}
 			</style>
-			
+
 			<div class="goNewerDoc" style="color:{{ inverseBackColor }}">
 				<span class="navButton">
 					&#x25c0;
@@ -19,7 +19,15 @@
 				</span>
 			</div>
 			<div class="eboycopyright" style="color:{{ inverseBackColor }}" >
-				©eBoy {{ madeDate }}
+				{{#each showLinks}}
+					{{ this.label }}:
+					{{#if this.url }}
+						<a target="_blank" href="{{ this.url }}">{{ this.name }}</a> |
+					{{else}}
+						{{ this.name }} |
+					{{/if}}
+				{{/each}}
+				{{this.metadata.copyright}} {{ madeDate }}
 			</div>
 			<div class="spriteBoxInfoToggle" style="color:{{ inverseBackColor }}">^</div>
 			<div class="contentbackground" style="background-color: {{ backColor }}">
@@ -36,21 +44,22 @@
 						{{#if this.metadata.madeDate}}
 							<li><span class="property">year</span>: {{ madeDate }}</li>
 						{{/if}}
-						<li><span class="property">uploaded</span>: {{ formatDate }}</li>
+
 						<li><span class="property">dimensions w/h</span>: {{this.metadata.width}}<span class="unit">px</span>/{{this.metadata.height}}<span class="unit">px</span></li>
 						<li><span class="property">size</span>: {{sizeFormatted.value}}<span class="unit">{{sizeFormatted.unit}}</span></li>
 						<li><span class="property">copyright</span>: {{this.metadata.copyright}}</li>
-						
+
 						{{#if this.metadata.license}}
 							<li><span class="property">license</span>: {{this.metadata.license}}</li>
 						{{/if}}
 
-						<li><span class="property">tags</span>: 
+						<li><span class="property">tags</span>:
 							{{#each this.metadata.tags}}
 								<span class="tag"><a class="searchForTag">{{ this }}</a></span>
 							{{/each}}
 						</li>
 						{{#if currentUser.profile.isEditor}}
+							<li><span class="property">uploaded</span>: {{ formatDate }}</li>
 							<li><span class="property">background-color</span>: {{ this.metadata.backColor }}</li>
 							<li><span class="property">boxsize</span>: {{ scaledSprite.boxsize }}<span class="unit">px</span></li>
 							<li><span class="property">window w/h</span>: {{ scaledSprite.widthWindow }}<span class="unit">px</span>/{{ scaledSprite.heightWindow }}<span class="unit">px</span></li>
@@ -60,8 +69,12 @@
 							<li><span class="property">scaledSprite-Device w/h</span>: {{ scaledSprite.widthDevice }}<span class="unit">px</span>/{{ scaledSprite.heightDevice }}<span class="unit">px</span></li>
 							<li><span class="property">scaledSprite-scaleFactorDevice</span>: {{ 	scaledSprite.scaleFactorDevice }}×</li>
 							<li><span class="property">uploadedBy.id</span>: {{this.metadata.uploadedBy.id}}</li>
-							<li><span class="property">uploadedBy.username</span>: {{this.metadata.uploadedBy.username}}</li>
-							<li><span class="property">users.username</span>: {{ showThisUserName }}</li>
+							{{#if this.metadata.uploadedBy.username}}
+								<li><span class="property">uploadedBy.username</span>: {{this.metadata.uploadedBy.username}}</li>
+							{{/if}}
+							{{#if showThisUserName }}
+								<li><span class="property">users.username</span>: {{ showThisUserName }}</li>
+							{{/if}}
 						{{/if}}
 					</ol>
 				</div>
