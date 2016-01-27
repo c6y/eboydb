@@ -66,7 +66,13 @@ Template.newSearchPool.helpers({
 Template.newSearchPool.events({
 	'submit .seachDbForm': function(event) {
 		event.preventDefault();
-		const searchingFor = event.target.searchDB.value.toLowerCase();
+
+		let searchValue = event.target.searchDB.value;
+		if (!searchValue) {
+			searchValue = 'everything'; // if no value search for everything
+		}
+
+		const searchingFor = searchValue.toLowerCase();
 		const re = / /gi;
 
 		const trimmedSearch = searchingFor.replace(re, ''); // remove whitespace

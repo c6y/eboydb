@@ -6,7 +6,7 @@ Template.pool.onCreated(function() {
 		const searchQuery = FlowRouter.getQueryParam('q');
 
 		// check if slug is part of array containing aliases
-		// the aliasesForFullSearch array is defined in environment.js
+		// the aliasesForFullSearch array is defined in searchAliases.js
 		let searchTerm = searchSlug;
 		if (aliasesForFullSearch.indexOf(searchSlug.toLowerCase()) > -1) {
 			searchTerm = '.*';
