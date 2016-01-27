@@ -34,3 +34,5 @@ kadira:blaze-layout
 ecmascript
 meteorhacks:kadira
 datariot:ganalytics
+react
+kadira:react-layout

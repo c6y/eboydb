@@ -169,3 +169,11 @@ Meteor.publish('aDocsLinks', function(imageId) {
 	}};
 	return DocLinks.find(selector, options);
 });
+
+Meteor.publish('PixTags', function() {
+	const selector = {};
+	const options = {fields: {
+		'metadata.tags': 1,
+	}};
+	return MyPix.find(selector, options);
+});
