@@ -1,42 +1,30 @@
-Link = React.createClass({
-
-	mixins: [ReactMeteorData],
-
-	getMeteorData() {
-		let data = {};
-		theId = 'o29J4FceReBJfD6B5';
-		const handle = Meteor.subscribe('aDocsLinks', theId);
-		if (handle.ready()) {
-			data = DocLinks.findOne();
-		}
-		return data;
-	},
-
-	render() {
-		return (
-			<div className="container">
-				name:&nbsp;{ this.data.name }
-			</div>
-		);
-	},
-});
-
-
 Tags = React.createClass({
 	mixins: [ReactMeteorData],
 	getMeteorData() {
-		let docTags = {};
+		let docTags = [];
 		const handle = Meteor.subscribe('PixTags');
+
 		if (handle.ready()) {
-			// theData = MyPix.findOne();
 			docTags = MyPix.find().fetch();
+			// check and log if Array
+			if (docTags.constructor === Array) {
+				console.log('docTags is an Array');
+			}
+			// log length of Array
+			const qtyDocs = Object.keys(docTags).length;
+			console.log('qtyDocs: ' + qtyDocs);
 		}
-		return docTags;
+
+		return {
+			docTags,
+		};
 	},
 
 	renderTags() {
-		return this.getMeteorData().map((tag) => {
-			return <Tag key={tag._id} tag={tag} />;
+		return this.data.docTags.map((tagArray) => {
+			const tags = tagArray.metadata.tags;
+			console.log('tags: ' + tags);
+			return <span key={tagArray._id}>{tags} </span>
 		});
 	},
 
