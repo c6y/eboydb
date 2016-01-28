@@ -21,7 +21,9 @@ Tags = React.createClass({
 	},
 
 	renderTags() {
-		return this.data.docTags.map((tagArray) => {
+		let cleanTagArray = [];
+
+		foo = this.data.docTags.map((tagArray) => {
 			const tags = tagArray.metadata.tags;
 
 			const qtyTags = tags.length;
@@ -31,9 +33,21 @@ Tags = React.createClass({
 				console.log('tags is an Array');
 			}
 			console.log('tags: ' + tags);
-			return tags.toString() + ',';
+
+			tags.forEach(function(e) {
+				console.log('element: ' + e);
+
+				if (!cleanTagArray.includes(e)) {
+					console.log('not in Array: ' + e);
+					cleanTagArray.push(e);
+				}
+			});
 		});
+		console.log('cleanTagArray: ' + cleanTagArray);
+		console.log('cleanTagArray.length: ' + cleanTagArray.length);
+		return cleanTagArray.sort().join(', ');
 	},
+
 
 	render() {
 		return (
