@@ -609,3 +609,29 @@ img {
 		text-align: center;
 	}
 }
+
+#tagContainer {
+	padding: 16px 0 0 0;
+	ol {
+		color: @almostBlack;
+		margin: 0;
+		padding: 12px 12px 18px 12px;
+		li {
+			list-style-type: none;
+		}
+		a{
+			text-decoration: none;
+			color: @almostBlack;
+		}
+		a:hover{
+			background-color: @editorColor;
+			color: @editorBackColor;
+		}
+		.tag:after {
+			content: ','
+		}
+		.tag:last-of-type:after {
+			content:''
+		}
+	}
+}

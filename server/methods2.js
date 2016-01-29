@@ -2,7 +2,7 @@ Meteor.methods({
 	getTagsData() {
 		const allDocsTags = MyPix.find().fetch();
 		// console.log('allDocsTags: ' + allDocsTags);
-		uniqueTagsArray = ['START', 'sprite'];
+		uniqueTagsArray = [];
 
 		allDocsTags.map((doc) => {
 			const tags = doc.metadata.tags;
@@ -15,7 +15,7 @@ Meteor.methods({
 			});
 		});
 		// console.log('uniqueTagsArray: ' + uniqueTagsArray);
-		return uniqueTagsArray;
+		return uniqueTagsArray.sort();
 		// return 'TESTTEST';
 	},
 });

@@ -1,7 +1,10 @@
 <template name="tags">
-	<div class="container">
-		<div id="tagContainer">
-			tagCloud: {{ showTagCloud }}
-		</div>
+	<div id="tagContainer">
+		<ol>
+			{{#each showTagCloud }}
+				<span class="tag"><a href="{{ toTagPath }}">{{ this }}</a></span>
+				<!-- <span class="tag"><a class="searchForTag" href="">{{ this }}</a></span> -->
+			{{/each}}
+		</ol>
 	</div>
 </template>

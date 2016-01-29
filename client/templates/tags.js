@@ -1,22 +1,21 @@
 Template.tags.onCreated(function() {
-	Meteor.call('getTagsData', function(error, result) {
-		if (error) {
-			alert('Error');
-		} else {
-			console.log('typeof ' + 'result: ' + typeof result);
-
+	const self = this;
+	self.autorun(function() {
+		Meteor.call('getTagsData', function(error, result) {
 			Session.set('tagsList', result);
-			Template.instance().tagsList = new ReactiveVar( 'test' );
-		}
+		});
 	});
 });
 
 Template.tags.helpers({
 	showTagCloud() {
-		const tagsArray = Session.get('tagsList').join(', ');;
-		console.log('typeof ' + 'tagsArray: ' + typeof tagsArray);
-
+		const tagsArray = Session.get('tagsList');
 		return tagsArray;
-		// return Template.instance().tagsList.get();
-	}
+	},
+	toTagPath() {
+		const thisTag = this;
+		const params = {slug: thisTag, page: '1'};
+		const queryParams = {q: 'tag'};
+		return FlowRouter.path('pool', params, queryParams);
+	},
 });

@@ -28,30 +28,32 @@ Template.editorMenu.helpers({
 		}
 		return profileName;
 	},
-});
-
-Template.editorMenu.events({
-
-	'click .toPool': function() {
-		FlowRouter.go('/pool/everything/1');
+	toPoolPath() {
+		return FlowRouter.path('/pool/everything/1');
 	},
-	'click .toAddDoc': function() {
-		FlowRouter.go('addDoc');
+	toAddDocPath() {
+		return FlowRouter.path('addDoc');
 	},
-	'click .toLogin': function() {
-		FlowRouter.go('login');
+	toColorsPath() {
+		return FlowRouter.path('colors');
 	},
-	'click .toColors': function() {
-		FlowRouter.go('colors');
+	toTagsPath() {
+		return FlowRouter.path('tags');
 	},
-	'click .toDocEdit': function() {
+	toLoginPath() {
+		return FlowRouter.path('login');
+	},
+	toDocEditPath() {
 		const routeName = FlowRouter.getRouteName();
 		if (routeName === 'spriteBox') {
 			const thisId = FlowRouter.getParam('_id');
 			const params = {_id: thisId};
-			FlowRouter.go('docEdit', params);
+			return FlowRouter.path('docEdit', params);
 		}
 	},
+});
+
+Template.editorMenu.events({
 	'click #toggleEditorMenu': function() {
 		// set default if it hasn't been set before:
 		Session.setDefault('displayEditor', 'false');

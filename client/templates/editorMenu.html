@@ -9,12 +9,13 @@
 				{{/if}}
 			</span>
 			{{#if showEditor}}
-				<a class="toPool">pool</a> |
-				<a class="toAddDoc">addDoc</a> |
-				<a class="toLogin">{{ thisUserName }}</a> |
-				<a class="toColors">colors</a>
+				<a href="{{ toPoolPath }}">pool</a> |
+				<a href="{{ toAddDocPath }}">addDoc</a> |
+				<a href="{{ toColorsPath }}">colors</a> |
+				<a href="{{ toTagsPath }}">tags</a> |
+				<a href="{{ toLoginPath }}">{{ thisUserName }}</a>
 				{{#if onSpriteBox}}
-					| <a class="toDocEdit" title="Edit {{onSpriteBox.id}}">{{onSpriteBox.id}}</a>
+					| <a href="{{ toDocEditPath }}" title="Edit {{onSpriteBox.id}}">{{onSpriteBox.id}}</a>
 				{{/if}}
 			{{/if}}
 		</div>
