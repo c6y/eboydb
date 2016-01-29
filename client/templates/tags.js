@@ -18,4 +18,8 @@ Template.tags.helpers({
 		const queryParams = {q: 'tag'};
 		return FlowRouter.path('pool', params, queryParams);
 	},
+	tagsQuantity() {
+		const tagsArray = Session.get('tagsList');
+		return tagsArray.length;
+	},
 });
