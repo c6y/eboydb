@@ -1,25 +1,30 @@
 Template.tags.onCreated(function() {
-	const self = this;
-	self.autorun(function() {
-		Meteor.call('getTagsData', function(error, result) {
-			Session.set('tagsList', result);
-		});
+	this.distinctTags = new ReactiveVar();
+	Meteor.call('getDistinctTags', (error, result) => {
+		if (error) {
+			// do something
+		} else {
+			this.distinctTags.set(result); // save result when we get it
+		}
 	});
 });
 
 Template.tags.helpers({
-	showTagCloud() {
-		const tagsArray = Session.get('tagsList');
-		return tagsArray;
-	},
-	toTagPath() {
-		const thisTag = this;
-		const params = {slug: thisTag, page: '1'};
-		const queryParams = {q: 'tag'};
-		return FlowRouter.path('pool', params, queryParams);
+	tags: function() {
+		const theTags = Template.instance().distinctTags.get().sort();
+		// turn theTags array to tags — and path-to-tags
+		return _.map(theTags, aTag => {
+			const params = {slug: aTag, page: '1'};
+			const queryParams = {q: 'tag'};
+			const pathToTag = FlowRouter.path('pool', params, queryParams);
+			return {
+				aTag,
+				pathToTag,
+			};
+		});
 	},
 	tagsQuantity() {
-		const tagsArray = Session.get('tagsList');
+		const tagsArray = Template.instance().distinctTags.get();
 		return tagsArray.length;
 	},
 });
