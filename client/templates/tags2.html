@@ -1,0 +1,10 @@
+<template name="tags2">
+	<div id="tagContainer">
+		<ol>
+		<strong>{{tagsQuantity}} tags2:</strong>
+			{{ #each tags }}
+				<span class="tag"><a href="{{ pathToTag }}">{{ aTag }}</a></span>
+			{{ /each }}
+		</ol>
+	</div>
+</template>

@@ -1,7 +1,6 @@
 Meteor.methods({
 	getTagsData() {
 		const allDocsTags = MyPix.find().fetch();
-		// console.log('allDocsTags: ' + allDocsTags);
 		uniqueTagsArray = [];
 
 		allDocsTags.map((doc) => {
@@ -14,8 +13,12 @@ Meteor.methods({
 				}
 			});
 		});
-		// console.log('uniqueTagsArray: ' + uniqueTagsArray);
 		return uniqueTagsArray.sort();
-		// return 'TESTTEST';
+	},
+	getDistinctTags() {
+		// get unique tags only, via Mongo's distinct
+		return Meteor.wrapAsync(function(callback) {
+			MyPix.files.rawCollection().distinct('metadata.tags', callback);
+		})();
 	},
 });
