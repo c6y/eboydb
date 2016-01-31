@@ -1,9 +1,9 @@
 Meteor.startup(function() {
 	$(document).on('keyup', function(event) {
 		const thisRoute = FlowRouter.getRouteName();
-		const newerKey = 219;
-		const olderKey = 221;
-		const infoKey = 73;
+		const newerKey = 219; // opening square brackets
+		const olderKey = 221; // closing square brackets
+		const infoKey = 73; // i
 
 		// shortcuts for SpriteBox Template
 		if (thisRoute === 'spriteBox') {
@@ -18,10 +18,16 @@ Meteor.startup(function() {
 				FlowRouter.go('spriteBox', params);
 			}
 			if (event.keyCode === infoKey) {
-				if (Session.get('displaySpriteBoxInfo') === 'true') {
-					Session.set('displaySpriteBoxInfo', 'false');
-				} else {
+				// if Editor is visible then also do display SpriteBox info
+				// set default if it hasn't been set before:
+				Session.setDefault('displayEditor', 'false');
+				const theSession = Session.get('displayEditor');
+				if (theSession === 'false') {
+					Session.set('displayEditor', 'true');
 					Session.set('displaySpriteBoxInfo', 'true');
+				} else if (theSession === 'true') {
+					Session.set('displayEditor', 'false');
+					Session.set('displaySpriteBoxInfo', 'false');
 				}
 			}
 		}
@@ -38,20 +44,35 @@ Meteor.startup(function() {
 					currentSlug = FlowRouter.getParam('slug');
 					thisQuery = FlowRouter.getParam('query');
 					maxPages = Math.ceil(Counts.get('numberOfFinds') / displayQty);
-				}
-				if (event.keyCode === newerKey) {
-					if (currentPage > 1) {
-						const newerPage = Number(currentPage) - 1;
-						const params = {slug: currentSlug, page: newerPage};
-						const query = {query: thisQuery};
-						FlowRouter.go('pool', params, query);
+					if (event.keyCode === newerKey) {
+						if (currentPage > 1) {
+							const newerPage = Number(currentPage) - 1;
+							const params = {slug: currentSlug, page: newerPage};
+							const query = {query: thisQuery};
+							FlowRouter.go('pool', params, query);
+						}
+					} else if (event.keyCode === olderKey) {
+						if (currentPage < maxPages) {
+							const olderPage = Number(currentPage) + 1;
+							const params = {slug: currentSlug, page: olderPage};
+							const query = {query: thisQuery};
+							FlowRouter.go('pool', params, query);
+						}
 					}
-				} else if (event.keyCode === olderKey) {
-					if (currentPage < maxPages) {
-						const olderPage = Number(currentPage) + 1;
-						const params = {slug: currentSlug, page: olderPage};
-						const query = {query: thisQuery};
-						FlowRouter.go('pool', params, query);
+				}
+				// toggle editorMenu
+				if (Meteor.user()) {
+					if (Meteor.user().profile.isEditor) {
+						if (event.keyCode === infoKey) {
+							// set default if it hasn't been set before:
+							Session.setDefault('displayEditor', 'false');
+							const theSession = Session.get('displayEditor');
+							if (theSession === 'false') {
+								Session.set('displayEditor', 'true');
+							} else if (theSession === 'true') {
+								Session.set('displayEditor', 'false');
+							}
+						}
 					}
 				}
 			}

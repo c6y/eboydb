@@ -112,7 +112,7 @@ Template.spriteBox.helpers({
 		};
 	},
 	showThisUserName() {
-		if (this.metadata.uploadedBy.id) {
+		if (this.metadata.uploadedBy) {
 			const thisUserId = this.metadata.uploadedBy.id;
 			const thisUserObj = Meteor.users.findOne(thisUserId);
 			const thisUserName = thisUserObj.username;
