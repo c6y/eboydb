@@ -12,4 +12,4 @@ Apologies, this is messy at the moment
 - go to `/login` to create an account
 - set `profile.isAdmin` and `profile.isEditor` to `true` in the console
 
-If you have questions or need sample pictues let me know at k@eboy.com
+If you have questions or need sample pictures let me know at k@eboy.com

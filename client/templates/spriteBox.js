@@ -112,10 +112,12 @@ Template.spriteBox.helpers({
 		};
 	},
 	showThisUserName() {
-		const thisUserId = this.metadata.uploadedBy.id;
-		const thisUserObj = Meteor.users.findOne(thisUserId);
-		const thisUserName = thisUserObj.username;
-		return thisUserName;
+		if (this.metadata.uploadedBy.id) {
+			const thisUserId = this.metadata.uploadedBy.id;
+			const thisUserObj = Meteor.users.findOne(thisUserId);
+			const thisUserName = thisUserObj.username;
+			return thisUserName;
+		}
 	},
 	toPoolPath() {
 		let params = {slug: 'everything', page: '1'};

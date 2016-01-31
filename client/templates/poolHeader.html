@@ -13,7 +13,15 @@
 <template name="newSearchPool">
 	<span class="search">
 		<form class="seachDbForm">
-			<input type="text" onclick="this.focus(); this.setSelectionRange(0, 9999);" name="searchDB" value="{{ searchTerm }}" class="searchFor" maxlength="24" size="12">
+			<input
+				type="text"
+				onclick="this.focus(); this.setSelectionRange(0, 9999);"
+				name="searchDB"
+				value="{{ searchTerm }}"
+				class="searchFor"
+				id="searchField"
+				maxlength="24"
+				size="12">
 		</form>
 	</span>
 </template>
@@ -21,10 +29,10 @@
 <template name="newPagingHeader">
 	<div class="paging">
 		<span>
-			<a class="previous" onclick="">previous</a> | 
+			<a class="previous" onclick="">previous</a> |
 			<a class="next" onclick="">next</a>
 		</span>
-		<span class="pagestats"> 
+		<span class="pagestats">
 			p.{{ currentPage }}/{{ totalPages }} c.{{ postsCount }}
 		</span>
 	</div>
