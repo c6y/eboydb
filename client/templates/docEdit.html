@@ -137,18 +137,18 @@
 					{{#if this.metadata.license}}
 						<li><span class="property">metadata.license</span>: {{ this.metadata.license }}</li>
 					{{/if}}
-					<li><span class="property">collection.links</span>:
-						{{#each showLinks}}
-
-							<span class="removelink">(×)</span>{{ this.label }}:
-							{{#if this.url }}
-								<a href="{{ this.url }}">{{ this.name }}</a>
-							{{else}}
-								{{ this.name }}
-							{{/if}}
-						
-						{{/each}}
-					</li>
+					{{#if hasLinks}}
+						<li><span class="property">collection.links</span>:
+							{{#each showLinks}}
+								<span class="removelink">(×)</span>{{ this.label }}:
+								{{#if this.url }}
+									<a href="{{ this.url }}">{{ this.name }}</a>
+								{{else}}
+									{{ this.name }}
+								{{/if}}
+							{{/each}}
+						</li>
+					{{/if}}
 					<li class='moreMetaToggle'>
 						<span id='toggleEditorMenu'>
 							{{#unless displayMoreMeta }}

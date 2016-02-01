@@ -67,6 +67,14 @@ Template.docEdit.helpers({
 		const thisLinkObj = DocLinks.find(selector);
 		return thisLinkObj;
 	},
+	hasLinks() {
+		const thisId = this._id;
+		const selector = { myPixId: thisId };
+		const thisLinkObj = DocLinks.findOne(selector);
+		if (thisLinkObj) {
+			return true;
+		}
+	},
 	displayLinkFields() {
 		if (!this.showLinkFields) {
 			this.showLinkFields = new ReactiveVar();
