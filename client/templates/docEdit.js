@@ -67,15 +67,37 @@ Template.docEdit.helpers({
 		const thisLinkObj = DocLinks.find(selector);
 		return thisLinkObj;
 	},
+	displayLinkFields() {
+		if (!this.showLinkFields) {
+			this.showLinkFields = new ReactiveVar();
+			this.showLinkFields.set(false);
+		}
+		const visible	= this.showLinkFields.get();
+		if (visible) {
+			return 'true';
+		}
+		return 'none';
+	},
+	displayMoreMeta() {
+		if (!this.toggleMoreMeta) {
+			this.toggleMoreMeta = new ReactiveVar();
+			this.toggleMoreMeta.set(false);
+		}
+		const visible	= this.toggleMoreMeta.get();
+		if (visible) {
+			return true;
+		}
+		return false;
+	},
 });
 
 Template.docEdit.events({
-	'click .goSpriteBox': function() {
+	'click .goSpriteBox'() {
 		const thisId = this._id;
 		const params = {_id: thisId, boxsize: 'auto'};
 		FlowRouter.go('spriteBox', params);
 	},
-	'keypress input.addTag': function(event) {
+	'keypress input.addTag'(event) {
 		if (Meteor.user().profile.isEditor) {
 			if (event.which === 13) {
 				const newTag = event.currentTarget.value;
@@ -90,7 +112,7 @@ Template.docEdit.events({
 			}
 		}
 	},
-	'keypress input.editBackColor': function(event) {
+	'keypress input.editBackColor'(event) {
 		if (Meteor.user().profile.isEditor) {
 			if (event.which === 13) {
 				const updatedColor = event.currentTarget.value.toLowerCase();
@@ -104,7 +126,7 @@ Template.docEdit.events({
 			}
 		}
 	},
-	'keypress input.editMadeDate': function(event) {
+	'keypress input.editMadeDate'(event) {
 		if (Meteor.user().profile.isEditor) {
 			if (event.which === 13) {
 				const thisId = this._id;
@@ -117,7 +139,7 @@ Template.docEdit.events({
 			}
 		}
 	},
-	'click input.editFullframe': function() {
+	'click input.editFullframe'() {
 		if (Meteor.user().profile.isEditor) {
 			const thisId = this._id;
 			if (this.metadata.fullframe) {
@@ -127,7 +149,7 @@ Template.docEdit.events({
 			}
 		}
 	},
-	'keypress input.editLicense': function(event) {
+	'keypress input.editLicense'(event) {
 		if (Meteor.user().profile.isEditor) {
 			const thisId = this._id;
 			if (event.which === 13) {
@@ -136,14 +158,14 @@ Template.docEdit.events({
 			}
 		}
 	},
-	'click .remove': function() {
+	'click .remove'() {
 		if (Meteor.user().profile.isEditor) {
 			const thisId = FlowRouter.getParam('_id');
 			const thisTag = String(this);
 			Meteor.call('removeTag', thisId, thisTag);
 		}
 	},
-	'click #submitLink': function() {
+	'click #submitLink'() {
 		const linkLabel = document.getElementById('editLinkLabel').value;
 		const linkName = document.getElementById('editLinkName').value;
 		const linkURL = document.getElementById('editLinkURL').value;
@@ -155,6 +177,9 @@ Template.docEdit.events({
 				if (linkLabels.includes(linkLabel)) {
 					const thisId = this._id;
 					Meteor.call('addLink', thisId, linkLabel, linkName, linkURL);
+					document.getElementById('editLinkName').value = '';
+					document.getElementById('editLinkLabel').value = '';
+					this.showLinkFields.set(false);
 				} else {
 					const allowedLabels = linkLabels.join(', ');
 					window.alert(
@@ -170,10 +195,27 @@ Template.docEdit.events({
 			window.alert('Error: field empty');
 		}
 	},
-	'click .removelink': function() {
+	'click .removelink'() {
 		if (Meteor.user().profile.isEditor) {
 			const thisId =  this._id;
 			Meteor.call('deleteLink', thisId);
+		}
+	},
+	// show additional link fields if link name is entered
+	'change #editLinkName'() {
+		const linkInput = document.getElementById('editLinkName').value;
+		if (linkInput) {
+			this.showLinkFields.set(true);
+		} else {
+			this.showLinkFields.set(false);
+		}
+	},
+	'click .moreMetaToggle'() {
+		let visible = this.toggleMoreMeta.get();
+		if (visible) {
+			this.toggleMoreMeta.set(false);
+		} else {
+			this.toggleMoreMeta.set(true);
 		}
 	},
 });

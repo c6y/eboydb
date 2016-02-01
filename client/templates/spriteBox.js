@@ -149,7 +149,7 @@ Template.spriteBox.helpers({
 });
 
 Template.spriteBox.events({
-	'click .spriteBoxInfoToggle': function() {
+	'click .spriteBoxInfoToggle'() {
 		Session.setDefault('displaySpriteBoxInfo', 'false');
 		let theSession = Session.get('displaySpriteBoxInfo');
 		if (theSession === 'true') {
@@ -158,19 +158,19 @@ Template.spriteBox.events({
 			Session.set('displaySpriteBoxInfo', 'true');
 		}
 	},
-	'click .searchForTag': function() {
+	'click .searchForTag'() {
 		const thisTag = this;
 		const params = {slug: thisTag, page: '1'};
 		const queryParams = {q: 'tag'};
 		FlowRouter.go('pool', params, queryParams);
 	},
-	'click .goNewerDoc': function(event) {
+	'click .goNewerDoc'(event) {
 		event.preventDefault();
 		const newerDocument = MyPix.findOne({}, {sort: {uploadedAt: -1}});
 		const params = {_id: newerDocument._id, boxsize: 'auto'};
 		FlowRouter.go('spriteBox', params);
 	},
-	'click .goOlderDoc': function(event) {
+	'click .goOlderDoc'(event) {
 		event.preventDefault();
 		const olderDocument = MyPix.findOne({}, {sort: {uploadedAt: 1}});
 		const params = {_id: olderDocument._id, boxsize: 'auto'};

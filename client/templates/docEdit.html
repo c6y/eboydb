@@ -18,7 +18,8 @@
 							class="addTag"
 							placeholder="tag"
 							maxlength="24"
-							size="21"
+							size="28"
+							tabIndex = "1"
 						>
 					</div>
 					<div><label class="property">background</label>:
@@ -28,7 +29,8 @@
 							value="{{ this.metadata.backColor }}"
 							class="editBackColor"
 							maxlength="24"
-							size="20"
+							size="21"
+							tabIndex = "2"
 						>
 					</div>
 					<div><label class="property">fullframe</label>:
@@ -37,6 +39,7 @@
 							name="rectangle"
 							checked="{{ this.metadata.fullframe }}"
 							class="editFullframe"
+							tabIndex = "3"
 						>
 					</div>
 					<div><label class="property">madeDate</label>:
@@ -46,7 +49,8 @@
 							value = "{{ madeDateGMT.iso }}"
 							class="editMadeDate"
 							maxlength="39"
-							size="20"
+							size="23"
+							tabIndex = "4"
 						>
 					</div>
 					<div><label class="property">license</label>:
@@ -56,58 +60,63 @@
 							value="{{ this.metadata.license }}"
 							class="editLicense"
 							maxlength="24"
-							size="17"
+							size="24"
+							tabIndex = "5"
 						>
 					</div>
-				</div>
-
-				<div class="editLink">
-					<div><label class="property">link</label>:
-						<input
-							type="text"
-							name="linkLabel"
-							placeholder="label"
-							id="editLinkLabel"
-							maxlength="24"
-							size="38"
-						>
-					</div>
-					<div><label class="property">link</label>:
+					<div><label class="property">add link</label>:
 						<input
 							type="text"
 							name="linkName"
 							placeholder="name"
 							id="editLinkName"
 							maxlength="26"
-							size="39"
+							size="23"
+							tabIndex = "6"
 						>
 					</div>
-					<div><label class="property">link</label>:
-						<input
-							type="text"
-							name="linkURL"
-							placeholder="url"
-							id="editLinkURL"
-							maxlength="256"
-							size="40"
-						>
-						<span class="submitLinkButton">
-							<a id="submitLink">[submit]</a>
-						</span>
+					<div class="editLink" style="display: {{ displayLinkFields }}">
+						<div><label class="property"></label>:
+							<input
+								type="text"
+								name="linkLabel"
+								placeholder="label"
+								id="editLinkLabel"
+								maxlength="24"
+								size="31"
+								tabIndex = "7"
+							>
+						</div>
+						<div><label class="property"></label>:
+							<input
+								type="text"
+								name="linkURL"
+								placeholder="url (optional)"
+								id="editLinkURL"
+								maxlength="256"
+								size="31"
+								tabIndex = "8"
+							>
+							<span class="submitLinkButton">
+								<a id="submitLink" tabIndex = "9">[submit]</a>
+							</span>
+						</div>
 					</div>
 				</div>
 				<ol>
-					<li><span class="property">_id</span>: {{ this._id }}</li>
-					<li><span class="property">name</span>: {{ this.name }}</li>
-					<li><span class="property">uploadedAt</span>: {{ this.uploadedAt }}</li>
-					<li><span class="property">metadata.width</span>: {{ this.metadata.width }}<span class="unit">px</span></li>
-					<li><span class="property">metadata.height</span>: {{ this.metadata.height }}<span class="unit">px</span></li>
-					<li><span class="property">size</span>: {{sizeFormatted.value}}<span class="unit">{{ sizeFormatted.unit }}</span></li>
-					<li><span class="property">metadata.copyright</span>: {{ this.metadata.copyright }}</li>
-					{{#if this.metadata.license}}
-						<li><span class="property">metadata.license</span>: {{ this.metadata.license }}</li>
+					{{#if metadata.tags}}
+						<li>
+							<span class="property">metadata.tags</span>:
+							{{#each this.metadata.tags}}
+								<span class="remove">(×)</span><span class="tag">{{this}}</span>
+							{{/each}}
+						</li>
 					{{/if}}
-					<li><span class="property">metadata.backColor</span>: {{ this.metadata.backColor }}</li>
+					<li>
+						<span class="property">metadata.backColor</span>
+						: {{ this.metadata.backColor }}
+						<span style="color:{{ this.metadata.backColor }}">&#9724;</span>
+					</li>
 					<li><span class="property">metadata.fullframe</span>:
 						{{#if this.metadata.fullframe}}
 							{{ this.metadata.fullframe }}
@@ -115,23 +124,11 @@
 							false
 						{{/if}}
 					</li>
-					<li>
-						<span class="property">metadata.tags</span>:
-						{{#each this.metadata.tags}}
-							<span class="remove">(×)</span><span class="tag">{{this}}</span>
-						{{/each}}
-					</li>
 					{{#if madeDateGMT.iso }}
 						<li><span class="property">metadata.madeDate</span>: {{ madeDateGMT.iso }}</li>
 					{{/if}}
-					{{#if this.metadata.uploadedBy.id}}
-						<li><span class="property">uploadedBy.id</span>: {{ this.metadata.uploadedBy.id }}</li>
-					{{/if}}
-					{{#if this.metadata.uploadedBy.username }}
-						<li><span class="property">uploadedBy.username</span>: {{ this.metadata.uploadedBy.username }}</li>
-					{{/if}}
-					{{#if showThisUserName }}
-						<li><span class="property">users.username</span>: {{ showThisUserName }}</li>
+					{{#if this.metadata.license}}
+						<li><span class="property">metadata.license</span>: {{ this.metadata.license }}</li>
 					{{/if}}
 					{{#each showLinks}}
 						<li><span class="property">collection.links</span>:
@@ -143,6 +140,40 @@
 							{{/if}}
 						</li>
 					{{/each}}
+					<li class='moreMetaToggle'>
+						<span id='toggleEditorMenu'>
+							{{#unless displayMoreMeta }}
+								...
+							{{/unless}}
+						</span>
+					</li>
+					{{#if displayMoreMeta}}
+						<div id='moreMeta'>
+							<li><span class="property">_id</span>: {{ this._id }}</li>
+							<li><span class="property">name</span>: {{ this.name }}</li>
+							<li><span class="property">uploadedAt</span>: {{ this.uploadedAt }}</li>
+							<li><span class="property">metadata.width</span>: {{ this.metadata.width }}<span class="unit">px</span></li>
+							<li><span class="property">metadata.height</span>: {{ this.metadata.height }}<span class="unit">px</span></li>
+							<li><span class="property">size</span>: {{sizeFormatted.value}}<span class="unit">{{ sizeFormatted.unit }}</span></li>
+							<li><span class="property">metadata.copyright</span>: {{ this.metadata.copyright }}</li>
+							{{#if this.metadata.uploadedBy.id}}
+								<li><span class="property">uploadedBy.id</span>: {{ this.metadata.uploadedBy.id }}</li>
+							{{/if}}
+							{{#if this.metadata.uploadedBy.username }}
+								<li><span class="property">uploadedBy.username</span>: {{ this.metadata.uploadedBy.username }}</li>
+							{{/if}}
+							{{#if showThisUserName }}
+								<li><span class="property">users.username</span>: {{ showThisUserName }}</li>
+							{{/if}}
+							<li class='moreMetaToggle'>
+								<span id='toggleEditorMenu'>
+									{{#if displayMoreMeta }}
+										.
+									{{/if}}
+								</span>
+							</li>
+						</div>
+					{{/if}}
 				</ol>
 			</div>
 		{{/if}}
