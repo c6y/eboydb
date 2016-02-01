@@ -34,13 +34,20 @@
 						>
 					</div>
 					<div><label class="property">fullframe</label>:
-						<input
+						<!-- <input
 							type="checkbox"
 							name="rectangle"
 							checked="{{ this.metadata.fullframe }}"
 							class="editFullframe"
 							tabIndex = "3"
-						>
+						> -->
+						<span class="fullframeToggle" tabIndex = "3">
+								{{#if this.metadata.fullframe }}
+									true
+								{{else}}
+									false
+								{{/if}}
+						</span>
 					</div>
 					<div><label class="property">madeDate</label>:
 						<input
@@ -130,16 +137,18 @@
 					{{#if this.metadata.license}}
 						<li><span class="property">metadata.license</span>: {{ this.metadata.license }}</li>
 					{{/if}}
-					{{#each showLinks}}
-						<li><span class="property">collection.links</span>:
+					<li><span class="property">collection.links</span>:
+						{{#each showLinks}}
+
 							<span class="removelink">(×)</span>{{ this.label }}:
 							{{#if this.url }}
 								<a href="{{ this.url }}">{{ this.name }}</a>
 							{{else}}
 								{{ this.name }}
 							{{/if}}
-						</li>
-					{{/each}}
+						
+						{{/each}}
+					</li>
 					<li class='moreMetaToggle'>
 						<span id='toggleEditorMenu'>
 							{{#unless displayMoreMeta }}

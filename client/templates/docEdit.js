@@ -139,14 +139,12 @@ Template.docEdit.events({
 			}
 		}
 	},
-	'click input.editFullframe'() {
-		if (Meteor.user().profile.isEditor) {
-			const thisId = this._id;
-			if (this.metadata.fullframe) {
-				Meteor.call('updateFullframe', thisId, false);
-			} else {
-				Meteor.call('updateFullframe', thisId, true);
-			}
+	'click .fullframeToggle'() {
+		toggleFullframe(this);
+	},
+	'keypress .fullframeToggle'() {
+		if (event.keyCode === 13) {
+			toggleFullframe(this);
 		}
 	},
 	'keypress input.editLicense'(event) {
@@ -166,33 +164,11 @@ Template.docEdit.events({
 		}
 	},
 	'click #submitLink'() {
-		const linkLabel = document.getElementById('editLinkLabel').value;
-		const linkName = document.getElementById('editLinkName').value;
-		const linkURL = document.getElementById('editLinkURL').value;
-		const httpStart = linkURL.match('^http');
-
-		if (linkName.length > 0) {
-			// URL has to be empty — or start with 'http'
-			if (!linkURL || httpStart ) {
-				if (linkLabels.includes(linkLabel)) {
-					const thisId = this._id;
-					Meteor.call('addLink', thisId, linkLabel, linkName, linkURL);
-					document.getElementById('editLinkName').value = '';
-					document.getElementById('editLinkLabel').value = '';
-					this.showLinkFields.set(false);
-				} else {
-					const allowedLabels = linkLabels.join(', ');
-					window.alert(
-						'\"' + linkLabel +
-						'\" label not allowed, please use these: ' +
-						allowedLabels
-					);
-				}
-			} else {
-				window.alert('Error: URL does not start with \"http\"');
-			}
-		} else {
-			window.alert('Error: field empty');
+		submitTheLink(this)
+	},
+	'keypress #submitLink'() {
+		if (event.which === 13) {
+			submitTheLink(this)
 		}
 	},
 	'click .removelink'() {
@@ -219,3 +195,46 @@ Template.docEdit.events({
 		}
 	},
 });
+
+// these functions are used twice
+// for click and for keypress events
+
+function toggleFullframe(t) {
+	const thisId = t._id;
+	if (t.metadata.fullframe) {
+		Meteor.call('updateFullframe', thisId, false);
+	} else {
+		Meteor.call('updateFullframe', thisId, true);
+	}
+}
+
+function submitTheLink(t) {
+	const linkLabel = document.getElementById('editLinkLabel').value;
+	const linkName = document.getElementById('editLinkName').value;
+	const linkURL = document.getElementById('editLinkURL').value;
+	const httpStart = linkURL.match('^http');
+
+	if (linkName.length > 0) {
+		// URL has to be empty — or start with 'http'
+		if (!linkURL || httpStart ) {
+			if (linkLabels.includes(linkLabel)) {
+				const thisId = t._id;
+				Meteor.call('addLink', thisId, linkLabel, linkName, linkURL);
+				document.getElementById('editLinkName').value = '';
+				document.getElementById('editLinkLabel').value = '';
+				t.showLinkFields.set(false);
+			} else {
+				const allowedLabels = linkLabels.join(', ');
+				window.alert(
+					'\"' + linkLabel +
+					'\" label not allowed, please use these: ' +
+					allowedLabels
+				);
+			}
+		} else {
+			window.alert('Error: URL does not start with \"http\"');
+		}
+	} else {
+		window.alert('Error: field empty');
+	}
+}
