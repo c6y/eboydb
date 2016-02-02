@@ -83,7 +83,7 @@ Template.newSearchPool.events({
 
 		if (trimmedSearch.match(taglabel)) {
 			const tagSearch = trimmedSearch.substr(2);
-			const checkedTag = Meteor.myFunctions.getTagAlias(tagSearch);
+			const checkedTag = Meteor.myFunctions.checkTagAliases(tagSearch);
 			FlowRouter.setParams({slug: checkedTag, page: '1'});
 			FlowRouter.setQueryParams({q: 'tag'});
 		} else if (trimmedSearch.match(namelabel)) {

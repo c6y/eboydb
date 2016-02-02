@@ -39,7 +39,8 @@ input.myPixInput,
 .goSpriteBox,
 .toDocEdit,
 .goDocEdit,
-.remove,
+.removeTag,
+.removeRelation,
 .removelink,
 .goOlderDoc,
 .goNewerDoc,
@@ -282,10 +283,10 @@ img {
 			color: @deleteHighlight;
 		}
 
-		.remove {
+		.removeTag, .removeRelation {
 		opacity: 0.4;
 		}
-		.remove:hover {
+		.removeTag:hover, .removeRelation:hover {
 			color: @deleteHighlight;
 			opacity: 1;
 		}
@@ -417,11 +418,12 @@ img {
 	right: 0;
 }
 
-.eboycopyright {
+#infobox {
 	position: fixed;
 	right: 0;
 	padding: 3px 12px;
 	z-index: 20;
+	white-space: nowrap;
 	a{
 		text-decoration: none;
 		color: inherit;
@@ -431,8 +433,38 @@ img {
 		color: inherit;
 		text-decoration: underline;
 	}
-	// -webkit-filter: invert(100%);
+	// .links:before {
+	// 	content: ''
+	// }
+	.relations:after {
+		content: '|';
+	}
+	.relation:before {
+		content: ''
+	}
+	.relation:after {
+		content: ','
+	}
+	.relation:last-of-type:after{
+		content: ''
+	}
+	.links:before {
+		content: ''
+	}
+	.links:after {
+		content: '|'
+	}
+	.thelink:before {
+		content: ''
+	}
+	.thelink:after {
+		content: ','
+	}
+	.thelink:last-of-type:after{
+		content: ''
+	}
 
+	// -webkit-filter: invert(100%);
 }
 
 .spriteBoxInfoToggle {
@@ -496,14 +528,14 @@ img {
 			content: ','
 		}
 		.tag:last-of-type:after {
-			content:''
+			content: ''
 		}
 	}
-	.remove, .removelink {
+	.removeTag, .removeRelation, .removelink {
 		padding: 0;
 		opacity: 0.4;
 	}
-	.remove:hover, .removelink:hover {
+	.removeTag:hover, .removeRelation:hover, .removelink:hover {
 		color: @deleteHighlight;
 		opacity: 1;
 	}
@@ -629,7 +661,7 @@ img {
 			content: ','
 		}
 		.tag:last-of-type:after {
-			content:''
+			content: ''
 		}
 	}
 }

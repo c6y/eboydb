@@ -94,6 +94,7 @@ Meteor.publish('aPix', function(id, slug, query) {
 		'metadata.height': 1,
 		'metadata.backColor': 1,
 		'metadata.tags': 1,
+		'metadata.relations': 1,
 		'metadata.copyright': 1,
 		'metadata.license': 1,
 		'metadata.uploadedBy': 1,

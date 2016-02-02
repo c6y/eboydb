@@ -140,6 +140,15 @@ Template.spriteBox.helpers({
 
 		return FlowRouter.path('pool', params, poolQuery);
 	},
+	hasLinks() {
+		const thisId = this._id;
+		const selector = { myPixId: thisId };
+		const thisLinkObj = DocLinks.findOne(selector);
+		if (thisLinkObj) {
+			return true;
+		}
+		return false;
+	},
 	showLinks() {
 		const thisId = this._id;
 		const selector = { myPixId: thisId };

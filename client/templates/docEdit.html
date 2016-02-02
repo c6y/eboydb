@@ -22,6 +22,18 @@
 							tabIndex = "1"
 						>
 					</div>
+					<div><label class="property">add</label>:
+						<input
+							type="text"
+							name="relations"
+							value=""
+							class="addRelation"
+							placeholder="relation"
+							maxlength="24"
+							size="28"
+							tabIndex = "1"
+						>
+					</div>
 					<div><label class="property">background</label>:
 						<input
 							type="text"
@@ -34,13 +46,6 @@
 						>
 					</div>
 					<div><label class="property">fullframe</label>:
-						<!-- <input
-							type="checkbox"
-							name="rectangle"
-							checked="{{ this.metadata.fullframe }}"
-							class="editFullframe"
-							tabIndex = "3"
-						> -->
 						<span class="fullframeToggle" tabIndex = "3">
 								{{#if this.metadata.fullframe }}
 									true
@@ -115,7 +120,15 @@
 						<li>
 							<span class="property">metadata.tags</span>:
 							{{#each this.metadata.tags}}
-								<span class="remove">(×)</span><span class="tag">{{this}}</span>
+								<span class="removeTag">(×)</span><span class="tag">{{this}}</span>
+							{{/each}}
+						</li>
+					{{/if}}
+					{{#if metadata.relations}}
+						<li>
+							<span class="property">metadata.relations</span>:
+							{{#each this.metadata.relations}}
+								<span class="removeRelation">(×)</span><span class="tag">{{this}}</span>
 							{{/each}}
 						</li>
 					{{/if}}
