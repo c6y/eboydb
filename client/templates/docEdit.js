@@ -244,8 +244,8 @@ function submitTheLink(t) {
 	const httpStart = linkURL.match('^http');
 
 	if (linkName.length > 0) {
-		// URL has to be empty — or start with 'http'
-		if (!linkURL || httpStart ) {
+		// URL cannot be empty and has to start with 'http'
+		if (linkURL && httpStart ) {
 			if (linkLabels.includes(linkLabel)) {
 				const thisId = t._id;
 				Meteor.call('addLink', thisId, linkLabel, linkName, linkURL);
@@ -261,9 +261,9 @@ function submitTheLink(t) {
 				);
 			}
 		} else {
-			window.alert('Error: URL does not start with \"http\"');
+			window.alert('Error: URL does not start with \"http\" or is empty');
 		}
 	} else {
-		window.alert('Error: field empty');
+		window.alert('Error: Name field empty');
 	}
 }

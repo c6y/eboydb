@@ -23,7 +23,7 @@ Template.relations.helpers({
 			};
 		});
 	},
-	tagsQuantity() {
+	relationsQuantity() {
 		const relationsArray = Template.instance().distinctRelations.get();
 		return relationsArray.length;
 	},
