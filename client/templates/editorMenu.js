@@ -40,6 +40,9 @@ Template.editorMenu.helpers({
 	toTagsPath() {
 		return FlowRouter.path('tags');
 	},
+	toRelationsPath() {
+		return FlowRouter.path('relations');
+	},
 	toLoginPath() {
 		return FlowRouter.path('login');
 	},

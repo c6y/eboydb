@@ -1,0 +1,10 @@
+<template name="relations">
+	<div id="relationsContainer">
+		<ol>
+		<strong>{{relationsQuantity}} relations:</strong>
+			{{ #each relations }}
+				<span class="relation"><a href="{{ pathToRelation }}">{{ aRelation }}</a></span>
+			{{ /each }}
+		</ol>
+	</div>
+</template>

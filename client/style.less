@@ -636,7 +636,7 @@ img {
 	}
 }
 
-#tagContainer {
+#tagContainer, #relationsContainer {
 	padding: 16px 0 0 0;
 	ol {
 		strong {
@@ -657,10 +657,10 @@ img {
 			background-color: @editorColor;
 			color: @editorBackColor;
 		}
-		.tag:after {
+		.tag:after, .relation:after {
 			content: ','
 		}
-		.tag:last-of-type:after {
+		.tag:last-of-type:after, .relation:last-of-type:after {
 			content: ''
 		}
 	}

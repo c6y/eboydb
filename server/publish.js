@@ -122,6 +122,7 @@ Meteor.publish('PixQuery', function(slug, page, query) {
 		selector = {
 			$or: [
 				{'metadata.tags': {$regex: reg}},
+				{'metadata.relations': {$regex: reg}},
 				{'original.name': {$regex: reg}},
 			],
 		};
