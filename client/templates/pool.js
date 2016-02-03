@@ -134,6 +134,9 @@ Template.pool.helpers({
 		const params = {_id: thisId};
 		return FlowRouter.path('docEdit', params);
 	},
+	thisIndex(currentIndex) {
+		return currentIndex + 2;
+	}
 });
 
 Template.pool.events({
@@ -144,6 +147,13 @@ Template.pool.events({
 				const thisId = this._id;
 				Meteor.call('deleteDocument', thisId);
 			}
+		}
+	},
+	'keypress .docbox'() {
+		if (event.which === 13) {
+			console.log(this._id);
+			const params = {_id: this._id, boxsize: 'auto'};
+			FlowRouter.go('spriteBox', params);
 		}
 	},
 });
