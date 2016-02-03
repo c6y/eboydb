@@ -54,6 +54,7 @@ Template.spriteBox.helpers({
 				heightMax
 			);
 		} else {
+			// if this has the 'photo' tag, scale soft and do not upscale
 			const windowWidth =  window.innerWidth; // zoomDimension;
 			const windowHeight =  window.innerHeight; // zoomDimension;
 			dimensionsTo = Meteor.myFunctions.scaleSoftToFit(
@@ -62,6 +63,18 @@ Template.spriteBox.helpers({
 				windowWidth,
 				windowHeight
 			);
+			// scale no more than 1x
+			if (dimensionsTo.factor * window.devicePixelRatio > 1) {
+				const factor = dimensionsTo.factor * window.devicePixelRatio;
+				console.log('factor: ' + factor);
+				dimensionsTo.width = Math.ceil(
+					widthOriginal / window.devicePixelRatio
+				);
+				dimensionsTo.height = Math.ceil(
+					heightOriginal / window.devicePixelRatio
+				);
+				dimensionsTo.factor = 1;
+			}
 		}
 		return {
 			width: dimensionsTo.width,
@@ -139,6 +152,15 @@ Template.spriteBox.helpers({
 		}
 
 		return FlowRouter.path('pool', params, poolQuery);
+	},
+	hasLinks() {
+		const thisId = this._id;
+		const selector = { myPixId: thisId };
+		const thisLinkObj = DocLinks.findOne(selector);
+		if (thisLinkObj) {
+			return true;
+		}
+		return false;
 	},
 	showLinks() {
 		const thisId = this._id;

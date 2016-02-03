@@ -110,7 +110,7 @@ Template.docEdit.events({
 			if (event.which === 13) {
 				const newTag = event.currentTarget.value;
 				const cleanNewTag = newTag.toLowerCase().replace(/ /gi, '-');
-				const checkedTag = Meteor.myFunctions.getTagAlias(cleanNewTag);
+				const checkedTag = Meteor.myFunctions.checkTagAliases(cleanNewTag);
 				const thisId = this._id;
 
 				if (!!newTag) { // if not empty
@@ -118,6 +118,34 @@ Template.docEdit.events({
 				}
 				event.currentTarget.value = ''; // empty input field
 			}
+		}
+	},
+	'click .removeTag'() {
+		if (Meteor.user().profile.isEditor) {
+			const thisId = FlowRouter.getParam('_id');
+			const thisTag = String(this);
+			Meteor.call('removeTag', thisId, thisTag);
+		}
+	},
+	'keypress input.addRelation'(event) {
+		if (Meteor.user().profile.isEditor) {
+			if (event.which === 13) {
+				const newRelation = event.currentTarget.value;
+				const checkedRel = Meteor.myFunctions.checkRelationAliases(newRelation);
+				const thisId = this._id;
+
+				if (!!newRelation) { // if not empty
+					Meteor.call('addRelation', thisId, checkedRel);
+				}
+				event.currentTarget.value = ''; // empty input field
+			}
+		}
+	},
+	'click .removeRelation'() {
+		if (Meteor.user().profile.isEditor) {
+			const thisId = FlowRouter.getParam('_id');
+			const thisRelation = String(this);
+			Meteor.call('removeRelation', thisId, thisRelation);
 		}
 	},
 	'keypress input.editBackColor'(event) {
@@ -164,19 +192,12 @@ Template.docEdit.events({
 			}
 		}
 	},
-	'click .remove'() {
-		if (Meteor.user().profile.isEditor) {
-			const thisId = FlowRouter.getParam('_id');
-			const thisTag = String(this);
-			Meteor.call('removeTag', thisId, thisTag);
-		}
-	},
 	'click #submitLink'() {
-		submitTheLink(this)
+		submitTheLink(this);
 	},
 	'keypress #submitLink'() {
 		if (event.which === 13) {
-			submitTheLink(this)
+			submitTheLink(this);
 		}
 	},
 	'click .removelink'() {
@@ -223,8 +244,8 @@ function submitTheLink(t) {
 	const httpStart = linkURL.match('^http');
 
 	if (linkName.length > 0) {
-		// URL has to be empty — or start with 'http'
-		if (!linkURL || httpStart ) {
+		// URL cannot be empty and has to start with 'http'
+		if (linkURL && httpStart ) {
 			if (linkLabels.includes(linkLabel)) {
 				const thisId = t._id;
 				Meteor.call('addLink', thisId, linkLabel, linkName, linkURL);
@@ -240,9 +261,9 @@ function submitTheLink(t) {
 				);
 			}
 		} else {
-			window.alert('Error: URL does not start with \"http\"');
+			window.alert('Error: URL does not start with \"http\" or is empty');
 		}
 	} else {
-		window.alert('Error: field empty');
+		window.alert('Error: Name field empty');
 	}
 }

@@ -4,6 +4,7 @@ Meteor.startup(function() {
 		const newerKey = 219; // opening square brackets
 		const olderKey = 221; // closing square brackets
 		const infoKey = 73; // i
+		const poolKey = 27; // esc, p=80
 
 		// shortcuts for SpriteBox Template
 		if (thisRoute === 'spriteBox') {
@@ -75,6 +76,25 @@ Meteor.startup(function() {
 						}
 					}
 				}
+			}
+		}
+		if (thisRoute === 'spriteBox') {
+			if (event.keyCode === poolKey) {
+				let params = {slug: 'everything', page: '1'};
+				let poolQuery = {};
+				const theSlug = Session.get('poolSlug');
+				if (theSlug) {
+					params.slug = theSlug;
+				}
+				const thePage = Session.get('poolPage');
+				if (thePage) {
+					params.page = thePage;
+				}
+				const theQuery = Session.get('poolQuery');
+				if (theQuery) {
+					poolQuery.q = theQuery;
+				}
+				FlowRouter.go('pool', params, poolQuery);
 			}
 		}
 	});

@@ -18,16 +18,22 @@
 					&#x25b6;
 				</span>
 			</div>
-			<div class="eboycopyright" style="color:{{ inverseBackColor }}" >
-				{{#each showLinks}}
-					{{ this.label }}:
-					{{#if this.url }}
-						<a target="_blank" href="{{ this.url }}">{{ this.name }}</a> |
-					{{else}}
-						{{ this.name }} |
-					{{/if}}
-				{{/each}}
-				{{this.metadata.copyright}} {{ madeDate }}
+			<div id="infobox" style="color:{{ backColor }};background-color:{{ inverseBackColor }}" >
+				{{#if this.metadata.relations}}
+					<span class="relations">
+						{{#each this.metadata.relations}}
+							<span class="relation">{{ this }}</span>
+						{{/each}}
+					</span>
+				{{/if}}
+				{{#if hasLinks}}
+					<span class="links">
+						{{#each showLinks}}
+							<span class="thelink"><a target="_blank" href="{{ this.url }}" title="{{ this.name }}">{{ this.label }}</a></span>
+						{{/each}}
+					</span>
+				{{/if}}
+				<span class="copyright">{{this.metadata.copyright}} {{ madeDate }}</span>
 			</div>
 			<div class="spriteBoxInfoToggle" style="color:{{ inverseBackColor }}">...</div>
 			<div class="contentbackground" style="background-color: {{ backColor }}">
