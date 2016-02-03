@@ -15,7 +15,7 @@ Template.relations.helpers({
 		// turn theRelations array to relations — and path-to-relations
 		return _.map(theRelations, aRelation => {
 			const params = {slug: aRelation, page: '1'};
-			const queryParams = {q: 'relation'};
+			const queryParams = {q: 'rel'};
 			const pathToRelation = FlowRouter.path('pool', params, queryParams);
 			return {
 				aRelation,

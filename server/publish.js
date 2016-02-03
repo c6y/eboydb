@@ -113,6 +113,9 @@ Meteor.publish('PixQuery', function(slug, page, query) {
 	if (query === 'tag') {
 		const tagSearch = slug;
 		selector = {'metadata.tags': tagSearch};
+	} else if (query === 'rel') {
+		const relationSearch = slug;
+		selector = {'metadata.relations': relationSearch};
 	} else if (query === 'name') {
 		const nameSearch = slug;
 		const reg = RegExp(nameSearch, 'i', 's');
