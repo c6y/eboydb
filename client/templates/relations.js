@@ -11,7 +11,12 @@ Template.relations.onCreated(function() {
 
 Template.relations.helpers({
 	relations: function() {
-		const theRelations = Template.instance().distinctRelations.get().sort();
+		// get the array and sort case insensitive
+		const theRelations = Template.instance().distinctRelations.get().sort(
+			function(a, b) {
+				return a.toLowerCase().localeCompare(b.toLowerCase());
+			}
+		);
 		// turn theRelations array to relations — and path-to-relations
 		return _.map(theRelations, aRelation => {
 			const params = {slug: aRelation, page: '1'};

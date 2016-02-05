@@ -72,26 +72,28 @@ Template.newSearchPool.events({
 			searchValue = 'everything'; // if no value search for everything
 		}
 
-		const searchingFor = searchValue.toLowerCase();
+		// transform string to lower case and remoive outer whitespace
+		const searchingFor = searchValue.toLowerCase().trim();
 		const re = / /gi;
-
-		const trimmedSearch = searchingFor.replace(re, ''); // remove whitespace
-		Session.set('slug', trimmedSearch); // read this for status in search field
+		// remove inside whitespace (used for tag search only)
+		const trimmedSearch = searchingFor.replace(re, '');
+		// read this for status in search field
+		Session.set('slug', trimmedSearch);
 
 		const taglabel = /^t\:./;
 		const namelabel = /^n\:./;
 
-		if (trimmedSearch.match(taglabel)) {
-			const tagSearch = trimmedSearch.substr(2);
+		if (searchingFor.match(taglabel)) {
+			const tagSearch = trimmedSearch.substr(2); // for tags use trimmedSearch
 			const checkedTag = Meteor.myFunctions.checkTagAliases(tagSearch);
 			FlowRouter.setParams({slug: checkedTag, page: '1'});
 			FlowRouter.setQueryParams({q: 'tag'});
-		} else if (trimmedSearch.match(namelabel)) {
-			const nameSearch = trimmedSearch.substr(2);
+		} else if (searchingFor.match(namelabel)) {
+			const nameSearch = searchingFor.substr(2);
 			FlowRouter.setParams({slug: nameSearch, page: '1'});
 			FlowRouter.setQueryParams({q: 'name'});
 		} else {
-			FlowRouter.setParams({slug: trimmedSearch, page: '1'});
+			FlowRouter.setParams({slug: searchingFor, page: '1'});
 			FlowRouter.setQueryParams({q: null});
 		}
 	},
