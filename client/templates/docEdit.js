@@ -130,7 +130,7 @@ Template.docEdit.events({
 	'keypress input.addRelation'(event) {
 		if (Meteor.user().profile.isEditor) {
 			if (event.which === 13) {
-				const newRelation = event.currentTarget.value;
+				const newRelation = event.currentTarget.value.trim();
 				const checkedRel = Meteor.myFunctions.checkRelationAliases(newRelation);
 				const thisId = this._id;
 
