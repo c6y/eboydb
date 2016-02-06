@@ -2,11 +2,11 @@
 	<div class="topnav">
 		<div class="header">
 			<span class="headline">
-				<a href="{{ toHomePath }}" class="dblogo">{{ name }}</a>
+				<a href="{{toHomePath}}" class="dblogo">{{name}}</a>
 			</span>
 			{{> newSearchPool}}
 		</div>
-		{{> newPagingHeader }}
+		{{> newPagingHeader}}
 	</div>
 </template>
 
@@ -17,7 +17,7 @@
 				type="text"
 				onclick="this.focus(); this.setSelectionRange(0, 9999);"
 				name="searchDB"
-				value="{{ searchTerm }}"
+				value="{{searchTerm}}"
 				class="searchFor"
 				id="searchField"
 				maxlength="24"
@@ -35,7 +35,7 @@
 			<a class="next" onclick="">next</a>
 		</span>
 		<span class="pagestats">
-			p.{{ currentPage }}/{{ totalPages }} c.{{ postsCount }}
+			p.{{currentPage}}/{{totalPages}} c.{{postsCount}}
 		</span>
 	</div>
 </template>

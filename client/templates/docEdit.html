@@ -3,7 +3,7 @@
 		<div class="showDocFull">
 			<div class="docOverview">
 				<a class="goSpriteBox">
-					<img style="background-color: {{ backColor }}" src="{{ this.url }}"/>
+					<img style="background-color: {{backColor}}" src="{{this.url}}"/>
 				</a>
 			</div>
 		</div>
@@ -38,7 +38,7 @@
 						<input
 							type="text"
 							name="backColor"
-							value="{{ this.metadata.backColor }}"
+							value="{{this.metadata.backColor}}"
 							class="editBackColor"
 							maxlength="24"
 							size="21"
@@ -47,7 +47,7 @@
 					</div>
 					<div><label class="property">fullframe</label>:
 						<span class="fullframeToggle" tabIndex = "3">
-								{{#if this.metadata.fullframe }}
+								{{#if this.metadata.fullframe}}
 									true
 								{{else}}
 									false
@@ -58,7 +58,7 @@
 						<input
 							type="text"
 							name="madeDate"
-							value = "{{ madeDateGMT.iso }}"
+							value = "{{madeDateGMT.iso}}"
 							class="editMadeDate"
 							maxlength="39"
 							size="23"
@@ -69,7 +69,7 @@
 						<input
 							type="text"
 							name="license"
-							value="{{ this.metadata.license }}"
+							value="{{this.metadata.license}}"
 							class="editLicense"
 							maxlength="24"
 							size="24"
@@ -87,7 +87,7 @@
 							tabIndex = "6"
 						>
 					</div>
-					<div class="editLink" style="display: {{ displayLinkFields }}">
+					<div class="editLink" style="display: {{displayLinkFields}}">
 						<div><label class="property"></label>:
 							<input
 								type="text"
@@ -134,62 +134,62 @@
 					{{/if}}
 					<li>
 						<span class="property">metadata.backColor</span>
-						: {{ this.metadata.backColor }}
+						: {{this.metadata.backColor}}
 						<span style="color:{{ this.metadata.backColor }}">&#9724;</span>
 					</li>
 					<li><span class="property">metadata.fullframe</span>:
 						{{#if this.metadata.fullframe}}
-							{{ this.metadata.fullframe }}
+							{{this.metadata.fullframe }}
 						{{else}}
 							false
 						{{/if}}
 					</li>
 					{{#if madeDateGMT.iso }}
-						<li><span class="property">metadata.madeDate</span>: {{ madeDateGMT.iso }}</li>
+						<li><span class="property">metadata.madeDate</span>: {{madeDateGMT.iso}}</li>
 					{{/if}}
 					{{#if this.metadata.license}}
-						<li><span class="property">metadata.license</span>: {{ this.metadata.license }}</li>
+						<li><span class="property">metadata.license</span>: {{this.metadata.license}}</li>
 					{{/if}}
 					{{#if hasLinks}}
 						<li><span class="property">collection.links</span>:
 							{{#each showLinks}}
-								<span class="removelink">(×)</span>{{ this.label }}:
-								{{#if this.url }}
-									<a href="{{ this.url }}">{{ this.name }}</a>
+								<span class="removelink">(×)</span>{{this.label}}:
+								{{#if this.url}}
+									<a href="{{this.url}}">{{this.name}}</a>
 								{{else}}
-									{{ this.name }}
+									{{this.name}}
 								{{/if}}
 							{{/each}}
 						</li>
 					{{/if}}
 					<li class='moreMetaToggle'>
 						<span id='toggleEditorMenu'>
-							{{#unless displayMoreMeta }}
+							{{#unless displayMoreMeta}}
 								...
 							{{/unless}}
 						</span>
 					</li>
 					{{#if displayMoreMeta}}
 						<div id='moreMeta'>
-							<li><span class="property">_id</span>: {{ this._id }}</li>
-							<li><span class="property">name</span>: {{ this.name }}</li>
-							<li><span class="property">uploadedAt</span>: {{ this.uploadedAt }}</li>
-							<li><span class="property">metadata.width</span>: {{ this.metadata.width }}<span class="unit">px</span></li>
-							<li><span class="property">metadata.height</span>: {{ this.metadata.height }}<span class="unit">px</span></li>
-							<li><span class="property">size</span>: {{sizeFormatted.value}}<span class="unit">{{ sizeFormatted.unit }}</span></li>
-							<li><span class="property">metadata.copyright</span>: {{ this.metadata.copyright }}</li>
+							<li><span class="property">_id</span>: {{this._id}}</li>
+							<li><span class="property">name</span>: {{this.name}}</li>
+							<li><span class="property">uploadedAt</span>: {{this.uploadedAt}}</li>
+							<li><span class="property">metadata.width</span>: {{this.metadata.width}}<span class="unit">px</span></li>
+							<li><span class="property">metadata.height</span>: {{this.metadata.height}}<span class="unit">px</span></li>
+							<li><span class="property">size</span>: {{sizeFormatted.value}}<span class="unit">{{sizeFormatted.unit}}</span></li>
+							<li><span class="property">metadata.copyright</span>: {{this.metadata.copyright}}</li>
 							{{#if this.metadata.uploadedBy.id}}
-								<li><span class="property">uploadedBy.id</span>: {{ this.metadata.uploadedBy.id }}</li>
+								<li><span class="property">uploadedBy.id</span>: {{this.metadata.uploadedBy.id}}</li>
 							{{/if}}
-							{{#if this.metadata.uploadedBy.username }}
-								<li><span class="property">uploadedBy.username</span>: {{ this.metadata.uploadedBy.username }}</li>
+							{{#if this.metadata.uploadedBy.username}}
+								<li><span class="property">uploadedBy.username</span>: {{this.metadata.uploadedBy.username}}</li>
 							{{/if}}
-							{{#if showThisUserName }}
-								<li><span class="property">users.username</span>: {{ showThisUserName }}</li>
+							{{#if showThisUserName}}
+								<li><span class="property">users.username</span>: {{showThisUserName}}</li>
 							{{/if}}
 							<li class='moreMetaToggle'>
 								<span id='toggleEditorMenu'>
-									{{#if displayMoreMeta }}
+									{{#if displayMoreMeta}}
 										.
 									{{/if}}
 								</span>
