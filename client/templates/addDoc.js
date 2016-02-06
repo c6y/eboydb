@@ -1,3 +1,8 @@
+Template.addDoc.onRendered(function() {
+	const route = FlowRouter.getRouteName();
+	DocHead.setTitle(route + ' – eboy.io');
+});
+
 Template.addDoc.events({
 	'change .myPixInput': function(event) {
 		if (Meteor.user().profile.isEditor) {

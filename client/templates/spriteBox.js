@@ -22,6 +22,13 @@ Template.spriteBox.helpers({
 	showThisPix() {
 		const thisId = FlowRouter.getParam('_id');
 		const thisDocument = MyPix.findOne(thisId);
+
+		const route = FlowRouter.getRouteName();
+		const title = thisDocument.original.name;
+		DocHead.setTitle(
+			route + '\/' + title + ' – eboy.io'
+		);
+
 		return thisDocument;
 	},
 	devicePixelRatio() {
@@ -65,8 +72,6 @@ Template.spriteBox.helpers({
 			);
 			// scale no more than 1x
 			if (dimensionsTo.factor * window.devicePixelRatio > 1) {
-				const factor = dimensionsTo.factor * window.devicePixelRatio;
-				console.log('factor: ' + factor);
 				dimensionsTo.width = Math.ceil(
 					widthOriginal / window.devicePixelRatio
 				);

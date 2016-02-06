@@ -16,6 +16,22 @@ Template.pool.onCreated(function() {
 	});
 });
 
+Template.pool.onRendered(function() {
+	this.autorun(function() {
+		const route = FlowRouter.getRouteName();
+		const title = FlowRouter.getParam('slug');
+		const page = FlowRouter.getParam('page');
+		const query = FlowRouter.getQueryParam('q');
+		let queryString = '';
+		if (query) {
+			queryString = ' – ' + query;
+		}
+		DocHead.setTitle(
+			route + '\/' + title + '\/' + page + queryString + ' – eboy.io'
+		);
+	});
+});
+
 Template.pool.helpers({
 	scaledSprite() {
 		const widthOrig = this.metadata.width;

@@ -5,6 +5,11 @@ Template.login.onCreated(function() {
 	});
 });
 
+Template.login.onRendered(function() {
+	const route = FlowRouter.getRouteName();
+	DocHead.setTitle(route + ' – eboy.io');
+});
+
 Template.login.helpers({
 	showUsers() {
 		return Meteor.users.find({}, {sort: {createdAt: -1}});

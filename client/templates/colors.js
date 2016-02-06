@@ -1,3 +1,8 @@
+Template.colors.onRendered(function() {
+	const route = FlowRouter.getRouteName();
+	DocHead.setTitle(route + ' – eboy.io');
+});
+
 Template.colors.helpers({
 	colorListArray() {
 		let result = [];
