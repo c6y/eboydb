@@ -122,6 +122,37 @@ Template.pool.helpers({
 		}
 		return 'DATE?';
 	},
+
+	bestAspectRatio() {
+		const originalWidth = this.metadata.width;
+		const originalHeight = this.metadata.height;
+
+		// add a border based on 10% of the smaller side
+		const border = Math.ceil(Math.min(originalWidth, originalHeight) / 10);
+		// console.log('border: ' + border);
+		const width = originalWidth + border * 2;
+		const height = originalHeight + border * 2;
+
+		const proportion = Math.max(width, height) / Math.min(width, height);
+		let minDifference = 100; // an arbitrary value, just higher than anything
+		let rightKey;
+
+		Object.keys(niceScreenRatios).forEach(function(key) {
+			const ratio = niceScreenRatios[key]; // get array assigned to this key
+			const maxDim = Math.max.apply(Math, ratio); // the larger value of array
+			const minDim = Math.min.apply(Math, ratio); // the smaller value of array
+			const propScreenRatio = maxDim / minDim; // calculate this ratio
+			const difference = Math.abs(proportion - propScreenRatio);
+			// replace minDifference if difference is smaller
+			// the first loop
+			if (difference < minDifference) {
+				minDifference = difference;
+				rightKey = key;
+			}
+		});
+		return rightKey;
+	},
+
 	showDocInfo() {
 		if (Session.get('displayEditor') === 'false') {
 			return false;
@@ -149,6 +180,11 @@ Template.pool.helpers({
 		const thisId = this._id;
 		const params = {_id: thisId};
 		return FlowRouter.path('docEdit', params);
+	},
+	toDocRenderPath() {
+		const thisId = this._id;
+		const params = {_id: thisId};
+		return FlowRouter.path('docRender', params);
 	},
 	thisIndex(currentIndex) {
 		return currentIndex + 2;

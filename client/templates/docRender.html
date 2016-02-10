@@ -1,0 +1,33 @@
+<template name="docRender">
+	{{#with thisPix}}
+		<div id="renderDocContainer">
+			<div id="canvasBox">
+				{{>canvas}}
+				<div>
+					bestAspectRatio: {{bestAspectRatioName}} = {{bestAspectRatioValues}} = {{bestAspectRatioFloat}}
+				</div>
+				<div>
+					theSpriteFactor: {{theSpriteFactor}}x
+				</div>
+				<div>
+					borderPercentageOf: {{borderPercentageOf}}%
+					{{#if currentUser.profile.isEditor}}
+						– <a id="substractBorder" class="goSpriteBox">[substract]</a>
+						<a id="resetBorder" class="goSpriteBox">[reset]</a>
+						<a id="addBorder" class="goSpriteBox">[add]</a>
+					{{/if}}
+				</div>
+				<div id="name">
+					{{fileName}}
+					{{#if currentUser.profile.isEditor}}
+						– [<a id="genImg" href="" target="_blank" download="{{fileName}}">Download</a>]
+					{{/if}}
+				</div>
+			</div>
+		</div>
+	{{/with}}
+</template>
+
+<template name="canvas">
+  <canvas id="myCanvas"></canvas>
+</template>
