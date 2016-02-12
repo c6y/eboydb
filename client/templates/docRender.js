@@ -1,6 +1,7 @@
 let canvas;
 let context;
-let maxSide = 1024;
+let maxCanvasSize = 1024;
+let maxCanvasSizeDep = new Deps.Dependency;
 // set border by percentage of image
 const borderPercDefault = 5;
 let borderPerc = borderPercDefault;
@@ -53,14 +54,15 @@ Template.canvas.onRendered(function() {
 		}
 
 		// set up canvas dimensions
-		let canvasWidth = maxSide;
-		let canvasHeight = maxSide;
+		maxCanvasSizeDep.depend();
+		let canvasWidth = maxCanvasSize;
+		let canvasHeight = maxCanvasSize;
 		if (imageOrientation === 'landscape') {
-			canvasWidth = maxSide;
-			canvasHeight = Math.ceil(maxSide / largerSide * smallerSide);
+			canvasWidth = maxCanvasSize;
+			canvasHeight = Math.ceil(maxCanvasSize / largerSide * smallerSide);
 		} else if (imageOrientation === 'portrait') {
-			canvasWidth = Math.ceil(maxSide / largerSide * smallerSide);
-			canvasHeight = maxSide;
+			canvasWidth = Math.ceil(maxCanvasSize / largerSide * smallerSide);
+			canvasHeight = maxCanvasSize;
 		}
 
 		// scale image to fit into canvasWidth but include the border
@@ -156,6 +158,10 @@ Template.docRender.helpers({
 		spriteFactorDep.depend();
 		return spriteFactor;
 	},
+	theMaxCanvasSize() {
+		maxCanvasSizeDep.depend();
+		return maxCanvasSize;
+	},
 	fileName() {
 		borderPercDep.depend();
 		spriteFactorDep.depend();
@@ -188,6 +194,18 @@ Template.docRender.events({
 		borderPerc = borderPercDefault;
 		borderPercDep.changed();
 	},
+	'click #addCanvasSize'() {
+		maxCanvasSize = maxCanvasSize + 128;
+		maxCanvasSizeDep.changed();
+	},
+	'click #substractCanvasSize'() {
+		maxCanvasSize = maxCanvasSize - 128;
+		maxCanvasSizeDep.changed();
+	},
+	'click #resetCanvasSize'() {
+		maxCanvasSize = 1024;
+		maxCanvasSizeDep.changed();
+	},
 });
 
 /**
@@ -219,10 +237,10 @@ function selectBestAspectRatio(pix, bPercentage) {
 }
 
 /**
-	* Returns the an object with new dimensions including border
-	* @param {Object} pix MyPix – image document
-	* @param {Number} borderP – percentage of original
-	* @returns {Object} dimensions – new width and height
+	* Returns an object with new dimensions including border
+	* @param {Object} pix - MyPix image document
+	* @param {Number} borderP - percentage of original
+	* @returns {Object} dimensions - new width and height
 	*/
 function calcDimsIncBorder(pix, borderP) {
 	let dimensions = {};
@@ -231,9 +249,9 @@ function calcDimsIncBorder(pix, borderP) {
 
 	// add a border based on borderP of the smaller side
 	const factor = 1 / 100 * borderP;
-	// take the smaller value of both as base for calculation
-	// results are slightly different if larger value is taken Math.max
-	const border = Math.ceil(Math.min(origWidth, origHeight) * factor);
+	// take the higher value of both as base for calculation
+	// results are slightly different if smaller value is taken Math.min
+	const border = Math.ceil(Math.max(origWidth, origHeight) * factor);
 	const width = origWidth + border * 2;
 	const height = origHeight + border * 2;
 	dimensions.width = width;

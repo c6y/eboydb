@@ -2,32 +2,43 @@
 	{{#with thisPix}}
 		<div id="renderDocContainer">
 			<div id="canvasBox">
+				<div id="canvasInfo">
+					<div>
+						bestAspectRatio: {{bestAspectRatioName}} = {{bestAspectRatioValues}} = {{bestAspectRatioFloat}}
+					</div>
+					<div>
+						theSpriteFactor: {{theSpriteFactor}}x
+					</div>
+					<div>
+						borderPercentageOf: {{borderPercentageOf}}%
+						{{#if currentUser.profile.isEditor}}
+							– <a id="substractBorder" class="bracketButton">[substract]</a>
+							<a id="resetBorder" class="bracketButton">[reset]</a>
+							<a id="addBorder" class="bracketButton">[add]</a>
+						{{/if}}
+					</div>
+					<div >
+						maxCanvasSize: {{theMaxCanvasSize}}
+						– <a id="substractCanvasSize" class="bracketButton">[substract]</a>
+						<a id="resetCanvasSize" class="bracketButton">[reset]</a>
+						<a id="addCanvasSize" class="bracketButton">[add]</a>
+					</div>
+					<br />
+					<div id="name">
+						{{fileName}}.png
+						{{#if currentUser.profile.isEditor}}
+							– [<a id="genImg" href="" target="_blank" download="{{fileName}}">Download</a>]
+						{{/if}}
+					</div>
+				</div>
 				{{>canvas}}
-				<div>
-					bestAspectRatio: {{bestAspectRatioName}} = {{bestAspectRatioValues}} = {{bestAspectRatioFloat}}
-				</div>
-				<div>
-					theSpriteFactor: {{theSpriteFactor}}x
-				</div>
-				<div>
-					borderPercentageOf: {{borderPercentageOf}}%
-					{{#if currentUser.profile.isEditor}}
-						– <a id="substractBorder" class="goSpriteBox">[substract]</a>
-						<a id="resetBorder" class="goSpriteBox">[reset]</a>
-						<a id="addBorder" class="goSpriteBox">[add]</a>
-					{{/if}}
-				</div>
-				<div id="name">
-					{{fileName}}.png
-					{{#if currentUser.profile.isEditor}}
-						– [<a id="genImg" href="" target="_blank" download="{{fileName}}">Download</a>]
-					{{/if}}
-				</div>
 			</div>
 		</div>
 	{{/with}}
 </template>
 
 <template name="canvas">
-  <canvas id="myCanvas"></canvas>
+	<div id="theCanvas">
+		<canvas id="myCanvas"></canvas>
+	</div>
 </template>
