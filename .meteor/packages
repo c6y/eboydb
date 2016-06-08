@@ -15,7 +15,6 @@ accounts-password
 cfs:gridfs
 accounts-github
 numeral:numeral
-standard-minifiers
 meteor-base
 mobile-experience
 mongo
@@ -36,3 +35,5 @@ meteorhacks:kadira
 datariot:ganalytics
 reactive-var
 kadira:dochead
+standard-minifier-css
+standard-minifier-js
