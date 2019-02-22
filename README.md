@@ -1,3 +1,5 @@
+> _This project is outdated and has been closed. Instead you can check [rainbow](https://github.com/c6y/rainbow) (a rewrite that stores image urls, instead of the actual images — and is much faster)._
+
 # eboydb
 A simple image database and client, optimized to store and render small original pixel images (sprites). Client gets original sized images (1:1 pixel ratio) and scales and displays them sharp at any size (no antialiasing). Built with Meteor.js.
 
